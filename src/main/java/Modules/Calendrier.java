@@ -87,7 +87,7 @@ public class Calendrier {
         tachesDecompose.put(tacheDecompose.getID(), tacheDecompose);
     }
 
-    public int calculRendement() {
+    public int NbrTachesRealisee() {
         int totalRendement = 0;
         for (HashMap.Entry<LocalDate, Journee> entry : lesJournees.entrySet()) {
             LocalDate journeeDate = entry.getKey();
@@ -95,9 +95,13 @@ public class Calendrier {
                 continue;
             }
             Journee journee = entry.getValue();
-            totalRendement += journee.rendement();
+            totalRendement += journee.getRendement();
         }
         return totalRendement;
+    }
+
+    public double Rendement(){////////il faut prendre en consideration les taches decomposees
+        return (double)this.NbrTachesRealisee()/(double)this.tachesSimple.size();
     }
 
     public HashMap<LocalDate, Journee> getLesJournees() {
@@ -262,6 +266,28 @@ public void supprimerTache(TacheDecompose tache){
 
     public void archiver(){
         this.historique.ajouterCalendrier(this);
+    }
+
+    public LocalDate getJourPlusRentable(){
+        LocalDate date=this.periodeDebut;
+        double max=0;
+        for(Journee jour : this.getLesJournees().values()){
+            if(jour.getRendement()>max){
+                max=jour.getRendement();
+                date=jour.getDate();
+            }
+        }
+        return date;
+    }
+
+    public int getDureeCategorie(String categorie){
+        int duree=0;
+        for(TacheSimple tache : this.getTachesSimple().values()){
+            if(tache.getCategorie().equals(categorie)){
+                duree+=tache.getDuree();
+            }
+        }
+        return duree;
     }
 }
 

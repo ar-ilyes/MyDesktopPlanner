@@ -114,16 +114,7 @@ public class Journee {
         this.creneauxLibres.add(creneau);
     }
 
-    // méthode pour calculer le rendement de la journée (nombre de tâches complétées)
-    public int rendement() {
-        int nbTachesCompletes = 0;
-        for(TacheSimple tache : this.taches.values()) {
-            if(tache.isComplete()) {
-                nbTachesCompletes++;
-            }
-        }
-        return nbTachesCompletes;
-    }
+
     public static String addMinutesToTime(String time, int minutesToAdd) {
         // Parse the input time string into hours and minutes
         String[] parts = time.split(":");
@@ -267,6 +258,22 @@ public class Journee {
             return false;
         }
    }
+
+   public int getNbTachesRealisees(){
+        int nb=0;
+        for(TacheSimple tache : this.taches.values()){
+            if(tache.getEtat()==Etat.Completed){
+                nb++;
+            }
+        }//////maybe we need to exlude les parties des tacheDecomposees
+        return nb;
+   }
+
+    // méthode pour calculer le rendement de la journée (nombre de tâches complétées/nombre de tâches planifiées)
+    public double getRendement(){////////il faut prendre en consideration les taches decomposees
+        return (double)this.getNbTachesRealisees()/(double)this.taches.size();
+    }
+
 }
 
 
