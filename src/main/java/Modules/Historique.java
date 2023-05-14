@@ -1,5 +1,7 @@
 package Modules;
 
+import java.util.ArrayList;
+
 /**
  * Décrivez votre classe Historique ici.
  *
@@ -8,27 +10,24 @@ package Modules;
  */
 public class Historique
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
-
-    /**
-     * Constructeur d'objets de classe Historique
-     */
-    public Historique()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    ArrayList<Calendrier> calendriers;
+    public Historique() {}
+    public Historique(ArrayList<Calendrier> calendriers) {
+        this.calendriers = calendriers;
+    }
+    public void ajouterCalendrier(Calendrier calendrier) {
+        calendriers.add(calendrier);
+    }
+    public void supprimerCalendrier(Calendrier calendrier) {
+        calendriers.remove(calendrier);
+    }
+    public ArrayList<Calendrier> getCalendriers() {
+        return calendriers;
+    }
+    public void setCalendriers(ArrayList<Calendrier> calendriers) {
+        this.calendriers = calendriers;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
-    }
+
+
 }

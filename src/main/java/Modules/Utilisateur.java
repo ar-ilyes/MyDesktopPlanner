@@ -8,16 +8,14 @@ public class Utilisateur {
     private int nbr_min_tache;
     private Badge badge;
     private String motDePasse;
-
-    public Utilisateur(String pseudo, Calendrier calendrier_perso, Historique historique, int nbr_min_tache, Badge badge, String motDePasse) {
+    public Utilisateur(String pseudo, Calendrier calendrier_perso, int nbr_min_tache, Badge badge, String motDePasse) {
         this.pseudo = pseudo;
         this.calendrier_perso = calendrier_perso;
-        this.historique = historique;
+        this.historique = new Historique();
         this.nbr_min_tache = nbr_min_tache;
         this.badge = badge;
         this.motDePasse = motDePasse;
     }
-
     public String getPseudo() {
         return pseudo;
     }

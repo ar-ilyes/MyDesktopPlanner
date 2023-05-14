@@ -93,6 +93,24 @@ public class Journee {
                 demiHeure.setLibre(true);
             }
         }
+        for (Creneau c : this.creneauxLibres){//le cas de chevauchement entre les creneaux existants et le nouveau creneau
+            LocalTime Cdebut = LocalTime.parse(c.getDebut());
+            LocalTime Cfin = LocalTime.parse(c.getFin());
+            LocalTime Creneaudebut = LocalTime.parse(creneau.getDebut());
+            LocalTime Creneaufin = LocalTime.parse(creneau.getFin());
+            if(c.getFin().equals(creneau.getDebut())){
+                c.setFin(creneau.getFin());
+                return;
+            }else if (c.getDebut().equals(creneau.getFin())){
+                c.setDebut(creneau.getDebut());
+                return;
+            }else if (Cdebut.isBefore(Creneaudebut) && Cfin.isAfter(Creneaufin)){
+                return;
+            }else if (Cdebut.isAfter(Creneaudebut) && Cfin.isBefore(Creneaufin)){
+                c.setDebut(creneau.getDebut());
+                c.setFin(creneau.getFin());
+                return;
+        }}
         this.creneauxLibres.add(creneau);
     }
 
@@ -134,6 +152,9 @@ public class Journee {
 
     public boolean introduireTacheAuto(TacheSimple tache){
         //loop over creneaux libres and find the creneau that has Duree > tache.getDuree()
+        if(this.date.isAfter(tache.getDeadline())){
+            return false;///the deadline is before the date of the day
+        }
         for (Creneau creneau : this.creneauxLibres){
             if (creneau.getDuree() >= tache.getDuree()){
                 this.creneauxLibres.remove(creneau);//and we re-put it in the list after we update its debut and fin

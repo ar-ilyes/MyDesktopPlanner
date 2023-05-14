@@ -16,12 +16,15 @@ public class Calendrier {
     private LocalDate dateActuelle;
     private String heureActuelle;
 
-    public Calendrier(LocalDate periodeDebut, LocalDate periodeFin) {
+    private Historique historique;
+
+    public Calendrier(LocalDate periodeDebut, LocalDate periodeFin,Historique historique) {
         this.periodeDebut = periodeDebut;
         this.periodeFin = periodeFin;
         this.tachesSimple = new HashMap<Integer, TacheSimple>();
         this.tachesDecompose = new HashMap<Integer, TacheDecompose>();
         this.lesJournees = new HashMap<LocalDate, Journee>();
+        this.historique = historique;
         long daysBetween = ChronoUnit.DAYS.between(periodeDebut, periodeFin);
 
         for (int i = 0; i <= daysBetween; i++) {
@@ -32,30 +35,34 @@ public class Calendrier {
         this.heureActuelle = "";
     }
 
+    public void setHistorique(Historique historique) {
+        this.historique = historique;
+    }
+
     public void introduirePeriode(LocalDate debut, LocalDate fin) {
         this.periodeDebut = debut;
         this.periodeFin = fin;
     }
 
-    public void introduireTache(Tache tache) throws OutOfDateException {
-        if (tache.getDate().isBefore(periodeDebut) || tache.getDate().isAfter(periodeFin)) {
-            throw new OutOfDateException("La date de la tâche est en dehors de la période du calendrier.");
-        }
-        int tacheId = tache.getID();
-        if (tache instanceof TacheSimple) {
-            tachesSimple.put(tacheId, (TacheSimple)tache);
-        } else if (tache instanceof TacheDecompose) {
-            tachesDecompose.put(tacheId, (TacheDecompose)tache);
-        }
+    //public void introduireTache(Tache tache) throws OutOfDateException {
+    //    if (tache.getDate().isBefore(periodeDebut) || tache.getDate().isAfter(periodeFin)) {
+    //      throw new OutOfDateException("La date de la tâche est en dehors de la période du calendrier.");
+    //  }
+    //  int tacheId = tache.getID();
+    //  if (tache instanceof TacheSimple) {
+    //      tachesSimple.put(tacheId, (TacheSimple)tache);
+    //  } else if (tache instanceof TacheDecompose) {
+    //      tachesDecompose.put(tacheId, (TacheDecompose)tache);
+    //  }
 
-        Journee journee = lesJournees.get(tache.getDate());
-        if (journee == null) {
-            journee = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),tache.getDate(),this);
-            lesJournees.put(tache.getDate(), journee);
-        }
+    //  Journee journee = lesJournees.get(tache.getDate());
+    //  if (journee == null) {
+    //      journee = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),tache.getDate(),this);
+    //      lesJournees.put(tache.getDate(), journee);
+    //  }
 
-        journee.introduireTache((TacheSimple)tache);
-    }
+    //  journee.introduireTache((TacheSimple)tache);
+    //}
 
     public TacheSimple getTacheSimple(int tacheId) {
         return tachesSimple.get(tacheId);
@@ -115,6 +122,10 @@ public class Calendrier {
     }
 
     public ArrayList<TacheSimple> planifierAuto(ArrayList<TacheSimple> taches){
+        Comparator<TacheSimple> comparator = Comparator
+                .comparing(TacheSimple::getPriorite)
+                .thenComparing(TacheSimple::getDeadline);
+        taches.sort(comparator);
         LocalDate dayDate=this.periodeDebut;
         ArrayList<TacheSimple> array_sugg=new ArrayList<TacheSimple>();
         for(TacheSimple tache : taches){
@@ -164,6 +175,10 @@ public class Calendrier {
         this.periodeFin = periodeFin;
     }
     public boolean etaleLaPeriode(ArrayList<TacheSimple> Taches){
+        Comparator<TacheSimple> comparator = Comparator
+                .comparing(TacheSimple::getPriorite)
+                .thenComparing(TacheSimple::getDeadline);
+        Taches.sort(comparator);
         LocalDate Daydate=this.periodeDebut;
         ArrayList<TacheSimple> TachesNonPlanifiees=new ArrayList<TacheSimple>();
         for(TacheSimple tache : Taches){
@@ -174,7 +189,6 @@ public class Calendrier {
                     Daydate=Daydate.plusDays(1);
                     if(Daydate.isBefore(this.periodeFin) || Daydate.isEqual(this.periodeFin)){
                         jour=this.getJournee(Daydate);
-
                     }else{
                         break;
                     }
@@ -189,7 +203,8 @@ public class Calendrier {
             }
 
         }
-        //i++;
+
+        TachesNonPlanifiees.sort(comparator);
         for(TacheSimple TacheNP : TachesNonPlanifiees){
             Journee jour=new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),Daydate,this);
             jour.introduireCreneau(new Creneau("08:00",jour.addMinutesToTime("08:00",TacheNP.getDuree())));
@@ -201,6 +216,10 @@ public class Calendrier {
         return true;
     }
     public boolean applySuggestions(ArrayList<TacheSimple> taches){
+        Comparator<TacheSimple> comparator = Comparator
+                .comparing(TacheSimple::getPriorite)
+                .thenComparing(TacheSimple::getDeadline);
+        taches.sort(comparator);
         for(TacheSimple tache : taches){
             if(tache.getDate()!=null){
                 Journee jour=this.getJournee(tache.getDate());
@@ -239,6 +258,10 @@ public void supprimerTache(TacheDecompose tache){
         } else {
             return false;//replanification impossible
         }
+    }
+
+    public void archiver(){
+        this.historique.ajouterCalendrier(this);
     }
 }
 

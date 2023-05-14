@@ -10,10 +10,11 @@ public class Test3 {
         LocalDate debutPeriode = LocalDate.of(2020, 1, 1);
         LocalDate finPeriode = LocalDate.of(2020, 1, 2);
         //the calendar of the user
-        Calendrier calendrier = new Calendrier(debutPeriode,finPeriode);
+        Calendrier calendrier = new Calendrier(debutPeriode,finPeriode,new Historique());
 
         //the user
-        Utilisateur user = new Utilisateur("test",calendrier, new Historique(), 0, new Badge(), "test_password");
+        Utilisateur user = new Utilisateur("test",calendrier, 0, new Badge(), "test_password");
+        calendrier.setHistorique(user.getHistorique());
         app.getUsers().put("test", user);
         app.setCurrentUser(user);
 
