@@ -274,6 +274,50 @@ public class Journee {
         return (double)this.getNbTachesRealisees()/(double)this.taches.size();
     }
 
+    public void setCompletedTache(TacheSimple tache){
+        this.taches.get(tache.getID()).setEtat(Etat.Completed);
+        if(this.getNbTachesRealisees()==this.calendrierSuper.getUtilisateur().getNbr_min_tache()){
+            this.calendrierSuper.getUtilisateur().setNbrFelicitation(this.calendrierSuper.getUtilisateur().getNbrFelicitation()+1);
+        }
+        if(this.calendrierSuper.getUtilisateur().getNbrFelicitation()==5){
+            this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Good"));
+            this.calendrierSuper.getUtilisateur().setNbrFelicitation(0);
+            //// !!!!!!!!!!!!!!!!!! un message de felicitation doit s'afficher !!!!!!!!!!!!!!!!
+        }
+        //if the user have 3 badges Good he will get a badge Verygood, and we remove the good badges
+        if (this.calendrierSuper.getUtilisateur().getBadge().size()>=3){
+            int nbGood=0;
+            for(Badge badge : this.calendrierSuper.getUtilisateur().getBadge()){
+                if(badge.getNom().equals("Good")){
+                    nbGood++;
+                }
+            }
+            if(nbGood>=3){
+                this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("VeryGood"));
+                for(int i=0;i<3;i++){
+                    this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("Good"));
+                }
+            }
+        }
+
+        //if the user have 3 badges VeryGood he will get a badge Excellent, and we remove the VeryGood badges
+        if (this.calendrierSuper.getUtilisateur().getBadge().size()>=3){
+            int nbVeryGood=0;
+            for(Badge badge : this.calendrierSuper.getUtilisateur().getBadge()){
+                if(badge.getNom().equals("VeryGood")){
+                    nbVeryGood++;
+                }
+            }
+            if(nbVeryGood>=3){
+                this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Excellent"));
+                for(int i=0;i<3;i++){
+                    this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("VeryGood"));
+                }
+            }
+        }
+
+    }
+
 }
 
 

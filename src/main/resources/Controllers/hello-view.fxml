@@ -1,16 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="Controllers.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="305.0" style="-fx-background-color: red;">
+            <children>
+                <AnchorPane prefHeight="705.0" prefWidth="304.0" style="-fx-background-color: #3C486B;">
+                    <children>
+                        <Label alignment="CENTER" layoutX="44.0" layoutY="311.0" prefHeight="37.0" prefWidth="140.0" text="MY Desktop  " textAlignment="RIGHT" textFill="WHITE">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="120.0" fitWidth="158.0" layoutX="60.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../../../../../../../Downloads/lister%201.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="705.0" prefWidth="567.0">
+            <children>
+                <TextField layoutX="322.0" layoutY="282.0" prefHeight="37.0" prefWidth="285.0" promptText="Pseudo" style="-fx-background-color: #D3D3D3; -fx-border-color: red; -fx-border-width: 0px 0px 2px 0px;">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </TextField>
+                <Label graphicTextGap="19.0" layoutX="115.0" layoutY="286.0" text="PSEUDO" textFill="RED">
+                    <font>
+                        <Font name="Segoe UI Black" size="28.0" />
+                    </font>
+                </Label>
+                <Label graphicTextGap="19.0" layoutX="116.0" layoutY="403.0" text="PASSWORD" textFill="RED">
+                    <font>
+                        <Font name="Segoe UI Black" size="28.0" />
+                    </font>
+                </Label>
+                <PasswordField layoutX="322.0" layoutY="400.0" prefHeight="37.0" prefWidth="285.0" promptText="password " style="-fx-background-color: #D3D3D3; -fx-border-width: 0px 0px 2px 0px; -fx-border-color: red;">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </PasswordField>
+                <Label layoutX="320.0" layoutY="90.0" text="REGISTRATION" textFill="RED">
+                    <font>
+                        <Font name="Segoe UI Black" size="38.0" />
+                    </font>
+                </Label>
+                <Button layoutX="397.0" layoutY="560.0" mnemonicParsing="false" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="REGISTER" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="22.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</HBox>

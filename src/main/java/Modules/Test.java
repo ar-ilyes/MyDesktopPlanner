@@ -13,8 +13,9 @@ public class Test {
         Calendrier calendrier = new Calendrier(debutPeriode,finPeriode,new Historique());
 
         //the user
-        Utilisateur user = new Utilisateur("test",calendrier, 0, new Badge(), "test_password");
+        Utilisateur user = new Utilisateur("test",calendrier, 0, new ArrayList<Badge>(), "test_password");
         calendrier.setHistorique(user.getHistorique());
+        calendrier.setUtilisateur(user);
         app.getUsers().put("test", user);
         app.setCurrentUser(user);
 

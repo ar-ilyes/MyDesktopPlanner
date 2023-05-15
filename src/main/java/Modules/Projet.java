@@ -83,4 +83,25 @@ public class Projet {
         return calendrierSuper.etaleLaPeriode(Taches);
     }
     ///!!!!!!! maybe we need to add replanification later
+
+    ///ajouter le rendement d'un projet çad le nombre de taches terminées sur le nombre de taches totales
+    public double rendement(){
+        double rendement=0;
+        double nbTachesTotales=0;
+        double nbTachesTerminees=0;
+        for(TacheSimple tache : tacheSimples){
+            nbTachesTotales++;
+            if(tache.getEtatRealisation()==Etat_realisation.TERMINÉ){
+                nbTachesTerminees++;
+            }
+        }
+        for(TacheDecompose tache : tacheDecomposees){
+            nbTachesTotales++;
+            if(tache.getEtatRealisation()==Etat_realisation.TERMINÉ){
+                nbTachesTerminees++;
+            }
+        }
+        rendement=nbTachesTerminees/nbTachesTotales;
+        return rendement;
+    }
 }

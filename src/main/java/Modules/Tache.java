@@ -97,7 +97,11 @@ public abstract class Tache {
     }
 
     public void setEtat(Etat etat) {
+
         this.etat = etat;
+        if(this.etat==Etat.Completed){
+            this.etatRealisation = Etat_realisation.TERMINÉ;
+        }
     }
 
     public LocalDate getDate() {

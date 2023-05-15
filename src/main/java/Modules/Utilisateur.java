@@ -1,20 +1,25 @@
 package Modules;
 
 
+import java.util.ArrayList;
+
 public class Utilisateur {
     private String pseudo;
     private Calendrier calendrier_perso;
     private Historique historique;
     private int nbr_min_tache;
-    private Badge badge;
+    private ArrayList<Badge> badges;
     private String motDePasse;
-    public Utilisateur(String pseudo, Calendrier calendrier_perso, int nbr_min_tache, Badge badge, String motDePasse) {
+
+    private int nbrFelicitation;
+    public Utilisateur(String pseudo, Calendrier calendrier_perso, int nbr_min_tache, ArrayList<Badge> badges, String motDePasse) {
         this.pseudo = pseudo;
         this.calendrier_perso = calendrier_perso;
         this.historique = new Historique();
         this.nbr_min_tache = nbr_min_tache;
-        this.badge = badge;
+        this.badges = badges;
         this.motDePasse = motDePasse;
+        this.nbrFelicitation= 0;
     }
     public String getPseudo() {
         return pseudo;
@@ -48,12 +53,12 @@ public class Utilisateur {
         this.nbr_min_tache = nbr_min_tache;
     }
 
-    public Badge getBadge() {
-        return badge;
+    public ArrayList<Badge> getBadge() {
+        return badges;
     }
 
-    public void setBadge(Badge badge) {
-        this.badge = badge;
+    public void setBadge(ArrayList<Badge> badges) {
+        this.badges = badges;
     }
 
     public String getMotDePasse() {
@@ -62,6 +67,13 @@ public class Utilisateur {
 
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
+    }
+
+    public void setNbrFelicitation(int nbrFelicitation) {
+        this.nbrFelicitation = nbrFelicitation;
+    }
+    public int getNbrFelicitation() {
+        return nbrFelicitation;
     }
 }
 

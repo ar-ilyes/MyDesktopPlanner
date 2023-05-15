@@ -15,8 +15,8 @@ public class Calendrier {
     private HashMap<LocalDate, Journee> lesJournees;
     private LocalDate dateActuelle;
     private String heureActuelle;
-
     private Historique historique;
+    private Utilisateur utilisateur;
 
     public Calendrier(LocalDate periodeDebut, LocalDate periodeFin,Historique historique) {
         this.periodeDebut = periodeDebut;
@@ -43,6 +43,16 @@ public class Calendrier {
         this.periodeDebut = debut;
         this.periodeFin = fin;
     }
+
+    //getter and setter for utilisateur
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+
 
     //public void introduireTache(Tache tache) throws OutOfDateException {
     //    if (tache.getDate().isBefore(periodeDebut) || tache.getDate().isAfter(periodeFin)) {
@@ -289,6 +299,15 @@ public void supprimerTache(TacheDecompose tache){
         }
         return duree;
     }
+
+    public double getMoyenneDesRendements(){
+        double moyenne=0;
+        for(Journee jour : this.getLesJournees().values()){
+            moyenne+=jour.getRendement();
+        }
+        return moyenne/this.getLesJournees().size();
+    }
+
 }
 
 
