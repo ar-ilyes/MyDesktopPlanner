@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Test {
     public static void main(String[] args) {
-        MyPlannerApp app = new MyPlannerApp();
+        //MyPlannerApp app = new MyPlannerApp();
         LocalDate debutPeriode = LocalDate.of(2020, 1, 1);
         LocalDate finPeriode = LocalDate.of(2020, 1, 7);
         //the calendar of the user
@@ -16,8 +16,8 @@ public class Test {
         Utilisateur user = new Utilisateur("test",calendrier, 0, new ArrayList<Badge>(), "test_password");
         calendrier.setHistorique(user.getHistorique());
         calendrier.setUtilisateur(user);
-        app.getUsers().put("test", user);
-        app.setCurrentUser(user);
+        //app.getUsers().put("test", user);
+        //app.setCurrentUser(user);
 
         //the 1st day and its creneaux and tasks
         Creneau creneau1 = new Creneau("08:30","11:30");
@@ -25,10 +25,9 @@ public class Test {
         Journee jour = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),LocalDate.of(2020, 1, 1),calendrier);
         jour.introduireCreneau(creneau1);
         jour.introduireCreneau(creneau2);
-        TacheSimple tache1 = new TacheSimple("testTache", 60, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 2);
+        TacheSimple tache1 = new TacheSimple("testTache", 60, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 8), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 2);
         TacheSimple tache2 = new TacheSimple("testTache2", 130, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
         TacheSimple tache3 = new TacheSimple("testTache3", 100, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
-
 
         //the 2nd day and its creneaux and tasks
         Creneau creneau2_1 = new Creneau("07:30","11:30");

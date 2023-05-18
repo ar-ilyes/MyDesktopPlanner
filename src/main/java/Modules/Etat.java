@@ -6,4 +6,5 @@ public enum Etat {
     In_Progress,
     Canceled,
     Delayed,
+    Unscheduled,
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Test3 {
     public static void main(String[] args) {
-        MyPlannerApp app = new MyPlannerApp();
+        //MyPlannerApp app = new MyPlannerApp();
         LocalDate debutPeriode = LocalDate.of(2020, 1, 1);
         LocalDate finPeriode = LocalDate.of(2020, 1, 2);
         //the calendar of the user
@@ -16,8 +16,8 @@ public class Test3 {
         Utilisateur user = new Utilisateur("test",calendrier, 0,  new ArrayList<Badge>(), "test_password");
         calendrier.setHistorique(user.getHistorique());
         calendrier.setUtilisateur(user);
-        app.getUsers().put("test", user);
-        app.setCurrentUser(user);
+        //app.getUsers().put("test", user);
+        //app.setCurrentUser(user);
 
         //the 1st day and its creneaux and tasks
         Creneau creneau1 = new Creneau("08:30","09:30");

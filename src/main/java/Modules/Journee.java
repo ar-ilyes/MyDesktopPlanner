@@ -144,6 +144,7 @@ public class Journee {
     public boolean introduireTacheAuto(TacheSimple tache){
         //loop over creneaux libres and find the creneau that has Duree > tache.getDuree()
         if(this.date.isAfter(tache.getDeadline())){
+            tache.setEtat(Etat.Unscheduled);
             return false;///the deadline is before the date of the day
         }
         for (Creneau creneau : this.creneauxLibres){
@@ -168,10 +169,12 @@ public class Journee {
                             return journeeSuivante.introduireTacheAuto(tache);
                         }else{
                             System.out.println("La tache ne peut pas etre introduite car la journee suivante n'existe pas");
+                            tache.setEtat(Etat.Unscheduled);
                             return false;
                         }
                     }else{
                         System.out.println("La tache ne peut pas etre introduite car la date suivante est hors de la periode");
+                        tache.setEtat(Etat.Unscheduled);
                         return false;
                     }
                 }else{
@@ -182,6 +185,7 @@ public class Journee {
 
             }
         }
+        tache.setEtat(Etat.Unscheduled);
         return false;
     }
 
