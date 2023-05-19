@@ -25,12 +25,12 @@ public class Calendrier {
         this.tachesDecompose = new HashMap<Integer, TacheDecompose>();
         this.lesJournees = new HashMap<LocalDate, Journee>();
         this.historique = historique;
-        long daysBetween = ChronoUnit.DAYS.between(periodeDebut, periodeFin);
+       /* long daysBetween = ChronoUnit.DAYS.between(periodeDebut, periodeFin);
 
         for (int i = 0; i <= daysBetween; i++) {
             LocalDate currentDate = periodeDebut.plusDays(i);
             Journee journee = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),currentDate,this);
-        }
+        }*/
         this.dateActuelle = LocalDate.now();
         this.heureActuelle = "";
     }
@@ -121,6 +121,9 @@ public class Calendrier {
     public LocalDate getPeriodeFin() {
         return periodeFin;
     }
+    public LocalDate getPeriodeDebut() {
+        return periodeDebut;
+    }
 
     public Journee getJournee(LocalDate date) {
         return lesJournees.get(date);
@@ -187,6 +190,9 @@ public class Calendrier {
     }
     public void setPeriodeFin(LocalDate periodeFin) {
         this.periodeFin = periodeFin;
+    }
+    public void setPeriodeDebut(LocalDate periodeDebut) {
+        this.periodeDebut = periodeDebut;
     }
     public boolean etaleLaPeriode(ArrayList<TacheSimple> Taches){
         Comparator<TacheSimple> comparator = Comparator

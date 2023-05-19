@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CalendarPageController">
+    <children>
+        <Label layoutX="572.0" layoutY="41.0" prefHeight="39.0" prefWidth="242.0" text="My Desktop Planner" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="22.0" />
+            </font>
+        </Label>
+        <Label fx:id="DisplayMonth" layoutX="155.0" layoutY="114.0" prefHeight="54.0" prefWidth="267.0" style="-fx-border-width: 80px;" text="MONTH" textFill="RED">
+            <font>
+                <Font name="Segoe UI Black" size="30.0" />
+            </font>
+        </Label>
+      <AnchorPane layoutX="77.0" layoutY="201.0" prefHeight="452.0" prefWidth="978.0" style="-fx-border-style: solid; -fx-border-width: 5px; -fx-border-radius: 40px; -fx-border-color: red;">
+         <children>
+            <Button fx:id="CalDay1" layoutX="43.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay2" layoutX="172.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay3" layoutX="306.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay4" layoutX="440.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay5" layoutX="580.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay6" layoutX="719.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay8" layoutX="43.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay15" layoutX="43.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay22" layoutX="43.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay9" layoutX="172.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay16" layoutX="172.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay23" layoutX="172.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay24" layoutX="306.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay17" layoutX="306.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay10" layoutX="306.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay11" layoutX="440.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay18" layoutX="440.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay25" layoutX="440.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay12" layoutX="580.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay19" layoutX="580.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay26" layoutX="580.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay13" layoutX="719.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay20" layoutX="719.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay27" layoutX="719.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay7" layoutX="853.0" layoutY="34.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay14" layoutX="853.0" layoutY="109.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay21" layoutX="853.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay28" layoutX="853.0" layoutY="247.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay29" layoutX="43.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay30" layoutX="172.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay31" layoutX="306.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay32" layoutX="440.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay33" layoutX="580.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay34" layoutX="719.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay35" layoutX="853.0" layoutY="312.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay36"  layoutX="43.0" layoutY="379.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="CalDay37" layoutX="172.0" layoutY="379.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button fx:id="NextMonth" layoutX="433.0" layoutY="127.0" mnemonicParsing="false" text="Next" textFill="#0e12d2">
+         <font>
+            <Font name="Segoe UI Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="PreviousMonth" layoutX="92.0" layoutY="127.0" mnemonicParsing="false" text="Prev" textFill="#0e12d2">
+         <font>
+            <Font name="Segoe UI Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="140.0" layoutY="168.0" prefHeight="39.0" prefWidth="48.0" text="Sun" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="272.0" layoutY="168.0" prefHeight="39.0" prefWidth="51.0" text="Mon" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="398.0" layoutY="168.0" prefHeight="39.0" prefWidth="48.0" text="Tue" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="537.0" layoutY="168.0" prefHeight="39.0" prefWidth="58.0" text="Wed" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="681.0" layoutY="168.0" prefHeight="39.0" prefWidth="48.0" text="Thu" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="814.0" layoutY="168.0" prefHeight="39.0" prefWidth="48.0" text="Fri" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="951.0" layoutY="168.0" prefHeight="39.0" prefWidth="48.0" text="Sat" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

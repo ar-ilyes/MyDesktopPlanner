@@ -9,12 +9,47 @@ import java.io.IOException;
 
 public class AppView {
     public void ShowJournee() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("JOURNEE-PAGE.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("JOURNEE-PAGE.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         Stage stage=new Stage();
-        stage.setTitle("Hello!");
+        stage.setTitle("MyDesktopPlanner");
         stage.setScene(scene);
         stage.show();
     }
+
+    public void ShowRegister() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void ShowCalendarFirstTimePeriodes() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CALENDAR-FIRST-TIME.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void ShowCalendarFirstTimeCreneaux() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CALENDAR-FIRST-TIME-CRENEAUX.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void ShowCalendarPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CalendarPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 }
