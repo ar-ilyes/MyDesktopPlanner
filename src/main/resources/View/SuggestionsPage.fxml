@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SuggestionsController">
+    <children>
+        <Label alignment="CENTER" layoutX="535.0" layoutY="39.0" prefHeight="55.0" prefWidth="421.0" text="MY Desktop Planner  " textAlignment="RIGHT" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="27.0" />
+            </font>
+        </Label>
+        <Label layoutX="499.0" layoutY="147.0" text="SUGGESTED PLAN" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="55.0" />
+            </font>
+        </Label>
+        <Button layoutX="633.0" layoutY="614.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="224.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="CONFIRMER" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="22.0" />
+            </font>
+        </Button>
+        <ScrollPane layoutX="398.0" layoutY="267.0" prefHeight="226.0" prefWidth="682.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+            <content>
+                <AnchorPane fx:id="SuggestionsContainer" prefHeight="292.0" prefWidth="665.0">
+                    <children>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

@@ -4,6 +4,7 @@ import Modules.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ public class AddTaskJourneeController implements Initializable {
                 OnPlanifierJourneeMan();//case of simple task not decomposed
             }
             try {
+                Stage stage = (Stage) planifierJournee.getScene().getWindow();
+                stage.close();
                 Modal.getInstance().getAppView().ShowJournee();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -77,7 +80,7 @@ public class AddTaskJourneeController implements Initializable {
         if(blocked.isSelected()) {
             tache.setBloqué(true);
         }
-        Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
+        Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
 
     }
     public void OnPlanifierJourneeAuto(){
@@ -99,7 +102,7 @@ public class AddTaskJourneeController implements Initializable {
         if(blocked.isSelected()) {
             tache.setBloqué(true);
         }
-        Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
+        Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
     }
     public void OnPlanifierJourneeMan(){
         //TODO

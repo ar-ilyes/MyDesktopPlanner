@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllTasksController">
+    <children>
+        <Label alignment="CENTER" layoutX="75.0" layoutY="67.0" prefHeight="55.0" prefWidth="421.0" text="MY Desktop Planner  " textAlignment="RIGHT" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="27.0" />
+            </font>
+        </Label>
+        <Circle fx:id="GoToCalendar" fill="#f45050" layoutX="937.0" layoutY="95.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fill="#3c486b" layoutX="1092.0" layoutY="96.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fill="#f9d949" layoutX="1016.0" layoutY="95.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label layoutX="525.0" layoutY="148.0" text="ALL TASKS" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="55.0" />
+            </font>
+        </Label>
+        <Button fx:id="AddTasksAuto" layoutX="548.0" layoutY="555.0" mnemonicParsing="false" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="ADD TASKS AUTO" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="22.0" />
+            </font>
+        </Button>
+        <ScrollPane layoutX="320.0" layoutY="265.0" prefHeight="226.0" prefWidth="682.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+            <content>
+                <AnchorPane fx:id="AllTasksContainer" prefWidth="665.0">
+                    <children>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

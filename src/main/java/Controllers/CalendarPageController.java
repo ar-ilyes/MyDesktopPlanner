@@ -172,7 +172,7 @@ public class CalendarPageController implements Initializable {
                     dayButton.setText(Integer.toString(i-numStartDayOfWeek+1));
                     dayButton.setVisible(true);
                     LocalDate dateColorized = LocalDate.of(currentYear, currentMonth, i-numStartDayOfWeek+1);
-                    if((dateColorized.isBefore(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin()) && dateColorized.isAfter(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut()))||dateColorized.equals(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut())||dateColorized.equals(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin())){
+                    if((dateColorized.isBefore(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin()) && dateColorized.isAfter(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut()))||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut())||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin())){
                         dayButton.setStyle("-fx-background-color: #ff0000");
                     }
                 } else {
@@ -243,7 +243,7 @@ public class CalendarPageController implements Initializable {
                     dayButton.setText(Integer.toString(i-numStartDayOfWeek+1));
                     dayButton.setVisible(true);
                     LocalDate dateColorized = LocalDate.of(currentYear, currentMonth, i-numStartDayOfWeek+1);
-                    if((dateColorized.isBefore(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin()) && dateColorized.isAfter(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut()))||dateColorized.equals(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut())||dateColorized.equals(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin())){
+                    if((dateColorized.isBefore(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin()) && dateColorized.isAfter(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut()))||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut())||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin())){
                         dayButton.setStyle("-fx-background-color: #ff0000");
                     }
                 } else {

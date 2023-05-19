@@ -20,7 +20,7 @@
         <Line endX="178.0" layoutX="629.0" layoutY="176.0" startX="-23.0" stroke="#f45050" />
         <ScrollPane layoutX="172.0" layoutY="310.0" prefHeight="226.0" prefWidth="345.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red; -fx-border-radius: 5px; -fx-background-radius: 15px;">
             <content>
-                <AnchorPane fx:id="AllTasksContainer"  prefWidth="327.0" style="-fx-background-radius: 30px;">
+                <AnchorPane fx:id="AllTasksContainer" prefWidth="327.0" style="-fx-background-radius: 30px;">
                     <children>
 
                     </children>
@@ -39,21 +39,21 @@
             </font>
         </Label>
         <Line endX="194.0" layoutX="859.0" layoutY="255.0" startX="-76.0" stroke="#f45050" />
-        <AnchorPane layoutX="811.0" layoutY="283.0" prefHeight="66.0" prefWidth="229.0" style="-fx-background-color: WHITE; -fx-border-image-width: 6.5PX; -fx-border-color: #f45050; -fx-background-radius: 25PX; -fx-border-radius: 25PX;">
-            <children>
-                <Label layoutX="45.0" layoutY="5.0" prefHeight="54.0" prefWidth="155.0" style="-fx-border-width: 80px;" text="11H TO 13H" textFill="#3c486b">
-                    <font>
-                        <Font name="Segoe UI Black" size="24.0" />
-                    </font>
-                </Label>
-            </children>
-        </AnchorPane>
+        <ScrollPane layoutX="781.0" layoutY="261.0" prefHeight="153.0" prefWidth="263.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red; -fx-border-radius: 5px; -fx-background-radius: 15px; -fx-padding: 10px;">
+            <content>
+                <AnchorPane fx:id="AllCreneauxContainer" layoutX="811.0" layoutY="283.0" prefHeight="67.0" prefWidth="236.0" style="-fx-background-color: WHITE;">
+                    <children>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
         <Label layoutX="835.0" layoutY="406.0" prefHeight="54.0" prefWidth="202.0" style="-fx-border-width: 80px;" text="RANDEMENT" textFill="#f45050">
             <font>
                 <Font name="Segoe UI Black" size="30.0" />
             </font>
         </Label>
-        <Button layoutX="823.0" layoutY="587.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="ADD CRENEAU" textFill="#3c486b">
+        <Button fx:id="AddCreneau" layoutX="823.0" layoutY="587.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="ADD CRENEAU" textFill="#3c486b">
             <font>
                 <Font name="Segoe UI Black" size="22.0" />
             </font>
@@ -63,8 +63,8 @@
                 <Font name="Segoe UI Black" size="22.0" />
             </font>
         </Button>
-        <Circle fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
-        <Circle fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="returnToCalendar" fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fx:id="GoToAllTasks" fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
         <Circle fill="#3c486b" layoutX="1110.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
     </children>
 </AnchorPane>

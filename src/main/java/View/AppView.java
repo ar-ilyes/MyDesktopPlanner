@@ -59,6 +59,47 @@ public class AppView {
         stage.setScene(scene);
         stage.show();
     }
+    public void ShowAddCreneauJournee() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Creneau.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void ShowAllTasks() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AllTasks.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void ShowAddTasksForm() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTasksForm.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void ShowSuggestionsPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SuggestionsPage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void ShowNumberTasksToAdd() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTasksNumberToAdd.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
 }
