@@ -18,30 +18,11 @@
             </font>
         </Label>
         <Line endX="178.0" layoutX="629.0" layoutY="176.0" startX="-23.0" stroke="#f45050" />
-        <ScrollPane layoutX="172.0" layoutY="311.0" prefHeight="226.0" prefWidth="345.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red; -fx-border-radius: 5px; -fx-background-radius: 15px;">
+        <ScrollPane layoutX="172.0" layoutY="310.0" prefHeight="226.0" prefWidth="345.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red; -fx-border-radius: 5px; -fx-background-radius: 15px;">
             <content>
-                <AnchorPane prefHeight="292.0" prefWidth="327.0" style="-fx-background-radius: 30px;">
+                <AnchorPane fx:id="AllTasksContainer"  prefWidth="327.0" style="-fx-background-radius: 30px;">
                     <children>
-                        <Button id="TASK_ALL_TASKS" layoutX="60.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="220.0" style="-fx-background-color: #FF0000; -fx-background-radius: 20px;" text="DO HOMEWORK" textFill="WHITE">
-                            <font>
-                                <Font name="Segoe UI Black" size="22.0" />
-                            </font>
-                        </Button>
-                        <Button id="TASK_ALL_TASKS" layoutX="61.0" layoutY="94.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="220.0" style="-fx-background-color: #FF0000; -fx-background-radius: 20px;" text="DO HOMEWORK" textFill="WHITE">
-                            <font>
-                                <Font name="Segoe UI Black" size="22.0" />
-                            </font>
-                        </Button>
-                        <Button id="TASK_ALL_TASKS" layoutX="64.0" layoutY="171.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="220.0" style="-fx-background-color: #589BFF; -fx-background-radius: 20px;" text="SPORT" textFill="WHITE">
-                            <font>
-                                <Font name="Segoe UI Black" size="22.0" />
-                            </font>
-                        </Button>
-                        <Button id="TASK_ALL_TASKS" layoutX="64.0" layoutY="244.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="220.0" style="-fx-background-color: #589BFF; -fx-background-radius: 20px;" text="SPORT" textFill="WHITE">
-                            <font>
-                                <Font name="Segoe UI Black" size="22.0" />
-                            </font>
-                        </Button>
+
                     </children>
                 </AnchorPane>
             </content>
@@ -77,7 +58,7 @@
                 <Font name="Segoe UI Black" size="22.0" />
             </font>
         </Button>
-        <Button layoutX="241.0" layoutY="587.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="ADD TASK" textFill="#3c486b">
+        <Button fx:id="AddTask" layoutX="241.0" layoutY="587.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="ADD TASK" textFill="#3c486b">
             <font>
                 <Font name="Segoe UI Black" size="22.0" />
             </font>

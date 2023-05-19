@@ -4,9 +4,9 @@ public class Categorie {
     private String nom;
     private Couleur couleur;
 
-    public Categorie(String nom, Couleur couleur) {
+    public Categorie(String nom) {
         this.nom = nom;
-        this.couleur = couleur;
+        this.couleur = Couleur.BLANC;//!!!!!!!!!!each categorie have to get a differnet color // maybe we will use txt files
     }
 
     public String getNom() {

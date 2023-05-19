@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Modal.getInstance().getAppView().ShowRegister();
-       // Modal.getInstance().getAppView().ShowCalendarPage();
+        //Modal.getInstance().getAppView().ShowAddTaskJournee();
     }
     public static void main(String[] args) {
         launch();

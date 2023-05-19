@@ -25,9 +25,9 @@ public class Test {
         Journee jour = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),LocalDate.of(2020, 1, 1),calendrier);
         jour.introduireCreneau(creneau1);
         jour.introduireCreneau(creneau2);
-        TacheSimple tache1 = new TacheSimple("testTache", 60, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 8), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 2);
-        TacheSimple tache2 = new TacheSimple("testTache2", 130, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
-        TacheSimple tache3 = new TacheSimple("testTache3", 100, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheSimple tache1 = new TacheSimple("testTache", 60, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 8), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 2);
+        TacheSimple tache2 = new TacheSimple("testTache2", 130, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheSimple tache3 = new TacheSimple("testTache3", 100, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
 
         //the 2nd day and its creneaux and tasks
         Creneau creneau2_1 = new Creneau("07:30","11:30");
@@ -86,7 +86,7 @@ public class Test {
         jour.introduireTacheAuto(tache2);
         jour.introduireTacheAuto(tache3);
 
-        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
+        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
         jour.introduireTacheAuto(tacheDecompose);
       //affichage
        /*for(MinHeure c : jour.getLesDemiHeures()){

@@ -38,10 +38,10 @@ public class Test3 {
         calendrier.addDay(jour2.getDate(),jour2);
 
         //the tasks
-        TacheSimple tache1 = new TacheSimple("test2Tache", 130, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
-        TacheSimple tache2 = new TacheSimple("test2Tache2", 50, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
-        TacheSimple tache3 = new TacheSimple("test2Tache3", 100, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
-        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study",Couleur.BLANC), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
+        TacheSimple tache1 = new TacheSimple("test2Tache", 130, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheSimple tache2 = new TacheSimple("test2Tache2", 50, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheSimple tache3 = new TacheSimple("test2Tache3", 100, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
 
         ArrayList<TacheSimple> taches = new ArrayList<TacheSimple>();
         taches.add(tache1);

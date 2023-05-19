@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddTaskJourneeController">
+    <children>
+        <Label layoutX="506.0" layoutY="50.0" prefHeight="54.0" prefWidth="389.0" text="My Desktop Planner" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="37.0" />
+            </font>
+        </Label>
+        <AnchorPane layoutX="308.0" layoutY="130.0" prefHeight="428.0" prefWidth="698.0" style="-fx-background-color: WHITE; -fx-border-image-width: 6.5PX; -fx-border-color: #f45050; -fx-background-radius: 25PX; -fx-border-radius: 25PX;">
+            <children>
+                <Label graphicTextGap="19.0" layoutX="24.0" layoutY="119.0" text="PRIORITE :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="22.0" />
+                    </font>
+                </Label>
+                <Label graphicTextGap="19.0" layoutX="24.0" layoutY="191.0" text="DEADLINE  :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="22.0" />
+                    </font>
+                </Label>
+                <Label graphicTextGap="19.0" layoutX="24.0" layoutY="267.0" text="CATEGORIE  :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="22.0" />
+                    </font>
+                </Label>
+                <Label graphicTextGap="19.0" layoutX="429.0" layoutY="190.0" text="N-PERIODIQUE  :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black Italic" size="22.0" />
+                    </font>
+                </Label>
+                <Label graphicTextGap="19.0" layoutX="426.0" layoutY="260.0" text="COMPOSE  :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black Italic" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="CreneauLabel" graphicTextGap="19.0" layoutX="23.0" layoutY="340.0" text="CRENEAU  :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black Italic" size="22.0" />
+                    </font>
+                </Label>
+                <Label graphicTextGap="19.0" layoutX="429.0" layoutY="120.0" text="BLOCKED  :" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="22.0" />
+                    </font>
+                </Label>
+                <ChoiceBox fx:id="categorie" layoutX="192.0" layoutY="270.0" prefHeight="25.0" prefWidth="174.0" style="-fx-border-radius: 5PX; -fx-background-radius: 5px;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="STUDY" />
+                            <String fx:value="SPORT" />
+                            <String fx:value="WORK" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <DatePicker fx:id="deadline" layoutX="191.0" layoutY="194.0" style="-fx-border-radius: 5PX;" />
+                <CheckBox fx:id="compose" layoutX="578.0" layoutY="270.0" mnemonicParsing="false" />
+                <ChoiceBox fx:id="priorite" layoutX="192.0" layoutY="122.0" prefHeight="25.0" prefWidth="174.0" style="-fx-border-radius: 5PX; -fx-background-radius: 5px;">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="LOW" />
+                            <String fx:value="MEDIUM" />
+                            <String fx:value="HIGH" />
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <TextField fx:id="periodique" layoutX="620.0" layoutY="190.0" prefHeight="36.0" prefWidth="204.0" promptText="entier" style="-fx-background-radius: 400;">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </TextField>
+                <CheckBox fx:id="blocked" layoutX="576.0" layoutY="130.0" mnemonicParsing="false" />
+                <TextField fx:id="nom" layoutX="187.0" layoutY="38.0" prefHeight="36.0" prefWidth="204.0" promptText="Name-Task" style="-fx-background-radius: 400;">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="creneau" layoutX="187.0" layoutY="335.0" prefHeight="36.0" prefWidth="204.0" promptText="ex: 08:00-09:30" style="-fx-background-radius: 400;">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </TextField>
+            <TextField fx:id="duree" layoutX="527.0" layoutY="33.0" prefHeight="36.0" prefWidth="204.0" promptText="la duree en minute , ex: 60 " style="-fx-background-radius: 400;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Label graphicTextGap="19.0" layoutX="425.0" layoutY="340.0" text="AUTO :" textFill="#3c486b">
+               <font>
+                  <Font name="Segoe UI Black Italic" size="22.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="automatique" layoutX="520.0" layoutY="350.0" mnemonicParsing="false" />
+            </children>
+        </AnchorPane>
+        <Button fx:id="planifierJournee" layoutX="558.0" layoutY="595.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="PLANIFIER" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="22.0" />
+            </font>
+        </Button>
+        <Label graphicTextGap="19.0" layoutX="336.0" layoutY="166.0" text="NAME :" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="22.0" />
+            </font>
+        </Label>
+      <Label graphicTextGap="19.0" layoutX="740.0" layoutY="166.0" prefHeight="32.0" prefWidth="144.0" text="DUREE :" textFill="#3c486b">
+         <font>
+            <Font name="Segoe UI Black" size="22.0" />
+         </font>
+      </Label>
+      <Button layoutX="1019.0" layoutY="31.0" mnemonicParsing="false" />
+    </children>
+</AnchorPane>

@@ -51,5 +51,14 @@ public class AppView {
         stage.show();
     }
 
+    public void ShowAddTaskJournee() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddTaskJournne.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 }
