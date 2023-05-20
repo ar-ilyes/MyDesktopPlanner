@@ -11,10 +11,9 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Modal.getInstance().getAppView().ShowRegister();
-        //Modal.getInstance().getAppView().ShowSuggestionsPage();
+        //Modal.getInstance().getAppView().ShowProjet();
     }
     public static void main(String[] args) {
         launch();
     }
-
 }

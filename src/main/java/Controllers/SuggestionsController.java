@@ -63,7 +63,6 @@ public class SuggestionsController implements Initializable {
         //if suggestions.size()==tasksToAdd.size() then we can apply the suggestions
         //else we will show a message that says that the number of suggestions is not equal to the number of tasks to add and if he wants to etale the periode and the user can click to call etaleeperiode(tasksToAdd)
         //if he clicks yes then we will call etaleeperiode(tasksToAdd)
-        //else we will do nothing
         if(Modal.getSuggestions().size()==Modal.getTasksToAdd().size()) {
             //!!!!!!!!!!!!!!! ajouter la fonctionnalité de modifier les suggestions
             Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().applySuggestions(Modal.getSuggestions());

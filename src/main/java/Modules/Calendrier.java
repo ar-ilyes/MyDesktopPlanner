@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Calendrier {
+public class Calendrier implements Cloneable {
     private LocalDate periodeDebut;
     private LocalDate periodeFin;
     private HashMap<Integer, TacheSimple> tachesSimple;
@@ -15,8 +15,11 @@ public class Calendrier {
     private HashMap<LocalDate, Journee> lesJournees;
     private LocalDate dateActuelle;
     private String heureActuelle;
-    private Historique historique;
+    private Historique historique;//!!! useless
     private Utilisateur utilisateur;
+    private ArrayList<Projet> projets;
+
+
 
     public Calendrier(LocalDate periodeDebut, LocalDate periodeFin,Historique historique) {
         this.periodeDebut = periodeDebut;
@@ -33,8 +36,17 @@ public class Calendrier {
         }*/
         this.dateActuelle = LocalDate.now();
         this.heureActuelle = "";
+        this.projets = new ArrayList<Projet>();
     }
-
+    public void ajouterProjet(Projet projet) {
+    	projets.add(projet);
+    }
+    public void supprimerProjet(Projet projet) {
+    	projets.remove(projet);
+    }
+    public ArrayList<Projet> getProjets() {
+    	return projets;
+    }
     public void setHistorique(Historique historique) {
         this.historique = historique;
     }
@@ -301,7 +313,16 @@ public void supprimerTache(TacheDecompose tache){
     }
 
     public void archiver(){
-        this.historique.ajouterCalendrier(this);
+        try {
+            this.getUtilisateur().getHistorique().ajouterCalendrier((Calendrier) this.clone());
+            //remove all Journee and TacheSimple and TacheDecompose from this
+            this.getLesJournees().clear();
+            this.getTachesSimple().clear();
+            this.getTachesDecompose().clear();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public LocalDate getJourPlusRentable(){
@@ -333,7 +354,37 @@ public void supprimerTache(TacheDecompose tache){
         }
         return moyenne/this.getLesJournees().size();
     }
-
+    public void setLesJournees(HashMap<LocalDate, Journee> lesJournees) {
+        this.lesJournees = lesJournees;
+    }
+    protected Object clone() throws CloneNotSupportedException {
+        Calendrier calendrier = (Calendrier) super.clone();
+        calendrier.setLesJournees(new HashMap<LocalDate, Journee>());
+        for (Journee jour : this.getLesJournees().values()) {
+            Journee journee = (Journee) jour.clone();
+            journee.setCalendrierSuper(calendrier);
+            calendrier.addDay(jour.getDate(), journee);
+        }
+        return calendrier;
+    }
+    public Projet getProjet(int ID){
+        //search for the project in the projects of the calendar with this ID
+        for(Projet projet : this.getProjets()) {
+            if (projet.getID() == ID) {
+                return projet;
+            }
+        }
+        return null;
+    }
+    public Projet getProjet(String nom){
+        //search for the project in the projects of the calendar with this ID
+        for(Projet projet : this.getProjets()) {
+            if (projet.getNom().equals(nom)) {
+                return projet;
+            }
+        }
+        return null;
+    }
 }
 
 

@@ -2,13 +2,15 @@ package Modules;
 
 import java.util.ArrayList;
 
-public class Projet {
+public class Projet {///projet est juste comme une etiquette pour les taches,on peut associer des taches à un projet existant puis on peut les consulter au niveau de la page projet
     private String nom;
     private String description;
     private ArrayList<TacheSimple> tacheSimples;
     private ArrayList<TacheDecompose> tacheDecomposees;
     private Etat_realisation etatRealisationGlobal;
     private Calendrier calendrierSuper;
+    private int ID;
+    private int IDtemp=0;
     public Projet(Calendrier calendrierSuper,String nom, String description, ArrayList<TacheSimple> tacheSimples, ArrayList<TacheDecompose> tacheDecomposees, Etat_realisation etatRealisationGlobal) {
         this.nom = nom;
         this.description = description;
@@ -16,6 +18,8 @@ public class Projet {
         this.tacheDecomposees = tacheDecomposees;
         this.etatRealisationGlobal = etatRealisationGlobal;
         this.calendrierSuper=calendrierSuper;
+        this.ID=IDtemp;
+        IDtemp++;
     }
     public Projet(String nom, String description,Calendrier calendrierSuper) {
         this.nom = nom;
@@ -24,7 +28,30 @@ public class Projet {
         this.tacheDecomposees = new ArrayList<TacheDecompose>();
         this.etatRealisationGlobal = Etat_realisation.EN_COURS;
         this.calendrierSuper=calendrierSuper;
+        this.ID=IDtemp;
+        IDtemp++;
     }
+    public int getID() {
+        return this.ID;
+    }
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getNom() {
+        return this.nom;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public String getDescription() {
+        return this.description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
     public void ajouterTache(TacheSimple tache){
         tacheSimples.add(tache);
     }
@@ -49,42 +76,9 @@ public class Projet {
     public ArrayList<TacheDecompose> getTacheDecomposees() {
         return tacheDecomposees;
     }
-    public boolean planifierAuto(TacheSimple tache){
 
-        if(calendrierSuper.planifierAuto(tache)){
-            this.ajouterTache(tache);
-            return true;
-        }else{
-            return false;
-        }
-    }
-    public boolean planifierAuto(TacheDecompose tache){
-        if(calendrierSuper.planifierAuto(tache)){
-            this.ajouterTache(tache);
-            return true;
-        }else{
-            return false;
-        }
-    }
 
-    public boolean planifierAuto(ArrayList<TacheSimple> taches){
-        ArrayList<TacheSimple> suggestion= calendrierSuper.planifierAuto(taches);
-        if(suggestion.size()==taches.size()){
-            return calendrierSuper.applySuggestions(suggestion);
-        }else {
-            return false;
-        }
-    }
-
-    public boolean etaleLaPeriode(ArrayList<TacheSimple> Taches){
-        for(TacheSimple tache : Taches){
-            this.ajouterTache(tache);
-        }
-        return calendrierSuper.etaleLaPeriode(Taches);
-    }
-    ///!!!!!!! maybe we need to add replanification later
-
-    ///ajouter le rendement d'un projet çad le nombre de taches terminées sur le nombre de taches totales
+    ///le rendement d'un projet çad le nombre de taches terminées sur le nombre de taches totales
     public double rendement(){
         double rendement=0;
         double nbTachesTotales=0;

@@ -13,7 +13,7 @@
                 <Font name="Segoe UI Black" size="37.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="308.0" layoutY="130.0" prefHeight="428.0" prefWidth="698.0" style="-fx-background-color: WHITE; -fx-border-image-width: 6.5PX; -fx-border-color: #f45050; -fx-background-radius: 25PX; -fx-border-radius: 25PX;">
+        <AnchorPane layoutX="308.0" layoutY="130.0" prefHeight="447.0" prefWidth="826.0" style="-fx-background-color: WHITE; -fx-border-image-width: 6.5PX; -fx-border-color: #f45050; -fx-background-radius: 25PX; -fx-border-radius: 25PX;">
             <children>
                 <Label graphicTextGap="19.0" layoutX="24.0" layoutY="119.0" text="PRIORITE :" textFill="#3c486b">
                     <font>
@@ -97,6 +97,16 @@
                </font>
             </Label>
             <CheckBox fx:id="automatique" layoutX="520.0" layoutY="350.0" mnemonicParsing="false" />
+            <Label  graphicTextGap="19.0" layoutX="24.0" layoutY="393.0" text="PROJET :" textFill="#3c486b">
+               <font>
+                  <Font name="Segoe UI Black Italic" size="22.0" />
+               </font>
+            </Label>
+            <TextField fx:id="ProjetName" layoutX="155.0" layoutY="393.0" prefHeight="36.0" prefWidth="204.0" promptText="Name" style="-fx-background-radius: 400;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
             </children>
         </AnchorPane>
         <Button fx:id="planifierJournee" layoutX="558.0" layoutY="595.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="PLANIFIER" textFill="#3c486b">

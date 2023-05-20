@@ -20,6 +20,7 @@ public class Utilisateur {
         this.badges = badges;
         this.motDePasse = motDePasse;
         this.nbrFelicitation= 0;
+        this.historique=new Historique();
     }
     public String getPseudo() {
         return pseudo;

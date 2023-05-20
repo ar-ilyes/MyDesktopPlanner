@@ -193,7 +193,7 @@
                   <Font name="Segoe UI Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="CalDay36"  layoutX="43.0" layoutY="379.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
+            <Button fx:id="CalDay36" layoutX="43.0" layoutY="379.0" mnemonicParsing="false" style="-fx-background-color: lightGray; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;" text="1">
                <font>
                   <Font name="Segoe UI Bold" size="18.0" />
                </font>
@@ -205,12 +205,12 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="NextMonth" layoutX="433.0" layoutY="127.0" mnemonicParsing="false" text="Next" textFill="#0e12d2">
+      <Button fx:id="NextMonth" layoutX="433.0" layoutY="127.0" mnemonicParsing="false" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="Next" textFill="#0e12d2">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="PreviousMonth" layoutX="92.0" layoutY="127.0" mnemonicParsing="false" text="Prev" textFill="#0e12d2">
+      <Button fx:id="PreviousMonth" layoutX="92.0" layoutY="127.0" mnemonicParsing="false" style="-fx-background-color: F9D949; -fx-background-radius: 20px;" text="Prev" textFill="#0e12d2">
          <font>
             <Font name="Segoe UI Bold" size="14.0" />
          </font>
@@ -250,5 +250,15 @@
             <Font name="Segoe UI Black" size="22.0" />
          </font>
       </Label>
+      <Button fx:id="ProjetButton" layoutX="693.0" layoutY="118.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="116.0" style="-fx-background-color: F9D949; -fx-background-radius: 20px;" text="PROJETS" textFill="#0e12d2">
+         <font>
+            <Font name="Segoe UI Black" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="ArchiverButton" layoutX="862.0" layoutY="118.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="116.0" style="-fx-background-color: F9D949; -fx-background-radius: 20px;" text="ARCHIVER" textFill="#0e12d2">
+         <font>
+            <Font name="Segoe UI Black" size="16.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

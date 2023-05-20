@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 
-public class TacheDecompose extends Tache {
+public class TacheDecompose extends Tache implements Cloneable {
     private ArrayList<TacheSimple> parties;
     private int periodeDesParties;
 
@@ -51,6 +51,15 @@ public class TacheDecompose extends Tache {
         }else {
             return null;
         }
+    }
+    public TacheDecompose clone() throws CloneNotSupportedException{
+        TacheDecompose tacheDecompose = (TacheDecompose) super.clone();
+        ArrayList<TacheSimple> parties = new ArrayList<TacheSimple>();
+        for (TacheSimple partie : this.parties) {
+            parties.add((TacheSimple) partie.clone());
+        }
+        tacheDecompose.setParties(parties);
+        return tacheDecompose;
     }
 }
 

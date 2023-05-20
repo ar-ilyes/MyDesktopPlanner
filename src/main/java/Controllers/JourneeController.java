@@ -67,13 +67,24 @@ public class JourneeController implements Initializable {
             taskContainer.setLayoutX(64.0);
             taskContainer.setLayoutY(14+i*80);
             taskContainer.setStyle("-fx-background-color: red;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            taskContainer.setOnAction(event -> {
+                System.out.println("Task"+taskContainer.getId().substring(8));
+                Modal.setSelectedTaskID(Integer.parseInt(taskContainer.getId().substring(8)));
+                try {
+                    Stage stage= (Stage) taskContainer.getScene().getWindow();
+                    stage.close();
+                    Modal.getInstance().getAppView().ShowTaskInfoSimple();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
             AllTasksContainer.getChildren().add(taskContainer);
         }
 
-        for (int i=0;i<Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).getCreneauxLibres().size();i++) {
+        for (int i=0;i<Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).getCreneauxLibres().size();i++) {
             Label creneauContainer = new Label();
             creneauContainer.setId("CreneauJour" + i);
-            creneauContainer.setText(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).getCreneauxLibres().get(i).getDebut() + " - " + Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).getCreneauxLibres().get(i).getFin());
+            creneauContainer.setText(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).getCreneauxLibres().get(i).getDebut() + " - " + Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).getCreneauxLibres().get(i).getFin());
             creneauContainer.setPrefSize(155, 54);
             creneauContainer.setLayoutX(44.0);
             creneauContainer.setLayoutY(3 + i * 20);

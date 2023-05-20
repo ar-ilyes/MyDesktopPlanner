@@ -24,6 +24,8 @@ public class AddTasksFormController implements Initializable {
     TextField dureeAllTasks;
     @FXML
     Button NextAllTasks;
+    @FXML
+    TextField ProjetName;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
         NextAllTasks.setOnAction(e -> {
@@ -50,6 +52,13 @@ public class AddTasksFormController implements Initializable {
         Etat etatTache = Etat.Not_realised;
         Etat_realisation etatRealisationTache = Etat_realisation.EN_COURS;
         TacheSimple tache=new TacheSimple(nom,duree,new Creneau("08:00","09:00"),prioriteTache,deadlineAllTasks.getValue(),categorieTache,categorieTache.getCouleur(),etatTache,etatRealisationTache,0);
+        String ProjetNameStr = ProjetName.getText();
+        Projet projet = Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
+        if(projet==null){
+            projet=new Projet(ProjetNameStr,"test description",Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
+            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().ajouterProjet(projet);
+        }
+        projet.ajouterTache(tache);
         Modal.getTasksToAdd().add(tache);
         Modal.setNumberOfTasksToAdd(Modal.getNumberOfTasksToAdd()-1);
         if(Modal.getNumberOfTasksToAdd()==0){

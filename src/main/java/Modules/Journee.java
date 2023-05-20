@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Journee {
+public class Journee implements Cloneable {
     private HashMap<Integer,TacheSimple> taches; // HashMap d'objets de la classe TacheSimple
     private ArrayList<Creneau> creneauxLibres; // tableau d'objets de la classe Creneau
     private LocalDate date; // représente la date de la journée sous forme de chaîne de caractères (comme 2023-04-30)
@@ -146,6 +146,7 @@ public class Journee {
         if(this.date.isAfter(tache.getDeadline())){
             tache.setEtat(Etat.Unscheduled);
             return false;///the deadline is before the date of the day
+
         }
         for (Creneau creneau : this.creneauxLibres){
             if (creneau.getDuree() >= tache.getDuree()){
@@ -173,9 +174,8 @@ public class Journee {
                             return false;
                         }
                     }else{
-                        System.out.println("La tache ne peut pas etre introduite car la date suivante est hors de la periode");
-                        tache.setEtat(Etat.Unscheduled);
-                        return false;
+                        this.calendrierSuper.ajouterTacheSimple(tache);
+                        return true;
                     }
                 }else{
                     setLesMinHeuresLibre(tache);
@@ -327,7 +327,14 @@ public class Journee {
         }
 
     }
-
+    public Journee clone() throws CloneNotSupportedException {
+        Journee clone = (Journee) super.clone();
+        clone.taches = new HashMap<>();
+        for (TacheSimple tache : this.taches.values()) {
+            clone.taches.put(tache.getID(), (TacheSimple) tache.clone());
+        }
+        return clone;
+    }
 }
 
 

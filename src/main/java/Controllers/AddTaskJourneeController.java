@@ -34,6 +34,8 @@ public class AddTaskJourneeController implements Initializable {
     TextField duree;
     @FXML
     CheckBox automatique;
+    @FXML
+    TextField ProjetName;
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         automatique.setOnAction(e -> {
@@ -65,8 +67,6 @@ public class AddTaskJourneeController implements Initializable {
     public void OnPlanifierJourneeComposeAuto(){
         String nomTache = nom.getText();
         int dureeTache = Integer.parseInt(duree.getText());
-        String categorieTacheStr = categorie.getValue();
-        Categorie categorieTache = new Categorie(categorieTacheStr);
         String prioriteTacheStr = priorite.getValue();
         Priorite prioriteTache = Priorite.LOW;
         if(prioriteTacheStr.equals("MEDIUM")) {
@@ -74,12 +74,23 @@ public class AddTaskJourneeController implements Initializable {
         }else if(prioriteTacheStr.equals("HIGH")) {
             prioriteTache = Priorite.LOW;
         }
+
+        String categorieTacheStr = categorie.getValue();
+        Categorie categorieTache = new Categorie(categorieTacheStr);
         Etat etatTache = Etat.Not_realised;
         Etat_realisation etatRealisationTache = Etat_realisation.EN_COURS;
         TacheDecompose tache = new TacheDecompose(nomTache,dureeTache,new Creneau("08:00","09:00"),prioriteTache,deadline.getValue(),categorieTache,categorieTache.getCouleur(),etatTache,etatRealisationTache,new ArrayList<TacheSimple>(),0);
         if(blocked.isSelected()) {
             tache.setBloqué(true);
         }
+        String ProjetNameStr = ProjetName.getText();
+        Projet projet = Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
+        if(projet==null){
+            projet=new Projet(ProjetNameStr,"test description",Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
+            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().ajouterProjet(projet);
+        }
+        projet.ajouterTache(tache);
+
         Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
 
     }
@@ -102,6 +113,15 @@ public class AddTaskJourneeController implements Initializable {
         if(blocked.isSelected()) {
             tache.setBloqué(true);
         }
+        String ProjetNameStr = ProjetName.getText();
+        //check if there is a project with the same name in calendrier_perso
+        Projet projet = Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
+        if(projet==null){
+            projet=new Projet(ProjetNameStr,"test description",Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
+            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().ajouterProjet(projet);
+
+        }
+        projet.ajouterTache(tache);
         Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
     }
     public void OnPlanifierJourneeMan(){

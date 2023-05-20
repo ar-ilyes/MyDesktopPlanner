@@ -96,6 +96,10 @@ public class CalendarPageController implements Initializable {
     Button CalDay36;
     @FXML
     Button CalDay37;
+    @FXML
+    Button ProjetButton;
+    @FXML
+    Button ArchiverButton;
     private int currentYear;
     private int currentMonth;
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
@@ -111,6 +115,32 @@ public class CalendarPageController implements Initializable {
                    }
                });
            }
+           ArchiverButton.setOnAction(e -> {
+               try {
+                   OnClickArchiver();
+               } catch (IOException ex) {
+                   throw new RuntimeException(ex);
+               }
+           });
+              ProjetButton.setOnAction(e -> {
+                try {
+                     OnClickProjet();
+                } catch (IOException ex) {
+                     throw new RuntimeException(ex);
+                }
+              });
+        }
+        public void OnClickProjet() throws IOException {
+            Stage stage= (Stage) ProjetButton.getScene().getWindow();
+            stage.close();
+            Modal.getInstance().getAppView().ShowProjet();
+        }
+        public void OnClickArchiver() throws IOException {
+            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().archiver();
+            //prompt user for new periodeDebut periodeFin for calendrier_perso
+            Stage stage= (Stage) ArchiverButton.getScene().getWindow();
+            stage.close();
+            Modal.getInstance().getAppView().ShowCalendarFirstTimePeriodes();
         }
 
         public void OnClickDay(Button button) throws IOException {
@@ -172,8 +202,8 @@ public class CalendarPageController implements Initializable {
                     dayButton.setText(Integer.toString(i-numStartDayOfWeek+1));
                     dayButton.setVisible(true);
                     LocalDate dateColorized = LocalDate.of(currentYear, currentMonth, i-numStartDayOfWeek+1);
-                    if((dateColorized.isBefore(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin()) && dateColorized.isAfter(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut()))||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut())||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin())){
-                        dayButton.setStyle("-fx-background-color: #ff0000");
+                    if((dateColorized.isBefore(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin()) && dateColorized.isAfter(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut()))||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut())||dateColorized.equals(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeFin())){
+                        dayButton.setStyle("-fx-background-color: #F9D949; -fx-min-width: 90px; -fx-min-height: 50px; -fx-border-radius: 50px; -fx-border-style: solid; -fx-background-radius: 50px;");
                     }
                 } else {
                     dayButton.setVisible(false);

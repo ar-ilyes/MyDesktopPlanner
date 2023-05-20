@@ -55,7 +55,7 @@ public class CalendarFirstTimeCreneaux implements Initializable {
                 throw new RuntimeException("Wrong format for creneaux");//!!!!!!!!!!!!!this must be a customized error
             }
         }
-        Journee journee = new Journee(new HashMap<Integer, TacheSimple>(),creneaux,Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut().plusDays(numberOfDaysSetted),Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso());
+        Journee journee = new Journee(new HashMap<Integer, TacheSimple>(),creneaux,Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut().plusDays(numberOfDaysSetted),Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
         Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().addDay(journee.getDate(),journee);
         //close the stage to open a new one :
         Stage stage= (Stage) NextCreneauxFirstTime.getScene().getWindow();

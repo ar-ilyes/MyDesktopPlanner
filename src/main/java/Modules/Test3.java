@@ -56,9 +56,6 @@ public class Test3 {
             System.out.println(t.getNom()+" date "+t.getDate()+" debut: "+t.getCreneau().getDebut()+" fin: "+t.getCreneau().getFin());
         }
         //calendrier.etaleLaPeriode(taches);
-
-
-
         //affichage
        /*for(MinHeure c : jour.getLesDemiHeures()){
            System.out.println(c.getHeure()+" dans creneau :"+c.isDansCreneau()+" libre  :"+c.isLibre()+" Bloque :"+c.isBloque());

@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Test {
     public static void main(String[] args) {
-        //MyPlannerApp app = new MyPlannerApp();
+        MyPlannerApp app = new MyPlannerApp();
         LocalDate debutPeriode = LocalDate.of(2020, 1, 1);
         LocalDate finPeriode = LocalDate.of(2020, 1, 7);
         //the calendar of the user
@@ -16,8 +16,8 @@ public class Test {
         Utilisateur user = new Utilisateur("test",calendrier, 0, new ArrayList<Badge>(), "test_password");
         calendrier.setHistorique(user.getHistorique());
         calendrier.setUtilisateur(user);
-        //app.getUsers().put("test", user);
-        //app.setCurrentUser(user);
+        app.getUsers().put("test", user);
+        app.setCurrentUser(user);
 
         //the 1st day and its creneaux and tasks
         Creneau creneau1 = new Creneau("08:30","11:30");
@@ -85,8 +85,9 @@ public class Test {
         jour.introduireTacheAuto(tache1);
         jour.introduireTacheAuto(tache2);
         jour.introduireTacheAuto(tache3);
+        calendrier.archiver();
 
-        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
+        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 8), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
         jour.introduireTacheAuto(tacheDecompose);
       //affichage
        /*for(MinHeure c : jour.getLesDemiHeures()){
@@ -106,6 +107,38 @@ public class Test {
                 System.out.println(c.getDebut()+" "+c.getFin());
             }
         }
+
+        System.out.println("//////////////////// ARCHIVE /////////////////////////");
+        for (Journee j : user.getHistorique().getCalendriers().get(0).getLesJournees().values()){
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("===========>>Jour :"+j.getDate());
+            System.out.println("Taches :");
+            for (TacheSimple t : j.getTaches().values()){
+                System.out.println(t.getNom()+" debut: "+t.getCreneau().getDebut()+" fin: "+t.getCreneau().getFin());
+            }
+            System.out.println("Creneaux libres :");
+            for (Creneau c : j.getCreneauxLibres()){
+                System.out.println(c.getDebut()+" "+c.getFin());
+            }
+        }
+        System.out.println("//////////////////// projets /////////////////////////");
+
+        Projet projet=new Projet("projet1","for test purpose",calendrier);
+        projet.ajouterTache(tache1);
+        projet.ajouterTache(tache2);
+        projet.ajouterTache(tache3);
+        calendrier.ajouterProjet(projet);
+
+        //loop over projects in the calendar and display names of each task in each project
+        for (Projet p : calendrier.getProjets()){
+            System.out.println("Projet :"+p.getNom());
+            for (TacheSimple t : p.getTacheSimples()){
+                System.out.println("     Tache :"+t.getNom());
+            }
+        }
+
 
 
     }

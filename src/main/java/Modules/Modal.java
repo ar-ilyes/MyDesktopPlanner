@@ -10,6 +10,8 @@ public class Modal {
     private static MyPlannerApp myPlannerApp = null;
     private final AppView appView = new AppView();
     private static LocalDate selectedDay;
+    private static int selectedTaskID;
+    private static int selectedProjetID;
     private static int numberOfTasksToAdd;
     private static ArrayList<TacheSimple> TasksToAdd = new ArrayList<>();
     private static ArrayList<TacheSimple> Suggestions = new ArrayList<>();
@@ -53,6 +55,18 @@ public class Modal {
     }
     public static void setSuggestions(ArrayList<TacheSimple> suggestions) {
         Suggestions = suggestions;
+    }
+    public static int getSelectedTaskID() {
+        return selectedTaskID;
+    }
+    public static void setSelectedTaskID(int selectedTaskID) {
+        Modal.selectedTaskID = selectedTaskID;
+    }
+    public static int getSelectedProjetID() {
+        return selectedProjetID;
+    }
+    public static void setSelectedProjetID(int selectedProjetID) {
+        Modal.selectedProjetID = selectedProjetID;
     }
 
 }

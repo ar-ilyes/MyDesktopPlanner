@@ -2,7 +2,7 @@ package Modules;
 
 import java.time.LocalDate;
 import java.util.Date;
-public class TacheSimple extends Tache {
+public class TacheSimple extends Tache implements Cloneable{
     private int periodicite;
 
     private Creneau creneau;
@@ -24,6 +24,12 @@ public class TacheSimple extends Tache {
 
     public void setPeriodicite(int periodicite) {
         this.periodicite = periodicite;
+    }
+
+    public TacheSimple clone() throws CloneNotSupportedException{
+        TacheSimple tacheSimple = (TacheSimple) super.clone();
+        tacheSimple.setCreneau((Creneau) this.creneau.clone());
+        return tacheSimple;
     }
 }
 

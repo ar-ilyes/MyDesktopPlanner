@@ -11,7 +11,9 @@ import java.util.ArrayList;
 public class Historique
 {
     ArrayList<Calendrier> calendriers;
-    public Historique() {}
+    public Historique() {
+        this.calendriers = new ArrayList<Calendrier>();
+    }
     public Historique(ArrayList<Calendrier> calendriers) {
         this.calendriers = calendriers;
     }
