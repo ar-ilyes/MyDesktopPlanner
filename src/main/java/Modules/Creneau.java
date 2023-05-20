@@ -3,7 +3,7 @@ package Modules;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Creneau {
+public class Creneau implements Cloneable {
     private String debut; // représente l'heure de début réelle du créneau sous forme de chaîne de caractères (comme 11:30)
     private String fin; // représente l'heure de fin réelle du créneau sous forme de chaîne de caractères (comme 11:30)
     private static int min = 30; // période de temps en minutes qui est égale à 30
@@ -93,6 +93,9 @@ public class Creneau {
         LocalTime end = LocalTime.parse(this.fin, DateTimeFormatter.ofPattern("HH:mm"));
         LocalTime time = LocalTime.parse(Hour, DateTimeFormatter.ofPattern("HH:mm"));
         return !time.isBefore(beginning) && !time.isAfter(end);
+    }
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
 

@@ -1,7 +1,7 @@
 package Modules;
 
 public enum Priorite {
-    LOW,
+    HIGH,
     MEDIUM,
-    HIGH
+    LOW
 }

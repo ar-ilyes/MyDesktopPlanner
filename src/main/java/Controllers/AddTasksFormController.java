@@ -42,9 +42,9 @@ public class AddTasksFormController implements Initializable {
         String prioriteTacheStr = prioriteAllTasks.getValue();
         Priorite prioriteTache = Priorite.LOW;
         if(prioriteTacheStr.equals("MEDIUM")) {
-            prioriteTache = Priorite.LOW;
+            prioriteTache = Priorite.MEDIUM;
         }else if(prioriteTacheStr.equals("HIGH")) {
-            prioriteTache = Priorite.LOW;
+            prioriteTache = Priorite.HIGH;
         }
 
         Etat etatTache = Etat.Not_realised;

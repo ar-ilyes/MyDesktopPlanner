@@ -16,7 +16,7 @@
                 <Font name="Segoe UI Black" size="55.0" />
             </font>
         </Label>
-        <Button layoutX="633.0" layoutY="614.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="224.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="CONFIRMER" textFill="#3c486b">
+        <Button fx:id="applySugg" layoutX="563.0" layoutY="594.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="224.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="CONFIRMER" textFill="#3c486b">
             <font>
                 <Font name="Segoe UI Black" size="22.0" />
             </font>
@@ -30,5 +30,10 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
+      <Label fx:id="etaleePeriodeMessage" layoutX="446.0" layoutY="561.0" prefHeight="20.0" prefWidth="497.0" text="Voulez vous étaler la periode pour qu'on peut planifier tous le taches" textFill="RED">
+         <font>
+            <Font name="Segoe UI Black" size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

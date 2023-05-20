@@ -233,14 +233,20 @@ public class Journee {
        }
    }
 
-   public TacheSimple Suggest(TacheSimple tache) {
-        Creneau creneau = this.biggestDureeCreneau();
-       if (tache.getDuree() < creneau.getDuree()) {
-           tache.setDate(this.getDate());
-       }else{
-           tache.setDate(null);
-       }
-       return tache;
+   public TacheSimple Suggest(TacheSimple tache,ArrayList<Creneau> creneauxLibresSugg,LocalDate dateSugg) {
+       tache.setDate(null);
+        for (Creneau creneau : creneauxLibresSugg){
+            if (tache.getDuree() <= creneau.getDuree()) {
+                tache.setDate(dateSugg);
+                Creneau creneauTmp=new Creneau(creneau.getDebut(),addMinutesToTime(creneau.getDebut(),tache.getDuree()));
+                creneauTmp.setDebut(creneauTmp.getDebut());
+                creneauTmp.setFin(addMinutesToTime(creneau.getDebut(),tache.getDuree()));
+                tache.setCreneau(creneauTmp);
+                creneau.setDebut(addMinutesToTime(creneau.getDebut(),tache.getDuree()));
+                break;
+            }
+        }
+        return tache;
    }
    public Creneau biggestDureeCreneau(){
         Creneau temp = this.getCreneauxLibres().get(0);

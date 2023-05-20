@@ -143,17 +143,37 @@ public class Calendrier {
                 .comparing(TacheSimple::getPriorite)
                 .thenComparing(TacheSimple::getDeadline);
         taches.sort(comparator);
+        // do a copy of all creneaux inside days of periode and then put them inside a hashmap of arraylist of creneaux where the key is the date journne and the value is a copy (not reference) of arraylist of creneaux that are present in that day
+        HashMap<LocalDate,ArrayList<Creneau>> creneauxSugg=new HashMap<LocalDate,ArrayList<Creneau>>();
+        for (HashMap.Entry<LocalDate, Journee> entry : lesJournees.entrySet()) {
+            LocalDate journeeDate = entry.getKey();
+            if (journeeDate.isBefore(periodeDebut) || journeeDate.isAfter(periodeFin)) {
+                continue;
+            }
+            Journee journee = entry.getValue();
+            ArrayList<Creneau> creneauxJournee=new ArrayList<Creneau>();
+            for(Creneau creneau : journee.getCreneauxLibres()){
+                try {
+                    creneauxJournee.add((Creneau) creneau.clone());
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            creneauxSugg.put(journeeDate,creneauxJournee);
+        }
+
         LocalDate dayDate=this.periodeDebut;
         ArrayList<TacheSimple> array_sugg=new ArrayList<TacheSimple>();
         for(TacheSimple tache : taches){
+            dayDate=this.periodeDebut;
             if(dayDate.isBefore(this.periodeFin)){
                 Journee sugDay=this.getJournee(dayDate);
-                TacheSimple suggestion=sugDay.Suggest(tache);
+                TacheSimple suggestion=sugDay.Suggest(tache,creneauxSugg.get(dayDate),dayDate);
                 while(suggestion.getDate()==null){
                     dayDate=dayDate.plusDays(1);
-                    if(dayDate.isBefore(this.periodeFin)){
+                    if(dayDate.isBefore(this.periodeFin) || dayDate.isEqual(this.periodeFin)){
                         sugDay=this.getJournee(dayDate);
-                        suggestion=sugDay.Suggest(tache);
+                        suggestion=sugDay.Suggest(tache,creneauxSugg.get(dayDate),dayDate);
                     }else{
                         break;
                     }
