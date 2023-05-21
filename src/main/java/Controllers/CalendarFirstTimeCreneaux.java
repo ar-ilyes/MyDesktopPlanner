@@ -25,8 +25,8 @@ public class CalendarFirstTimeCreneaux implements Initializable {
     Button NextCreneauxFirstTime;
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
         //put the date of the day to update
-        int numberOfDaysSetted=Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getLesJournees().size();
-        DateOfTheDay.setText(Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut().plusDays(numberOfDaysSetted).toString());
+        int numberOfDaysSetted=Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getLesJournees().size();
+        DateOfTheDay.setText(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut().plusDays(numberOfDaysSetted).toString());
         NextCreneauxFirstTime.setOnAction(e -> {
             try {
                 OnNextCreneauxFirstTime();
@@ -36,7 +36,7 @@ public class CalendarFirstTimeCreneaux implements Initializable {
         });
     }
     public void OnNextCreneauxFirstTime() throws IOException {
-        int numberOfDaysSetted = Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getLesJournees().size();
+        int numberOfDaysSetted = Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getLesJournees().size();
         ArrayList<Creneau> creneaux= new ArrayList<Creneau>();
         String creneauxTmp=CreneauxFirstTime.getText();
         //remove spaces from creneauxTmp
@@ -56,7 +56,7 @@ public class CalendarFirstTimeCreneaux implements Initializable {
             }
         }
         Journee journee = new Journee(new HashMap<Integer, TacheSimple>(),creneaux,Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getPeriodeDebut().plusDays(numberOfDaysSetted),Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
-        Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().addDay(journee.getDate(),journee);
+        Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().addDay(journee.getDate(),journee);
         //close the stage to open a new one :
         Stage stage= (Stage) NextCreneauxFirstTime.getScene().getWindow();
         stage.close();

@@ -233,6 +233,7 @@ public class AppView {
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.setResizable(false);
+        //hadi bach
         double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
         double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
         stage.setWidth(screenWidth);
@@ -240,6 +241,23 @@ public class AppView {
         stage.setFullScreenExitHint("");
         stage.show();
     }
+    public void ShowProfilePage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ProfilePage.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setResizable(false);
+        //hadi bach
+        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+        stage.setWidth(screenWidth);
+        stage.setHeight(screenHeight);
+        stage.setFullScreenExitHint("");
+        stage.show();
+    }
+
 
 
 

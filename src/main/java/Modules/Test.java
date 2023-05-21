@@ -88,7 +88,23 @@ public class Test {
         calendrier.archiver();
 
         TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 8), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
-        jour.introduireTacheAuto(tacheDecompose);
+        calendrier.setPeriodeDebut(LocalDate.of(2020, 1, 1));
+        calendrier.setPeriodeFin(LocalDate.of(2020, 1, 2));
+        Creneau creneau11AR = new Creneau("07:30","11:30");
+        Creneau creneau12AR = new Creneau("11:30","14:30");
+        Journee jourAr = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),LocalDate.of(2020, 1, 1),calendrier);
+        jourAr.introduireCreneau(creneau11AR);
+        jourAr.introduireCreneau(creneau12AR);
+
+        //the 7th day and its creneaux and tasks
+        Creneau creneau21AR = new Creneau("07:30","11:30");
+        Creneau creneau22AR = new Creneau("11:30","14:30");
+        Journee jourAr2 = new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),LocalDate.of(2020, 1, 2),calendrier);
+        jourAr2.introduireCreneau(creneau21AR);
+        jourAr2.introduireCreneau(creneau22AR);
+        calendrier.addDay(jourAr.getDate(),jourAr);
+        calendrier.addDay(jourAr2.getDate(),jourAr2);
+        jourAr.introduireTacheAuto(tacheDecompose);
       //affichage
        /*for(MinHeure c : jour.getLesDemiHeures()){
            System.out.println(c.getHeure()+" dans creneau :"+c.isDansCreneau()+" libre  :"+c.isLibre()+" Bloque :"+c.isBloque());

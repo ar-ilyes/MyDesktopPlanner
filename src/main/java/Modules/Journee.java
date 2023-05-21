@@ -271,7 +271,7 @@ public class Journee implements Cloneable {
 
    public int getNbTachesRealisees(){
         int nb=0;
-        for(TacheSimple tache : this.taches.values()){
+        for(TacheSimple tache : this.calendrierSuper.getTachesSimple().values()){
             if(tache.getEtat()==Etat.Completed){
                 nb++;
             }
@@ -286,8 +286,9 @@ public class Journee implements Cloneable {
 
     public void setCompletedTache(TacheSimple tache){
         this.taches.get(tache.getID()).setEtat(Etat.Completed);
-        if(this.getNbTachesRealisees()==this.calendrierSuper.getUtilisateur().getNbr_min_tache()){
+        if(this.getNbTachesRealisees()>=this.calendrierSuper.getUtilisateur().getNbr_min_tache()){
             this.calendrierSuper.getUtilisateur().setNbrFelicitation(this.calendrierSuper.getUtilisateur().getNbrFelicitation()+1);
+
         }
         if(this.calendrierSuper.getUtilisateur().getNbrFelicitation()==5){
             this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Good"));

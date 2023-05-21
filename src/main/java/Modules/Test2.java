@@ -13,7 +13,7 @@ public class Test2 {
         Calendrier calendrier = new Calendrier(debutPeriode,finPeriode,new Historique());
 
         //the user
-        Utilisateur user = new Utilisateur("test",calendrier, 0,  new ArrayList<Badge>(), "test_password");
+        Utilisateur user = new Utilisateur("test",calendrier, 1,  new ArrayList<Badge>(), "test_password");
         calendrier.setHistorique(user.getHistorique());
         calendrier.setUtilisateur(user);
         //app.getUsers().put("test", user);
@@ -82,11 +82,16 @@ public class Test2 {
         TacheSimple tache1 = new TacheSimple("test2Tache", 30, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
         TacheSimple tache2 = new TacheSimple("test2Tache2", 50, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
         TacheSimple tache3 = new TacheSimple("test2Tache3", 100, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheSimple tache4 = new TacheSimple("test2Tache2", 30, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+        TacheSimple tache5 = new TacheSimple("test2Tache3", 30, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
+
         TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
         ArrayList<TacheSimple> taches = new ArrayList<TacheSimple>();
         taches.add(tache1);
         taches.add(tache2);
         taches.add(tache3);
+        taches.add(tache4);
+        taches.add(tache5);
         ArrayList<TacheSimple> suggestion=calendrier.planifierAuto(taches);
         for (TacheSimple t : suggestion){
             System.out.println(t.getNom()+" date "+t.getDate()+" debut: "+t.getCreneau().getDebut()+" fin: "+t.getCreneau().getFin());
@@ -114,6 +119,14 @@ public class Test2 {
                 System.out.println(c.getDebut()+" "+c.getFin());
             }
         }
-
+        jour.setCompletedTache(tache1);
+        jour.setCompletedTache(tache2);
+        jour.setCompletedTache(tache3);
+        jour.setCompletedTache(tache4);
+        jour.setCompletedTache(tache5);
+        // affiche les badges
+        for (Badge b : user.getBadge()) {
+            System.out.println(b.getNom());
+        }
     }
 }

@@ -37,7 +37,7 @@ public class RegisterController implements Initializable {
         LocalDate finPeriode = LocalDate.of(2020, 1, 7);//just temporary
         //the calendar of the user
         Calendrier calendrier = new Calendrier(debutPeriode,finPeriode,new Historique());
-        Utilisateur user = new Utilisateur(pseudo,calendrier, 0, new ArrayList<Badge>(), motDePasse);
+        Utilisateur user = new Utilisateur(pseudo,calendrier, 1, new ArrayList<Badge>(), motDePasse);
         Modal.getInstance().getMyPlannerApp().getUsers().put(pseudo,user);
         Modal.getInstance().getMyPlannerApp().setCurrentUser(user);
         try {

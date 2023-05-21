@@ -29,6 +29,8 @@ public class JourneeController implements Initializable {
     Circle returnToCalendar;
     @FXML
     Circle GoToAllTasks;
+    @FXML
+    Circle GoToProfile;
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
     JourneeDate.setText(Modal.getSelectedDay().toString());
 
@@ -124,6 +126,15 @@ public class JourneeController implements Initializable {
                 Stage stage= (Stage) GoToAllTasks.getScene().getWindow();
                 stage.close();
                 Modal.getInstance().getAppView().ShowAllTasks();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+        GoToProfile.setOnMouseClicked(e -> {
+            try {
+                Stage stage= (Stage) GoToProfile.getScene().getWindow();
+                stage.close();
+                Modal.getInstance().getAppView().ShowProfilePage();
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

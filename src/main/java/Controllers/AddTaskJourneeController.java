@@ -115,14 +115,14 @@ public class AddTaskJourneeController implements Initializable {
         }
         String ProjetNameStr = ProjetName.getText();
         //check if there is a project with the same name in calendrier_perso
-        Projet projet = Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
+        Projet projet = Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
         if(projet==null){
             projet=new Projet(ProjetNameStr,"test description",Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
             Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().ajouterProjet(projet);
 
         }
         projet.ajouterTache(tache);
-        Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
+        Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
     }
     public void OnPlanifierJourneeMan(){
         //TODO

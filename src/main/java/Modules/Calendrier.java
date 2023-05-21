@@ -21,6 +21,7 @@ public class Calendrier implements Cloneable {
 
 
 
+
     public Calendrier(LocalDate periodeDebut, LocalDate periodeFin,Historique historique) {
         this.periodeDebut = periodeDebut;
         this.periodeFin = periodeFin;
@@ -340,7 +341,7 @@ public void supprimerTache(TacheDecompose tache){
     public int getDureeCategorie(String categorie){
         int duree=0;
         for(TacheSimple tache : this.getTachesSimple().values()){
-            if(tache.getCategorie().equals(categorie)){
+            if(tache.getCategorie().getNom().equals(categorie)){
                 duree+=tache.getDuree();
             }
         }
