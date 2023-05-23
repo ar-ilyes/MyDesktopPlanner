@@ -151,7 +151,7 @@ public class Calendrier implements Cloneable {
         }*/
     }
 
-    public ArrayList<TacheSimple> planifierAuto(ArrayList<Tache> taches){
+    public ArrayList<TacheSimple> planifierAuto(ArrayList<Tache> taches) throws DeadLinePassed, WrongCreneauFormat{
         Comparator<Tache> comparator = Comparator
                 .comparing(Tache::getPriorite)
                 .thenComparing(Tache::getDeadline);
@@ -209,7 +209,7 @@ public class Calendrier implements Cloneable {
         return array_sugg;
     }
 
-    public boolean planifierAuto(TacheSimple tache){
+    public boolean planifierAuto(TacheSimple tache) throws DeadLinePassed , WrongCreneauFormat{
         boolean stop=false;
         for (Journee jour : this.getLesJournees().values()){
             if(!stop){
@@ -226,7 +226,7 @@ public class Calendrier implements Cloneable {
         }
         return true;
     }
-    public boolean planifierAuto(TacheDecompose tache){
+    public boolean planifierAuto(TacheDecompose tache) throws DeadLinePassed,WrongCreneauFormat{
         Journee jour = this.getJournee(this.periodeDebut);
         return jour.introduireTacheAuto(tache);
     }
@@ -236,7 +236,7 @@ public class Calendrier implements Cloneable {
     public void setPeriodeDebut(LocalDate periodeDebut) {
         this.periodeDebut = periodeDebut;
     }
-    public boolean etaleLaPeriode(ArrayList<Tache> Taches){
+    public boolean etaleLaPeriode(ArrayList<Tache> Taches) throws DeadLinePassed,WrongCreneauFormat{
         Comparator<Tache> comparator = Comparator
                 .comparing(Tache::getPriorite)
                 .thenComparing(Tache::getDeadline);
@@ -299,7 +299,7 @@ public class Calendrier implements Cloneable {
 
         return true;
     }
-    public boolean applySuggestions(ArrayList<TacheSimple> taches){
+    public boolean applySuggestions(ArrayList<TacheSimple> taches) throws DeadLinePassed{
         Comparator<TacheSimple> comparator = Comparator
                 .comparing(TacheSimple::getPriorite)
                 .thenComparing(TacheSimple::getDeadline);
@@ -307,7 +307,8 @@ public class Calendrier implements Cloneable {
         for(TacheSimple tache : taches){
             if(tache.getDate()!=null){
                 Journee jour=this.getJournee(tache.getDate());
-               boolean bool= jour.introduireTacheAuto(tache);
+               //boolean bool= jour.introduireTacheAuto(tache);
+                boolean bool= jour.introduireTacheManuelle(tache,tache.getCreneau());
                 if(!bool){
                      return false;
                 }
@@ -317,7 +318,7 @@ public class Calendrier implements Cloneable {
         }
         return true;
     }
-    public boolean supprimerTache(TacheSimple tache){
+    public boolean supprimerTache(TacheSimple tache)throws WrongCreneauFormat{
         return this.getJournee(tache.getDate()).supprimerTache(tache);
     }
 public void supprimerTache(TacheDecompose tache){
@@ -327,19 +328,30 @@ public void supprimerTache(TacheDecompose tache){
         this.getTachesDecompose().remove(tache.getID());
     }
 
-    public boolean replanification(TacheSimple tache) {
+    public boolean replanification(TacheSimple tache) throws DeadLinePassed,WrongCreneauFormat {
         ArrayList<Tache> ReplannedTaches = new ArrayList<Tache>();
+        ArrayList<Tache> BeforeReplanificationTaches = new ArrayList<Tache>();
         ReplannedTaches.add(tache);
         for (TacheSimple t : this.getTachesSimple().values()) {
             if (!t.isBloqué()) {
-                ReplannedTaches.add(t);
+                BeforeReplanificationTaches.add(t);
+                try {
+                    ReplannedTaches.add(t.clone());
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                }
                 this.supprimerTache(t);
             }
         }
         ArrayList<TacheSimple> Suggestions = this.planifierAuto(ReplannedTaches);
-        if (Suggestions.size() == ReplannedTaches.size()) {
+        if (Suggestions.size() >= ReplannedTaches.size()) {
             return this.applySuggestions(Suggestions);
         } else {
+            //replan all the tasks before replanification manually with methode introduireTachemanuelle
+            for (Tache t : BeforeReplanificationTaches) {
+                Journee jour = this.getJournee(t.getDate());
+                jour.introduireTacheManuelle((TacheSimple) t, ((TacheSimple) t).getCreneau());
+            }
             return false;//replanification impossible
         }
     }

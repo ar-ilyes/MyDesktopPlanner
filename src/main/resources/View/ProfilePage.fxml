@@ -20,7 +20,7 @@
                 <Font name="Segoe UI Black" size="55.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="50.0" layoutY="260.0" prefHeight="195.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="50.0" layoutY="260.0" prefHeight="187.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="RendementContainer" prefHeight="179.0" prefWidth="419.0">
                <children>
@@ -58,7 +58,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Label layoutX="550.0" layoutY="450.0" text="HISTORIQUE" textFill="#f45050">
+        <Label layoutX="220.0" layoutY="450.0" text="HISTORIQUE" textFill="#f45050">
             <font>
                 <Font name="Segoe UI Black" size="24.0" />
             </font>
@@ -78,7 +78,7 @@
                 <Font name="Segoe UI Black" size="24.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="650.0" layoutY="260.0" prefHeight="195.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="650.0" layoutY="260.0" prefHeight="179.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="BadgeContainer">
                <children>
@@ -87,7 +87,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <ScrollPane layoutX="350.0" layoutY="490.0" prefHeight="195.0" prefWidth="533.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="50.0" layoutY="490.0" prefHeight="179.0" prefWidth="533.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="HistoriqueContainer">
                <children>
@@ -96,5 +96,39 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
+        <AnchorPane layoutX="689.0" layoutY="491.0" prefHeight="179.0" prefWidth="361.0" style="-fx-border-color: red; -fx-border-radius: 20px;">
+            <children>
+                <Label layoutX="10.0" layoutY="24.0" prefHeight="25.0" prefWidth="210.0" text="Nombre Min De Tache:" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="195.0" text="Duree Min Creneau:" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="NbMinTaches" layoutX="220.0" layoutY="20.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px; -fx-background-radius: 20px;">
+                    <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="CreneauMin" layoutX="200.0" layoutY="75.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px; -fx-background-radius: 20px;">
+                    <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                    </font>
+                </TextField>
+            <Button fx:id="changeParam" layoutX="132.0" layoutY="129.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: f9d949; -fx-background-radius: 20px;" text="CHANGER" textFill="#3c486b">
+               <font>
+                  <Font name="Segoe UI Black" size="14.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+      <Label layoutX="781.0" layoutY="460.0" prefHeight="35.0" prefWidth="170.0" text="PARAMETRES" textFill="#f45050">
+         <font>
+            <Font name="Segoe UI Black" size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

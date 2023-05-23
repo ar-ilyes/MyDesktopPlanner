@@ -33,9 +33,9 @@ public class SuggestionsController implements Initializable {
             SuggContainer.setPrefSize(570,52);
             SuggContainer.setLayoutX(30.0);
             SuggContainer.setLayoutY(16+i*80);
-            suggName.setLayoutX(41.0);
+            suggName.setLayoutX(25.0);
             suggName.setLayoutY(10.0);
-            suggDate.setLayoutX(300.0);
+            suggDate.setLayoutX(260.0);
             suggDate.setLayoutY(6.0);
             suggDate.setPrefSize(200,30);
             SuggContainer.setStyle("-fx-background-color: RED; -fx-background-radius: 20PX;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");

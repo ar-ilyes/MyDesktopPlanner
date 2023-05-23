@@ -1,15 +1,17 @@
 package Controllers;
 
-import Modules.Categorie;
+import Modules.Creneau;
 import Modules.Modal;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ProfileContainer implements Initializable {
     @FXML
@@ -28,8 +30,36 @@ public class ProfileContainer implements Initializable {
     Label DureeCategorie;
     @FXML
     Label MoyenneRendement;
+    @FXML
+    Button changeParam;
+    @FXML
+    TextField NbMinTaches;
+    @FXML
+    TextField CreneauMin;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
+        AtomicBoolean Clicked= new AtomicBoolean(false);
+        NbMinTaches.setText(String.valueOf(Modal.getMyPlannerApp().getCurrentUser().getNbr_min_tache()));
+        CreneauMin.setText(String.valueOf(Creneau.getMin()));
+        // NbMinTaches and CreeauMin are not editable
+        NbMinTaches.setEditable(false);
+        CreneauMin.setEditable(false);
+        changeParam.setOnMouseClicked(e -> {
+            if (!Clicked.get()){
+                NbMinTaches.setEditable(true);
+                CreneauMin.setEditable(true);
+                changeParam.setText("Valider");
+                Clicked.set(true);
+            }else{
+                NbMinTaches.setEditable(false);
+                CreneauMin.setEditable(false);
+                changeParam.setText("Changer");
+                Modal.getMyPlannerApp().getCurrentUser().setNbr_min_tache(Integer.parseInt(NbMinTaches.getText()));
+                Creneau.setMin(Integer.parseInt(CreneauMin.getText()));
+                Clicked.set(false);
+            }
+        });
+
         GoToCalendar.setOnMouseClicked(e -> {
             try {
                 OnGoToCalendar();
