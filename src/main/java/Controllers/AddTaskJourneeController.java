@@ -125,6 +125,37 @@ public class AddTaskJourneeController implements Initializable {
         Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
     }
     public void OnPlanifierJourneeMan(){
-        //TODO
+        String nomTache = nom.getText();
+        int dureeTache = Integer.parseInt(duree.getText());
+        String categorieTacheStr = categorie.getValue();
+        Categorie categorieTache = new Categorie(categorieTacheStr);
+        String prioriteTacheStr = priorite.getValue();
+        Priorite prioriteTache = Priorite.LOW;
+        String creneauTacheStr = creneau.getText();
+        Creneau creneauTache = new Creneau("00:00","00:00");
+        creneauTache.setDebut(creneauTacheStr.split("-")[0]);
+        creneauTache.setFin(creneauTacheStr.split("-")[1]);
+        if(prioriteTacheStr.equals("MEDIUM")) {
+            prioriteTache = Priorite.LOW;
+        }else if(prioriteTacheStr.equals("HIGH")) {
+            prioriteTache = Priorite.LOW;
+        }
+        Etat etatTache = Etat.Not_realised;
+        Etat_realisation etatRealisationTache = Etat_realisation.EN_COURS;
+        int periodiciteTache = Integer.parseInt(periodique.getText());
+        TacheSimple tache = new TacheSimple(nomTache,dureeTache,new Creneau("08:00","09:00"),prioriteTache,deadline.getValue(),categorieTache,categorieTache.getCouleur(),etatTache,etatRealisationTache,periodiciteTache);
+        if(blocked.isSelected()) {
+            tache.setBloqué(true);
+        }
+        String ProjetNameStr = ProjetName.getText();
+        //check if there is a project with the same name in calendrier_perso
+        Projet projet = Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
+        if(projet==null){
+            projet=new Projet(ProjetNameStr,"test description",Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
+            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().ajouterProjet(projet);
+
+        }
+        projet.ajouterTache(tache);
+        Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheManuelle(tache,creneauTache);
     }
 }

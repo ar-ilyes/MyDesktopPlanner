@@ -85,19 +85,20 @@ public class Test2 {
         TacheSimple tache4 = new TacheSimple("test2Tache2", 30, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
         TacheSimple tache5 = new TacheSimple("test2Tache3", 30, creneau2, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, 0);
 
-        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 1), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
-        ArrayList<TacheSimple> taches = new ArrayList<TacheSimple>();
+        TacheDecompose tacheDecompose=new TacheDecompose("testTacheDecompose", 400, creneau1, Priorite.LOW, LocalDate.of(2020, 1, 8), new Categorie("Study"), Couleur.BLEU, Etat.In_Progress, Etat_realisation.EN_COURS, new ArrayList<TacheSimple>(),0);
+        ArrayList<Tache> taches = new ArrayList<Tache>();
         taches.add(tache1);
         taches.add(tache2);
         taches.add(tache3);
         taches.add(tache4);
         taches.add(tache5);
+        taches.add(tacheDecompose);
         ArrayList<TacheSimple> suggestion=calendrier.planifierAuto(taches);
         for (TacheSimple t : suggestion){
             System.out.println(t.getNom()+" date "+t.getDate()+" debut: "+t.getCreneau().getDebut()+" fin: "+t.getCreneau().getFin());
         }
         calendrier.applySuggestions(suggestion);
-        calendrier.planifierAuto(tacheDecompose);
+       // calendrier.planifierAuto(tacheDecompose);
 
 
 

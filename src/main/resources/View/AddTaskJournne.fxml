@@ -53,9 +53,12 @@
                 <ChoiceBox fx:id="categorie" layoutX="192.0" layoutY="270.0" prefHeight="25.0" prefWidth="174.0" style="-fx-border-radius: 5PX; -fx-background-radius: 5px;">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="STUDY" />
-                            <String fx:value="SPORT" />
-                            <String fx:value="WORK" />
+                            <String fx:value="Studies" />
+                            <String fx:value="Work" />
+                            <String fx:value="Sport" />
+                            <String fx:value="Health" />
+                            <String fx:value="Perso" />
+                            <String fx:value="Family" />
                         </FXCollections>
                     </items>
                 </ChoiceBox>

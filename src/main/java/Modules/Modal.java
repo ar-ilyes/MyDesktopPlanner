@@ -13,7 +13,7 @@ public class Modal {
     private static int selectedTaskID;
     private static int selectedProjetID;
     private static int numberOfTasksToAdd;
-    private static ArrayList<TacheSimple> TasksToAdd = new ArrayList<>();
+    private static ArrayList<Tache> TasksToAdd = new ArrayList<>();
     private static ArrayList<TacheSimple> Suggestions = new ArrayList<>();
     private Modal() {
     }
@@ -44,10 +44,10 @@ public class Modal {
     public static void setNumberOfTasksToAdd(int numberOfTasksToAdd) {
         Modal.numberOfTasksToAdd = numberOfTasksToAdd;
     }
-    public static ArrayList<TacheSimple> getTasksToAdd() {
+    public static ArrayList<Tache> getTasksToAdd() {
         return TasksToAdd;
     }
-    public static void setTasksToAdd(ArrayList<TacheSimple> tasksToAdd) {
+    public static void setTasksToAdd(ArrayList<Tache> tasksToAdd) {
         TasksToAdd = tasksToAdd;
     }
     public static ArrayList<TacheSimple> getSuggestions() {

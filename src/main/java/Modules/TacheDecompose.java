@@ -47,6 +47,7 @@ public class TacheDecompose extends Tache implements Cloneable {
             this.addPartie(partie);
             nbParties++;
             this.periodeDesParties+=Duree;
+            partie.setPartieTacheDecompose(true);
             return partie;
         }else {
             return null;

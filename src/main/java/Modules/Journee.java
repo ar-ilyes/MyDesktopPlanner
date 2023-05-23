@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Journee implements Cloneable {
     private HashMap<Integer,TacheSimple> taches; // HashMap d'objets de la classe TacheSimple
@@ -189,8 +190,54 @@ public class Journee implements Cloneable {
         return false;
     }
 
-   public boolean introduireTacheManuelle(TacheSimple tache){
-        return true;// ====!!! à faire plus tard !!!====
+   public boolean introduireTacheManuelle(TacheSimple tache,Creneau creneau){
+        //verify if this creneaux is inside a creneau in creneauxLibres
+        for(Creneau c : this.creneauxLibres){
+            if(c.getDebut().compareTo(creneau.getDebut())<=0 && c.getFin().compareTo(creneau.getFin())>=0){
+                this.creneauxLibres.remove(c);
+                if(c.getDebut().compareTo(creneau.getDebut())==0){
+                    c.setDebut(creneau.getFin());
+                    if(c.getDebut().compareTo(c.getFin())!=0){
+                    this.creneauxLibres.add(c);
+                    }
+                }else if(c.getFin().compareTo(creneau.getFin())==0){
+                    c.setFin(creneau.getDebut());
+                    if(c.getDebut().compareTo(c.getFin())!=0){
+                    this.creneauxLibres.add(c);
+                    }
+                }else{
+                    Creneau c1 = new Creneau(c.getDebut(),creneau.getDebut());
+                    Creneau c2 = new Creneau(creneau.getFin(),c.getFin());
+                    this.creneauxLibres.add(c1);
+                    this.creneauxLibres.add(c2);
+                }
+                tache.setCreneau(creneau);
+                tache.setDate(this.date);
+                this.taches.put(tache.getID(),tache);
+                //=======!!! update les DemiHeures avec libre=false !!!=======
+                if(tache.getPeriodicite()!=0){
+                    LocalDate dateSuivante = this.getDate().plusDays(tache.getPeriodicite());
+                    if(dateSuivante.compareTo(this.getCalendrierSuper().getPeriodeFin())<=0){
+                        if(this.getCalendrierSuper().getLesJournees().containsKey(dateSuivante)){
+                            Journee journeeSuivante = this.getCalendrierSuper().getLesJournees().get(dateSuivante);
+                            return journeeSuivante.introduireTacheAuto(tache);
+                        }else{
+                            System.out.println("La tache ne peut pas etre introduite car la journee suivante n'existe pas");
+                            tache.setEtat(Etat.Unscheduled);
+                            return false;
+                        }
+                    }else{
+                        this.calendrierSuper.ajouterTacheSimple(tache);
+                        return true;
+                    }
+                }else{
+                    setLesMinHeuresLibre(tache);
+                    this.calendrierSuper.ajouterTacheSimple(tache);
+                    return true;
+                }
+            }
+        }
+        return false;
    }
 
    public boolean introduireTacheAuto(TacheDecompose tache){
@@ -228,7 +275,7 @@ public class Journee implements Cloneable {
                this.calendrierSuper.addDay(joursuiv.getDate(),joursuiv);
                return temp;
            }
-        }else{
+       }else{
            return false;
        }
    }
@@ -243,12 +290,60 @@ public class Journee implements Cloneable {
                 creneauTmp.setFin(addMinutesToTime(creneau.getDebut(),tache.getDuree()));
                 tache.setCreneau(creneauTmp);
                 creneau.setDebut(addMinutesToTime(creneau.getDebut(),tache.getDuree()));
+                if(creneau.getDebut().equals(creneau.getFin())){
+                    creneauxLibresSugg.remove(creneau);
+                }
                 break;
             }
         }
         return tache;
    }
+   public ArrayList<TacheSimple> SuggestDecom(TacheDecompose tache , HashMap<LocalDate,ArrayList<Creneau>> Allcreneaux){
+        ArrayList<TacheSimple> suggestions = new ArrayList<>();
+        //loop over daysdate and their creneaux in Allcreneaux hashmap
+       LocalDate date=this.calendrierSuper.getPeriodeDebut();
+        while(date.compareTo(this.calendrierSuper.getPeriodeFin())<=0){
+            Iterator<Creneau> iterator = Allcreneaux.get(date).iterator();
+            while (iterator.hasNext()) {
+                Creneau creneau = iterator.next();
+                if(creneau.getDuree()>tache.getDuree()-tache.getPeriodeDesParties()){
+                    TacheSimple partie = tache.decomposer(tache.getDuree()-tache.getPeriodeDesParties());
+                    partie.setDate(date);
+                    Creneau creneautmp=new Creneau(creneau.getDebut(),addMinutesToTime(creneau.getDebut(),partie.getDuree()));
+                    creneautmp.setDebut(creneau.getDebut());
+                    creneautmp.setFin(addMinutesToTime(creneau.getDebut(),partie.getDuree()));
+                    partie.setCreneau(creneautmp);
+                    suggestions.add(partie);
+                    creneau.setDebut(addMinutesToTime(creneau.getDebut(),partie.getDuree()));
+                    if(creneau.getDebut().equals(creneau.getFin())){
+                        iterator.remove(); // Safely remove the item
+                    }
+                    return suggestions;
+                }else{
+                    TacheSimple partie = tache.decomposer(creneau.getDuree());
+                    partie.setDate(date);
+                    Creneau creneautmp=new Creneau(creneau.getDebut(),addMinutesToTime(creneau.getDebut(),partie.getDuree()));
+                    creneautmp.setDebut(creneau.getDebut());
+                    creneautmp.setFin(addMinutesToTime(creneau.getDebut(),partie.getDuree()));
+                    partie.setCreneau(creneautmp);
+                    suggestions.add(partie);
+                    creneau.setDebut(addMinutesToTime(creneau.getDebut(),partie.getDuree()));
+                    if(creneau.getDebut().equals(creneau.getFin())){
+                        iterator.remove(); // Safely remove the item
+                    }
+
+                }
+            }
+            date=date.plusDays(1);
+        }
+        tache.setParties(new ArrayList<TacheSimple>());
+        tache.setPeriodeDesParties(0);
+        return null;
+   }
    public Creneau biggestDureeCreneau(){
+        if(this.getCreneauxLibres().size()==0){
+            return null;
+        }
         Creneau temp = this.getCreneauxLibres().get(0);
         for(Creneau creneau : this.getCreneauxLibres()){
             if(creneau.getDuree()>temp.getDuree()){

@@ -33,9 +33,12 @@
                 <ChoiceBox fx:id="categorieAllTasks" layoutX="304.0" layoutY="217.0" prefHeight="25.0" prefWidth="174.0" style="-fx-border-radius: 5PX; -fx-background-radius: 5px;">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="STUDY" />
-                            <String fx:value="SPORT" />
-                            <String fx:value="WORK" />
+                            <String fx:value="Studies" />
+                            <String fx:value="Work" />
+                            <String fx:value="Sport" />
+                            <String fx:value="Health" />
+                            <String fx:value="Perso" />
+                            <String fx:value="Family" />
                         </FXCollections>
                     </items>
                 </ChoiceBox>
@@ -79,6 +82,12 @@
                   <Font size="18.0" />
                </font>
             </TextField>
+            <Label graphicTextGap="19.0" layoutX="94.0" layoutY="380.0" prefHeight="32.0" prefWidth="144.0" text="Decompose :" textFill="#3c486b">
+               <font>
+                  <Font name="Segoe UI Black" size="22.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="Decompose" layoutX="270.0" layoutY="387.0" mnemonicParsing="false" />
             </children>
         </AnchorPane>
         <Button fx:id="NextAllTasks" layoutX="558.0" layoutY="595.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="222.0" style="-fx-background-color: #F9D949; -fx-background-radius: 20px;" text="NEXT" textFill="#3c486b">

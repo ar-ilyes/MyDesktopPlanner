@@ -151,12 +151,12 @@ public class Calendrier implements Cloneable {
         }*/
     }
 
-    public ArrayList<TacheSimple> planifierAuto(ArrayList<TacheSimple> taches){
-        Comparator<TacheSimple> comparator = Comparator
-                .comparing(TacheSimple::getPriorite)
-                .thenComparing(TacheSimple::getDeadline);
+    public ArrayList<TacheSimple> planifierAuto(ArrayList<Tache> taches){
+        Comparator<Tache> comparator = Comparator
+                .comparing(Tache::getPriorite)
+                .thenComparing(Tache::getDeadline);
         taches.sort(comparator);
-        // do a copy of all creneaux inside days of periode and then put them inside a hashmap of arraylist of creneaux where the key is the date journne and the value is a copy (not reference) of arraylist of creneaux that are present in that day
+        // doing a copy of all creneaux inside days of periode and then put them inside a hashmap of arraylist of creneaux where the key is the date journne and the value is a copy (not reference) of arraylist of creneaux that are present in that day
         HashMap<LocalDate,ArrayList<Creneau>> creneauxSugg=new HashMap<LocalDate,ArrayList<Creneau>>();
         for (HashMap.Entry<LocalDate, Journee> entry : lesJournees.entrySet()) {
             LocalDate journeeDate = entry.getKey();
@@ -177,24 +177,33 @@ public class Calendrier implements Cloneable {
 
         LocalDate dayDate=this.periodeDebut;
         ArrayList<TacheSimple> array_sugg=new ArrayList<TacheSimple>();
-        for(TacheSimple tache : taches){
+
+        for(Tache tache : taches){
+            //condition if tache is instance of tachesimple
+            if((tache instanceof TacheSimple)){
+
             dayDate=this.periodeDebut;
-            if(dayDate.isBefore(this.periodeFin)){
-                Journee sugDay=this.getJournee(dayDate);
-                TacheSimple suggestion=sugDay.Suggest(tache,creneauxSugg.get(dayDate),dayDate);
-                while(suggestion.getDate()==null){
-                    dayDate=dayDate.plusDays(1);
-                    if(dayDate.isBefore(this.periodeFin) || dayDate.isEqual(this.periodeFin)){
-                        sugDay=this.getJournee(dayDate);
-                        suggestion=sugDay.Suggest(tache,creneauxSugg.get(dayDate),dayDate);
-                    }else{
-                        break;
-                    }
-                }
-                array_sugg.add(suggestion);
+
+            Journee sugDay=this.getJournee(dayDate);
+            TacheSimple suggestion=sugDay.Suggest((TacheSimple) tache,creneauxSugg.get(dayDate),dayDate);
+            while(suggestion.getDate()==null){
                 dayDate=dayDate.plusDays(1);
-            }else{
-                break;
+                if(dayDate.isBefore(this.periodeFin) || dayDate.isEqual(this.periodeFin)){
+                    sugDay=this.getJournee(dayDate);
+                    suggestion=sugDay.Suggest((TacheSimple)tache,creneauxSugg.get(dayDate),dayDate);
+                }else{
+                    break;
+                }
+            }
+            if(suggestion.getDate()!=null){
+                array_sugg.add(suggestion);
+            }
+        }else{
+            Journee sugDay=this.getJournee(this.periodeDebut);
+            ArrayList<TacheSimple> suggParties=sugDay.SuggestDecom((TacheDecompose) tache,creneauxSugg);
+            if (suggParties!=null){//it can return null when not all parties are suggested
+            array_sugg.addAll(suggParties);
+            }
             }
         }
         return array_sugg;
@@ -227,45 +236,67 @@ public class Calendrier implements Cloneable {
     public void setPeriodeDebut(LocalDate periodeDebut) {
         this.periodeDebut = periodeDebut;
     }
-    public boolean etaleLaPeriode(ArrayList<TacheSimple> Taches){
-        Comparator<TacheSimple> comparator = Comparator
-                .comparing(TacheSimple::getPriorite)
-                .thenComparing(TacheSimple::getDeadline);
+    public boolean etaleLaPeriode(ArrayList<Tache> Taches){
+        Comparator<Tache> comparator = Comparator
+                .comparing(Tache::getPriorite)
+                .thenComparing(Tache::getDeadline);
         Taches.sort(comparator);
         LocalDate Daydate=this.periodeDebut;
-        ArrayList<TacheSimple> TachesNonPlanifiees=new ArrayList<TacheSimple>();
-        for(TacheSimple tache : Taches){
+        LocalDate Maxdate=this.periodeDebut;
+        ArrayList<Tache> TachesNonPlanifiees=new ArrayList<Tache>();
+        for(Tache tache : Taches){
             Daydate = this.periodeDebut;
-            if(Daydate.isBefore(this.periodeFin) || Daydate.isEqual(this.periodeFin)){
-                Journee jour=this.getJournee(Daydate);
-                while(jour.biggestDureeCreneau().getDuree()<tache.getDuree()){
-                    Daydate=Daydate.plusDays(1);
-                    if(Daydate.isBefore(this.periodeFin) || Daydate.isEqual(this.periodeFin)){
-                        jour=this.getJournee(Daydate);
-                    }else{
-                        break;
+            if(tache instanceof TacheSimple) {
+                if (Daydate.isBefore(this.periodeFin) || Daydate.isEqual(this.periodeFin)) {
+                    Journee jour = this.getJournee(Daydate);
+                    while (jour.biggestDureeCreneau() != null &&jour.biggestDureeCreneau().getDuree() < tache.getDuree()) {
+                        Daydate = Daydate.plusDays(1);
+                        if (Daydate.isBefore(this.periodeFin) || Daydate.isEqual(this.periodeFin)) {
+                            jour = this.getJournee(Daydate);
+                            if(Daydate.isAfter(Maxdate)){
+                                Maxdate=Daydate;
+                            }
+                        } else {
+                            break;
+                        }
                     }
-                }
-                if(jour.biggestDureeCreneau().getDuree()>tache.getDuree()) {
-                    jour.introduireTacheAuto(tache);
-                }else{
-                    TachesNonPlanifiees.add(tache);
+                    if (jour.biggestDureeCreneau()!= null && jour.biggestDureeCreneau().getDuree() >= tache.getDuree()) {
+                        jour.introduireTacheAuto((TacheSimple) tache);
+                    } else {
+                        TachesNonPlanifiees.add(tache);
+                    }
+                } else {
+                    break;
                 }
             }else{
-                break;
+                Journee jour = this.getJournee(Daydate);
+                if(Daydate.isAfter(Maxdate)){
+                    Maxdate=Daydate;
+                }
+                jour.introduireTacheAuto((TacheDecompose) tache);
+                ArrayList<Tache> lesparties=new ArrayList<>();
+                while(tache.getDuree()-((TacheDecompose) tache).getPeriodeDesParties()>=480){
+                    lesparties.add(((TacheDecompose) tache).decomposer(480));
+                }
+                if(tache.getDuree()-((TacheDecompose) tache).getPeriodeDesParties()!=0){
+                    lesparties.add(((TacheDecompose) tache).decomposer(tache.getDuree()-((TacheDecompose) tache).getPeriodeDesParties()));
+                }
+                TachesNonPlanifiees.addAll(lesparties);
+
             }
-
         }
-
+        System.out.println("day li lha9nalou"+Maxdate);
+        Maxdate=Maxdate.plusDays(1);
         TachesNonPlanifiees.sort(comparator);
-        for(TacheSimple TacheNP : TachesNonPlanifiees){
-            Journee jour=new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),Daydate,this);
+        for(Tache TacheNP : TachesNonPlanifiees){
+            Journee jour=new Journee(new HashMap<Integer,TacheSimple>(),new ArrayList<Creneau>(),Maxdate,this);
             jour.introduireCreneau(new Creneau("08:00",jour.addMinutesToTime("08:00",TacheNP.getDuree())));
-            jour.introduireTacheAuto(TacheNP);
-            this.addDay(Daydate,jour);
-            this.setPeriodeFin(Daydate);
-            Daydate=Daydate.plusDays(1);
+            this.addDay(Maxdate,jour);
+            this.getJournee(Maxdate).introduireTacheAuto((TacheSimple) TacheNP);
+            this.setPeriodeFin(Maxdate);
+            Maxdate=Maxdate.plusDays(1);
         }
+
         return true;
     }
     public boolean applySuggestions(ArrayList<TacheSimple> taches){
@@ -297,7 +328,7 @@ public void supprimerTache(TacheDecompose tache){
     }
 
     public boolean replanification(TacheSimple tache) {
-        ArrayList<TacheSimple> ReplannedTaches = new ArrayList<TacheSimple>();
+        ArrayList<Tache> ReplannedTaches = new ArrayList<Tache>();
         ReplannedTaches.add(tache);
         for (TacheSimple t : this.getTachesSimple().values()) {
             if (!t.isBloqué()) {

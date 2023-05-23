@@ -3,13 +3,11 @@ package Controllers;
 import Modules.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class AddTasksFormController implements Initializable {
     @FXML
@@ -26,6 +24,8 @@ public class AddTasksFormController implements Initializable {
     Button NextAllTasks;
     @FXML
     TextField ProjetName;
+    @FXML
+    CheckBox Decompose;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
         NextAllTasks.setOnAction(e -> {
@@ -51,14 +51,24 @@ public class AddTasksFormController implements Initializable {
 
         Etat etatTache = Etat.Not_realised;
         Etat_realisation etatRealisationTache = Etat_realisation.EN_COURS;
-        TacheSimple tache=new TacheSimple(nom,duree,new Creneau("08:00","09:00"),prioriteTache,deadlineAllTasks.getValue(),categorieTache,categorieTache.getCouleur(),etatTache,etatRealisationTache,0);
+        Tache tache;
+        if(Decompose.isSelected()){
+            tache = new TacheDecompose(nom, duree, new Creneau("08:00", "09:00"), prioriteTache, deadlineAllTasks.getValue(), categorieTache, categorieTache.getCouleur(), etatTache, etatRealisationTache, new ArrayList<TacheSimple>(),0);
+        }else {
+            tache = new TacheSimple(nom, duree, new Creneau("08:00", "09:00"), prioriteTache, deadlineAllTasks.getValue(), categorieTache, categorieTache.getCouleur(), etatTache, etatRealisationTache, 0);
+        }
         String ProjetNameStr = ProjetName.getText();
         Projet projet = Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(ProjetNameStr);
         if(projet==null){
             projet=new Projet(ProjetNameStr,"test description",Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso());
             Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().ajouterProjet(projet);
         }
-        projet.ajouterTache(tache);
+        if (Decompose.isSelected()){
+            projet.ajouterTache((TacheDecompose) tache);
+        }else{
+            projet.ajouterTache((TacheSimple) tache);
+        }
+
         Modal.getTasksToAdd().add(tache);
         Modal.setNumberOfTasksToAdd(Modal.getNumberOfTasksToAdd()-1);
         if(Modal.getNumberOfTasksToAdd()==0){
@@ -66,6 +76,7 @@ public class AddTasksFormController implements Initializable {
             Modal.setSuggestions(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().planifierAuto(Modal.getTasksToAdd()));
             System.out.println("suggestions :"+Modal.getSuggestions().size());
             Modal.getInstance().getAppView().ShowSuggestionsPage();
+            System.out.println("tasks :"+Modal.getTasksToAdd().size());
         }else{
             Modal.getInstance().getAppView().ShowAddTasksForm();
         }

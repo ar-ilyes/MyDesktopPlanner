@@ -6,7 +6,19 @@ public class Categorie {
 
     public Categorie(String nom) {
         this.nom = nom;
-        this.couleur = Couleur.BLANC;//!!!!!!!!!!each categorie have to get a differnet color // maybe we will use txt files
+        if(nom.equals("Studies")){
+            this.couleur = Couleur.BLEU;
+        }else  if(nom.equals("Work")){
+            this.couleur = Couleur.ROUGE;
+        }else if(nom.equals("Sport")){
+            this.couleur = Couleur.JAUNE;
+        }else if(nom.equals("Health")){
+            this.couleur = Couleur.VERT;
+        }else if(nom.equals("Perso")){
+            this.couleur = Couleur.GRIS;
+        }else if(nom.equals("Family")){
+            this.couleur = Couleur.ROUGE;
+        }
     }
 
     public String getNom() {

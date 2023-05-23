@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 public class TacheSimple extends Tache implements Cloneable{
     private int periodicite;
+    private boolean partieTacheDecompose=false;
 
     private Creneau creneau;
     public TacheSimple(String nom, int duree,Creneau creneau ,Priorite priorite, LocalDate deadline, Categorie categorie, Couleur color, Etat etat, Etat_realisation etatRealisation, int periodicite) {
@@ -24,6 +25,12 @@ public class TacheSimple extends Tache implements Cloneable{
 
     public void setPeriodicite(int periodicite) {
         this.periodicite = periodicite;
+    }
+    public boolean isPartieTacheDecompose() {
+        return partieTacheDecompose;
+    }
+    public void setPartieTacheDecompose(boolean partieTacheDecompose) {
+        this.partieTacheDecompose = partieTacheDecompose;
     }
 
     public TacheSimple clone() throws CloneNotSupportedException{

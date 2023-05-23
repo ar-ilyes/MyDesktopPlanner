@@ -68,7 +68,19 @@ public class JourneeController implements Initializable {
             taskContainer.setPrefSize(220,48);
             taskContainer.setLayoutX(64.0);
             taskContainer.setLayoutY(14+i*80);
-            taskContainer.setStyle("-fx-background-color: red;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            if(taches.get(i).getCategorie().getCouleur()== Couleur.BLEU){
+                taskContainer.setStyle("-fx-background-color: #0000FF;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            }else if(taches.get(i).getCategorie().getCouleur()== Couleur.ROUGE) {
+                taskContainer.setStyle("-fx-background-color: #FF0000;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            }else if(taches.get(i).getCategorie().getCouleur()== Couleur.JAUNE) {
+                taskContainer.setStyle("-fx-background-color: #FFFF00;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            }else if(taches.get(i).getCategorie().getCouleur()== Couleur.VERT) {
+                taskContainer.setStyle("-fx-background-color: #00FF00;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            }else if(taches.get(i).getCategorie().getCouleur()== Couleur.ORANGE) {
+                taskContainer.setStyle("-fx-background-color: #FFA500;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            }else{
+                taskContainer.setStyle("-fx-background-color: #808080;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            }
             taskContainer.setOnAction(event -> {
                 System.out.println("Task"+taskContainer.getId().substring(8));
                 Modal.setSelectedTaskID(Integer.parseInt(taskContainer.getId().substring(8)));

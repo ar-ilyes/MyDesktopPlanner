@@ -1,6 +1,7 @@
 package Controllers;
 
 import Modules.Modal;
+import Modules.TacheSimple;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -19,16 +20,7 @@ public class SuggestionsController implements Initializable {
     Label etaleePeriodeMessage;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
-        if (Modal.getSuggestions().size()==Modal.getTasksToAdd().size()){
-            etaleePeriodeMessage.setVisible(false);
-        }else{
-            etaleePeriodeMessage.setVisible(true);
-            //make textfields not editable
-            for(int i=0;i<Modal.getSuggestions().size();i++){
-                TextField suggDate=(TextField) SuggestionsContainer.lookup("#SuggDate"+Modal.getSuggestions().get(i).getID());
-                suggDate.setEditable(false);
-            }
-        }
+
         for(int i=0;i< Modal.getSuggestions().size();i++){
             AnchorPane SuggContainer=new AnchorPane();
             SuggContainer.setId("Sugg"+Modal.getSuggestions().get(i).getID());
@@ -51,6 +43,16 @@ public class SuggestionsController implements Initializable {
             SuggContainer.getChildren().add(suggDate);
             SuggestionsContainer.getChildren().add(SuggContainer);
         }
+        if (Modal.getSuggestions().size()>=Modal.getTasksToAdd().size()){
+            etaleePeriodeMessage.setVisible(false);
+        }else{
+            etaleePeriodeMessage.setVisible(true);
+            //make textfields not editable
+            for(int i=0;i<Modal.getSuggestions().size();i++){
+                TextField suggDate=(TextField) SuggestionsContainer.lookup("#SuggDate"+Modal.getSuggestions().get(i).getID());
+                suggDate.setEditable(false);
+            }
+        }
         applySugg.setOnAction(e -> {
             try {
                 Onapply();
@@ -63,10 +65,11 @@ public class SuggestionsController implements Initializable {
         //if suggestions.size()==tasksToAdd.size() then we can apply the suggestions
         //else we will show a message that says that the number of suggestions is not equal to the number of tasks to add and if he wants to etale the periode and the user can click to call etaleeperiode(tasksToAdd)
         //if he clicks yes then we will call etaleeperiode(tasksToAdd)
-        if(Modal.getSuggestions().size()==Modal.getTasksToAdd().size()) {
+        if(Modal.getSuggestions().size()>=Modal.getTasksToAdd().size()) {
             //!!!!!!!!!!!!!!! ajouter la fonctionnalité de modifier les suggestions
             Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().applySuggestions(Modal.getSuggestions());
         }else{
+            System.out.println("tasks :"+Modal.getTasksToAdd().size());
             Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().etaleLaPeriode(Modal.getTasksToAdd());
         }
         Modal.getInstance().getAppView().ShowAllTasks();
