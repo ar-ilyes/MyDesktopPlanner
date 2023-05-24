@@ -1,9 +1,12 @@
 package Controllers;
 
 import Modules.Creneau;
+import Modules.InvalidCreneauMin;
 import Modules.Modal;
+import Modules.NotFilledForm;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,27 +41,48 @@ public class ProfileContainer implements Initializable {
     TextField CreneauMin;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
-        AtomicBoolean Clicked= new AtomicBoolean(false);
+        AtomicBoolean Clicked = new AtomicBoolean(false);
         NbMinTaches.setText(String.valueOf(Modal.getMyPlannerApp().getCurrentUser().getNbr_min_tache()));
         CreneauMin.setText(String.valueOf(Creneau.getMin()));
         // NbMinTaches and CreeauMin are not editable
         NbMinTaches.setEditable(false);
         CreneauMin.setEditable(false);
+        try{
         changeParam.setOnMouseClicked(e -> {
-            if (!Clicked.get()){
+            if (!Clicked.get()) {
                 NbMinTaches.setEditable(true);
                 CreneauMin.setEditable(true);
                 changeParam.setText("Valider");
                 Clicked.set(true);
-            }else{
+            } else {
                 NbMinTaches.setEditable(false);
                 CreneauMin.setEditable(false);
                 changeParam.setText("Changer");
+                //if CreneauMin.getText() or NbMinTaches.getText() are empty or are not numbers or are equal to zero we throw an exception
+                if (NbMinTaches.getText().isEmpty() || Integer.parseInt(NbMinTaches.getText()) <= 0 ) {
+                    throw new NotFilledForm();
+                }
+                if(CreneauMin.getText().isEmpty() || Integer.parseInt(CreneauMin.getText()) < 30 ){
+                    throw new InvalidCreneauMin();
+                }
                 Modal.getMyPlannerApp().getCurrentUser().setNbr_min_tache(Integer.parseInt(NbMinTaches.getText()));
                 Creneau.setMin(Integer.parseInt(CreneauMin.getText()));
                 Clicked.set(false);
             }
         });
+        }catch (NotFilledForm e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Wrong number of tasks");
+            alert.setContentText("you must enter a number");
+            alert.showAndWait();
+        }catch (InvalidCreneauMin e){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Error");
+            alert.setHeaderText("Wrong creneau min");
+            alert.setContentText("you must enter a number greater than 30");
+            alert.showAndWait();
+        }
 
         GoToCalendar.setOnMouseClicked(e -> {
             try {

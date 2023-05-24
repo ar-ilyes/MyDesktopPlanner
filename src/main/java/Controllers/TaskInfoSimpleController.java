@@ -1,15 +1,15 @@
 package Controllers;
 
-import Modules.Modal;
-import Modules.Priorite;
-import Modules.TacheSimple;
+import Modules.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class TaskInfoSimpleController implements Initializable {
     @FXML
@@ -66,7 +66,40 @@ public class TaskInfoSimpleController implements Initializable {
         ApplyModifButton.setOnAction(e -> {
             try {
                 OnConfirmModifTache();
-            } catch (Exception ex) {
+            } catch (NotFilledForm notFilledForm) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Veuillez remplir tous les champs");
+                alert.showAndWait();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } catch (WrongDateFormat ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Veuillez entrer une date valide");
+                alert.showAndWait();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException exp) {
+                    throw new RuntimeException(exp);
+                }
+            } catch (WrongPriorite ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Veuillez entrer une priorité valide");
+                alert.showAndWait();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException exp) {
+                    throw new RuntimeException(exp);
+                }
+            }catch (IOException ex){
                 throw new RuntimeException(ex);
             }
         });
@@ -105,18 +138,34 @@ public class TaskInfoSimpleController implements Initializable {
         ApplyModifButton.setVisible(true);
         ApplyModifButton.setDisable(false);
     }
-    public void OnConfirmModifTache() throws IOException {
+    public void OnConfirmModifTache() throws IOException , NotFilledForm, WrongDateFormat, WrongPriorite {
         TacheSimple tache=Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTacheSimple(Modal.getSelectedTaskID());
+        if (NameField.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
         tache.setNom(NameField.getText());
         String prioTmp=PrioriteField.getText();
+        if (prioTmp.isEmpty()){
+            throw new NotFilledForm();
+        }
         if(prioTmp.equals("LOW")){
             tache.setPriorite(Priorite.LOW);
         }else if(prioTmp.equals("MEDIUM")){
             tache.setPriorite(Priorite.MEDIUM);
-        }else {
+        }else if(prioTmp.equals("HIGH")) {
             tache.setPriorite(Priorite.HIGH);
+        }else {
+            throw new WrongPriorite();
         }
         String dateTmp=DeadlineField.getText();
+        if (dateTmp.isEmpty()){
+            throw new NotFilledForm();
+        }
+        try {
+            LocalDate deadline = LocalDate.parse(dateTmp);
+        }catch ( DateTimeParseException e){
+            throw new WrongDateFormat();
+        }
         LocalDate deadline = LocalDate.parse(dateTmp);
         tache.setDeadline(deadline);
         //!!!!!!!!!!!!!!!!!!!see categorie logic

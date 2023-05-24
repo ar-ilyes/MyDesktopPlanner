@@ -37,12 +37,21 @@ public class AddTasksNumberToAddController implements Initializable {
             Modal.getInstance().getAppView().ShowAddTasksForm();
         }else{
             //show error alert
+            if(numberOfTasks==0){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");
             alert.setHeaderText("Wrong number of tasks");
             alert.setContentText("you can't add less than 1 task");
             // Show the alert and wait for user response
             alert.showAndWait();
+            }else {//case where he enters characters and not numbers
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setHeaderText("Wrong number of tasks");
+                alert.setContentText("you must enter a number");
+                // Show the alert and wait for user response
+                alert.showAndWait();
+            }
         }
 
     }
