@@ -1,9 +1,10 @@
 package Modules;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ArrayList;
 
-public class TacheDecompose extends Tache implements Cloneable {
+public class TacheDecompose extends Tache implements Cloneable , Serializable {
     private ArrayList<TacheSimple> parties;
     private int periodeDesParties;
 

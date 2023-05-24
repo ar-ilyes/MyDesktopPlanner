@@ -1,12 +1,14 @@
 package Modules;
 
+import java.io.Serializable;
+
 /**
  * Décrivez votre classe Badge ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Badge
+public class Badge  implements Serializable
 {
     private String nom;
     public Badge(String nom){

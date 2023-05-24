@@ -1,9 +1,10 @@
 package Modules;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Creneau implements Cloneable {
+public class Creneau implements Cloneable , Serializable {
     private String debut; // représente l'heure de début réelle du créneau sous forme de chaîne de caractères (comme 11:30)
     private String fin; // représente l'heure de fin réelle du créneau sous forme de chaîne de caractères (comme 11:30)
     private static int min = 30; // période de temps en minutes qui est égale à 30

@@ -38,11 +38,11 @@ public class RegisterController implements Initializable {
         //the calendar of the user
         Calendrier calendrier = new Calendrier(debutPeriode,finPeriode,new Historique());
         Utilisateur user = new Utilisateur(pseudo,calendrier, 1, new ArrayList<Badge>(), motDePasse);
-        Modal.getInstance().getMyPlannerApp().getUsers().put(pseudo,user);
-        Modal.getInstance().getMyPlannerApp().setCurrentUser(user);
+        Modal.getMyPlannerApp().getUsers().put(pseudo,user);
+        Modal.getMyPlannerApp().setCurrentUser(user);
         try {
             Modal.getInstance().getAppView().ShowCalendarFirstTimePeriodes();
-            System.out.println("User registered :"+Modal.getInstance().getMyPlannerApp().getCurrentUser().getPseudo());
+            System.out.println("User registered :"+Modal.getMyPlannerApp().getCurrentUser().getPseudo());
         } catch (IOException e) {
             e.printStackTrace();
         }

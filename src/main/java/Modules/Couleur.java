@@ -1,6 +1,6 @@
 package Modules;
 
-public enum Couleur {
+public enum Couleur implements java.io.Serializable {
     ROUGE,
     VERT,
     BLEU,

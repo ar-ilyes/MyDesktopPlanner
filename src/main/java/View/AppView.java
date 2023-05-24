@@ -1,16 +1,18 @@
 package View;
 
 import Controllers.HelloApplication;
+import Modules.Modal;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
-public class AppView {
+public class AppView implements java.io.Serializable {
 
-    public void ShowJournee() throws IOException {
+    public void ShowJournee() throws IOException  {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("JOURNEE-PAGE.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
@@ -23,12 +25,15 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
 
 
     public void ShowRegister() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Registration.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage=new Stage();
         stage.setTitle("MyDesktopPlanner");
@@ -40,6 +45,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
 
@@ -56,6 +64,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowCalendarFirstTimeCreneaux() throws IOException {
@@ -71,6 +82,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowCalendarPage() throws IOException {
@@ -86,6 +100,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
 
@@ -102,6 +119,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowAddCreneauJournee() throws IOException {
@@ -117,6 +137,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowAllTasks() throws IOException {
@@ -132,6 +155,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowAddTasksForm() throws IOException {
@@ -147,6 +173,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowSuggestionsPage() throws IOException {
@@ -162,6 +191,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowNumberTasksToAdd() throws IOException {
@@ -177,6 +209,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowTaskInfoSimple() throws IOException {
@@ -192,6 +227,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
 
@@ -208,6 +246,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowProjet() throws IOException {
@@ -223,6 +264,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowProjetInfo() throws IOException {
@@ -239,6 +283,9 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
     public void ShowProfilePage() throws IOException {
@@ -255,6 +302,48 @@ public class AppView {
         stage.setWidth(screenWidth);
         stage.setHeight(screenHeight);
         stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
+        stage.show();
+    }
+    public void ShowLogin() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LOGIN.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setResizable(false);
+        //hadi bach
+        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+        stage.setWidth(screenWidth);
+        stage.setHeight(screenHeight);
+        stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
+        stage.show();
+    }
+
+    public void ShowHistInfo() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HistoriqueInfo.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage=new Stage();
+        stage.setTitle("MyDesktopPlanner");
+        stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setResizable(false);
+        //hadi bach
+        double screenWidth = Screen.getPrimary().getVisualBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
+        stage.setWidth(screenWidth);
+        stage.setHeight(screenHeight);
+        stage.setFullScreenExitHint("");
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Modal.serialize(Modal.getInstance());
+        });
         stage.show();
     }
 

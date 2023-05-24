@@ -1,8 +1,10 @@
 package Modules;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Projet {///projet est juste comme une etiquette pour les taches,on peut associer des taches à un projet existant puis on peut les consulter au niveau de la page projet
+public class Projet implements Serializable {
+    ///projet est juste comme une etiquette pour les taches,on peut associer des taches à un projet existant puis on peut les consulter au niveau de la page projet
     private String nom;
     private String description;
     private ArrayList<TacheSimple> tacheSimples;
@@ -10,7 +12,7 @@ public class Projet {///projet est juste comme une etiquette pour les taches,on 
     private Etat_realisation etatRealisationGlobal;
     private Calendrier calendrierSuper;
     private int ID;
-    private int IDtemp=0;
+    public static int IDtemp=0;
     public Projet(Calendrier calendrierSuper,String nom, String description, ArrayList<TacheSimple> tacheSimples, ArrayList<TacheDecompose> tacheDecomposees, Etat_realisation etatRealisationGlobal) {
         this.nom = nom;
         this.description = description;

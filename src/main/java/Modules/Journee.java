@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Journee implements Cloneable {
+public class Journee implements Cloneable , java.io.Serializable {
     private HashMap<Integer,TacheSimple> taches; // HashMap d'objets de la classe TacheSimple
     private ArrayList<Creneau> creneauxLibres; // tableau d'objets de la classe Creneau
     private LocalDate date; // représente la date de la journée sous forme de chaîne de caractères (comme 2023-04-30)
@@ -414,8 +414,9 @@ public class Journee implements Cloneable {
         }
         if(this.calendrierSuper.getUtilisateur().getNbrFelicitation()==5){
             this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Good"));
+            this.calendrierSuper.getBadges().add(new Badge("Good"));
             this.calendrierSuper.getUtilisateur().setNbrFelicitation(0);
-            //// !!!!!!!!!!!!!!!!!! un message de felicitation doit s'afficher !!!!!!!!!!!!!!!!
+
         }
         //if the user have 3 badges Good he will get a badge Verygood, and we remove the good badges
         if (this.calendrierSuper.getUtilisateur().getBadge().size()>=3){
@@ -427,8 +428,10 @@ public class Journee implements Cloneable {
             }
             if(nbGood>=3){
                 this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("VeryGood"));
+                this.calendrierSuper.getBadges().add(new Badge("VeryGood"));
                 for(int i=0;i<3;i++){
                     this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("Good"));
+                    this.calendrierSuper.getBadges().remove(new Badge("Good"));
                 }
             }
         }
@@ -443,8 +446,10 @@ public class Journee implements Cloneable {
             }
             if(nbVeryGood>=3){
                 this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Excellent"));
+                this.calendrierSuper.getBadges().add(new Badge("Excellent"));
                 for(int i=0;i<3;i++){
                     this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("VeryGood"));
+                    this.calendrierSuper.getBadges().remove(new Badge("VeryGood"));
                 }
             }
         }

@@ -1,5 +1,6 @@
 package Modules;
 
+import java.io.Serializable;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Calendrier implements Cloneable {
+public class Calendrier implements Cloneable, Serializable {
     private LocalDate periodeDebut;
     private LocalDate periodeFin;
     private HashMap<Integer, TacheSimple> tachesSimple;
@@ -18,6 +19,7 @@ public class Calendrier implements Cloneable {
     private Historique historique;//!!! useless
     private Utilisateur utilisateur;
     private ArrayList<Projet> projets;
+    private ArrayList<Badge> badges;
 
 
 
@@ -38,6 +40,7 @@ public class Calendrier implements Cloneable {
         this.dateActuelle = LocalDate.now();
         this.heureActuelle = "";
         this.projets = new ArrayList<Projet>();
+        this.badges = new ArrayList<Badge>();
     }
     public void ajouterProjet(Projet projet) {
     	projets.add(projet);
@@ -63,6 +66,12 @@ public class Calendrier implements Cloneable {
     }
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+    public void setBadges(ArrayList<Badge> badges) {
+        this.badges = badges;
+    }
+    public ArrayList<Badge> getBadges() {
+        return badges;
     }
 
 

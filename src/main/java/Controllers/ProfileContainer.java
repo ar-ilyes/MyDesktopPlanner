@@ -1,9 +1,6 @@
 package Controllers;
 
-import Modules.Creneau;
-import Modules.InvalidCreneauMin;
-import Modules.Modal;
-import Modules.NotFilledForm;
+import Modules.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -12,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -99,15 +97,26 @@ public class ProfileContainer implements Initializable {
             HistContainer.setLayoutX(77);
             HistContainer.setLayoutY(11+i*70);
             HistContainer.setStyle("-fx-background-color: red;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
+            int finalI = i;
+            HistContainer.setOnMouseClicked(e -> {
+               try {
+                   Modal.setNumHistSelected(finalI);
+                   Stage stage= (Stage) HistContainer.getScene().getWindow();
+                   stage.close();
+                   Modal.getInstance().getAppView().ShowHistInfo();
+               } catch (Exception ex) {
+                   throw new RuntimeException(ex);
+               }
+              });
             HistoriqueContainer.getChildren().add(HistContainer);
         }
         UserName.setText(Modal.getMyPlannerApp().getCurrentUser().getPseudo());
         MoyenneRendement.setText(String.valueOf(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getMoyenneDesRendements()));
         JourPlusRentable.setText(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJourPlusRentable().toString());
         ArrayList<String> categories=new ArrayList<>();
-        for (int i=0;i<Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesSimple().size();i++){
-            if (!categories.contains(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesSimple().get(i).getCategorie().getNom())){
-                categories.add(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesSimple().get(i).getCategorie().getNom());
+        for (TacheSimple tache : Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesSimple().values()) {
+            if (!categories.contains(tache.getCategorie().getNom())) {
+                categories.add(tache.getCategorie().getNom());
             }
         }
         String CategoriesAff="";

@@ -115,6 +115,13 @@ public class TaskInfoSimpleController implements Initializable {
     }
     public void OnDone() throws IOException {
         LocalDate date = Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTacheSimple(Modal.getSelectedTaskID()).getDate();
+        if(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(date).getNbTachesRealisees()==Modal.getMyPlannerApp().getCurrentUser().getNbr_min_tache()-1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Félicitations");
+            alert.setHeaderText("Vous avez atteint votre objectif de tâches pour aujourd'hui");
+            alert.setContentText("Vous pouvez vous reposer");
+            alert.showAndWait();
+        }
         Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(date).setCompletedTache(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTacheSimple(Modal.getSelectedTaskID()));
         Modal.getInstance().getAppView().ShowCalendarPage();
     }
