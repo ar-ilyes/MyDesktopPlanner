@@ -20,7 +20,7 @@
                 <Font name="Segoe UI Black" size="55.0" />
             </font>
         </Label>
-        <ScrollPane  layoutX="320.0" layoutY="265.0" prefHeight="226.0" prefWidth="682.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="320.0" layoutY="265.0" prefHeight="226.0" prefWidth="682.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="TasksProjectContainer" prefWidth="665.0">
                     <children>
@@ -44,5 +44,6 @@
             <Font name="Segoe UI Black" size="36.0" />
          </font>
       </Label>
+      <Button fx:id="supprimePrj" layoutX="539.0" layoutY="643.0" mnemonicParsing="false" text="SUPPRIMER" />
     </children>
 </AnchorPane>

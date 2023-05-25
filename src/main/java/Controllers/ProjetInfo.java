@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 
+import java.io.IOException;
+
 public class ProjetInfo implements Initializable {
     @FXML
     Circle GoToCalendar;
@@ -18,6 +20,8 @@ public class ProjetInfo implements Initializable {
     AnchorPane TasksProjectContainer;
     @FXML
     Label RendementContent;
+    @FXML
+    Button supprimePrj;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
         projetName.setText(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(Modal.getSelectedProjetID()).getNom());
@@ -49,6 +53,14 @@ public class ProjetInfo implements Initializable {
                 Modal.getInstance().getAppView().ShowCalendarPage();
             } catch (Exception exception) {
                 exception.printStackTrace();
+            }
+        });
+        supprimePrj.setOnAction(ev->{
+            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().supprimerProjet(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getProjet(Modal.getSelectedProjetID()));
+            try {
+                Modal.getInstance().getAppView().ShowCalendarPage();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
     }
