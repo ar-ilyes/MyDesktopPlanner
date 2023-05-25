@@ -36,10 +36,38 @@ public class CalendarFirstTimePeriodesController implements Initializable {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
+            } catch (UnacceptableDateDebutPeriode ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de date");
+                alert.setContentText("La date de début de la période est aprés la date actuelle");
+                alert.showAndWait();
+                Stage stage = (Stage) NextPeriodeFirstTime.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowCalendarFirstTimePeriodes();
+                } catch (IOException exp) {
+                    throw new RuntimeException(exp);
+                }
+            } catch (UnacceptableDateFinPeriode ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de date");
+                alert.setContentText("La date de fin de la période est avant la date de debut de periode");
+                alert.showAndWait();
+                Stage stage = (Stage) NextPeriodeFirstTime.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowCalendarFirstTimePeriodes();
+                } catch (IOException exp) {
+                    throw new RuntimeException(exp);
+                }
+            }catch (IOException ex){
+                throw new RuntimeException(ex);
             }
     });
     }
-    public void OnNextPeriodeFirstTime() throws WrongPeriodeFormat{
+    public void OnNextPeriodeFirstTime() throws WrongPeriodeFormat,UnacceptableDateDebutPeriode,UnacceptableDateFinPeriode,IOException{
         Stage stage= (Stage) NextPeriodeFirstTime.getScene().getWindow();
         stage.close();
         String debutPeriodeTmp=DebutPeriodeFirstTime.getText();

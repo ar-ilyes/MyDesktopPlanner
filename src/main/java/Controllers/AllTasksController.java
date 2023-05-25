@@ -26,7 +26,6 @@ public class AllTasksController implements Initializable {
 
         //put every task from all simple tasks in calendrier_perso in the container as a form of a button with the following style : style="-fx-background-color: #FF0000; -fx-background-radius: 20px;" and an id of the form Task+number of the task in the array list
         for (int i=0;i<taches.size();i++) {
-            if (!taches.get(i).isPartieTacheDecompose()){
                 Button taskContainer = new Button();
                 taskContainer.setId("AllTasks" + taches.get(i).getID());
                 taskContainer.setText(taches.get(i).getNom());
@@ -47,11 +46,10 @@ public class AllTasksController implements Initializable {
                     taskContainer.setStyle("-fx-background-color: #808080;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
                 }
                 AllTasksContainer.getChildren().add(taskContainer);
-            }
+
         }
-        ArrayList<TacheDecompose> tachesDecomp = new ArrayList<>(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesDecompose().values());
+        /*ArrayList<TacheDecompose> tachesDecomp = new ArrayList<>(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesDecompose().values());
         for (int i=0;i<tachesDecomp.size();i++) {
-            if (!taches.get(i).isPartieTacheDecompose()){
                 Button taskContainer = new Button();
                 taskContainer.setId("AllTasks" + tachesDecomp.get(i).getID());
                 taskContainer.setText(tachesDecomp.get(i).getNom());
@@ -60,8 +58,7 @@ public class AllTasksController implements Initializable {
                 taskContainer.setLayoutY(14 + i * 80+ taches.size()*80);
                 taskContainer.setStyle("-fx-background-color: red;-fx-background-radius: 20px;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
                 AllTasksContainer.getChildren().add(taskContainer);
-            }
-        }
+        }*/
 
         AddTasksAuto.setOnAction(e -> {
             try {

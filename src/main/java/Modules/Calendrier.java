@@ -239,10 +239,18 @@ public class Calendrier implements Cloneable, Serializable {
         Journee jour = this.getJournee(this.periodeDebut);
         return jour.introduireTacheAuto(tache);
     }
-    public void setPeriodeFin(LocalDate periodeFin) {
+    public void setPeriodeFin(LocalDate periodeFin) throws UnacceptableDateFinPeriode {
+        if (periodeFin.isBefore(periodeDebut)) {
+            throw new UnacceptableDateFinPeriode();
+        }
         this.periodeFin = periodeFin;
     }
-    public void setPeriodeDebut(LocalDate periodeDebut) {
+    public void setPeriodeDebut(LocalDate periodeDebut) throws UnacceptableDateDebutPeriode {
+
+        //if this date is after the date of this day then we throw UnacceptableDateDebutPeriode exception
+        if(periodeDebut.isAfter(LocalDate.now())){
+            throw new UnacceptableDateDebutPeriode();
+        }
         this.periodeDebut = periodeDebut;
     }
     public boolean etaleLaPeriode(ArrayList<Tache> Taches) throws DeadLinePassed,WrongCreneauFormat{
