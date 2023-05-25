@@ -1,12 +1,15 @@
 package Controllers;
 
 import Modules.Modal;
+import Modules.Tache;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class AddTasksNumberToAddController implements Initializable {
     @FXML
@@ -34,6 +37,7 @@ public class AddTasksNumberToAddController implements Initializable {
             Stage stage = (Stage) ConfirmNumber.getScene().getWindow();
             stage.close();
             Modal.setNumberOfTasksToAdd(numberOfTasks);
+            Modal.setTasksToAdd(new ArrayList<Tache>());
             Modal.getInstance().getAppView().ShowAddTasksForm();
         }else{
             //show error alert

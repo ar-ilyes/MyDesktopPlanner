@@ -51,6 +51,7 @@ public class HistoriqueInfoController implements Initializable{
             DureeCategorie.setText(CategoriesAff);
 
             int i=0;
+            System.out.println("histCal.getTachesSimple().size() :"+histCal.getTachesSimple().size());
             for (TacheSimple t : histCal.getTachesSimple().values()){
                 Button tachecon=new Button();
                 tachecon.setText(t.getNom());

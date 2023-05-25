@@ -4,8 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+<?import javafx.scene.shape.Circle?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TaskInfoSimpleController">
     <children>
+        <Circle fx:id="returnToCalendar" fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fx:id="GoToAllTasks" fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="GoToProfile" fill="#3c486b" layoutX="1110.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+
         <Label layoutX="411.0" layoutY="51.0" prefHeight="54.0" prefWidth="389.0" text="My Desktop Planner" textFill="#3c486b">
             <font>
                 <Font name="Segoe UI Black" size="37.0" />
@@ -28,7 +33,7 @@
                         <Font name="Segoe UI Black" size="22.0" />
                     </font>
                 </Label>
-                <Label graphicTextGap="19.0" layoutX="56.0" layoutY="291.0" text="N-PERIODIQUE  :" textFill="#3c486b">
+                <Label graphicTextGap="19.0" layoutX="56.0" layoutY="291.0" text="DUREE :" textFill="#3c486b">
                     <font>
                         <Font name="Segoe UI Black Italic" size="22.0" />
                     </font>

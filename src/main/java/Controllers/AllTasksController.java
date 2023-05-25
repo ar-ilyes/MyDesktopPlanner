@@ -19,7 +19,7 @@ public class AllTasksController implements Initializable {
     @FXML
     AnchorPane AllTasksContainer;
     @FXML
-    Circle GoToCalendar;
+    Circle returnToCalendar;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
         ArrayList<TacheSimple> taches = new ArrayList<>(Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getTachesSimple().values());
@@ -69,9 +69,9 @@ public class AllTasksController implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
-        GoToCalendar.setOnMouseClicked(e -> {
+        returnToCalendar.setOnMouseClicked(e -> {
             try {
-                Stage stage= (Stage) GoToCalendar.getScene().getWindow();
+                Stage stage= (Stage) returnToCalendar.getScene().getWindow();
                 stage.close();
                 Modal.getInstance().getAppView().ShowCalendarPage();
             } catch (Exception ex) {

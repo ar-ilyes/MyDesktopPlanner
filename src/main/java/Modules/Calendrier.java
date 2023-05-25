@@ -248,7 +248,10 @@ public class Calendrier implements Cloneable, Serializable {
     public void setPeriodeDebut(LocalDate periodeDebut) throws UnacceptableDateDebutPeriode {
 
         //if this date is after the date of this day then we throw UnacceptableDateDebutPeriode exception
-        if(periodeDebut.isAfter(LocalDate.now())){
+        System.out.println("now :"+LocalDate.now());
+        System.out.println("added:"+ periodeDebut);
+        if(periodeDebut.isBefore(LocalDate.now())){
+            System.out.println("WE HAVE UnacceptableDateDebutPeriode");
             throw new UnacceptableDateDebutPeriode();
         }
         this.periodeDebut = periodeDebut;
@@ -410,10 +413,16 @@ public void supprimerTache(TacheDecompose tache){
 
     public double getMoyenneDesRendements(){
         double moyenne=0;
+        int tmp=0;
         for(Journee jour : this.getLesJournees().values()){
             moyenne+=jour.getRendement();
+            tmp++;
         }
-        return moyenne/this.getLesJournees().size();
+        if(tmp==0){
+            return 0;
+        }else{
+        return moyenne/tmp;
+        }
     }
     public void setLesJournees(HashMap<LocalDate, Journee> lesJournees) {
         this.lesJournees = lesJournees;
@@ -426,6 +435,13 @@ public void supprimerTache(TacheDecompose tache){
             journee.setCalendrierSuper(calendrier);
             calendrier.addDay(jour.getDate(), journee);
         }
+        //clone all tasks in tachesSimple
+        calendrier.setTachesSimple(new HashMap<Integer, TacheSimple>());
+        for (TacheSimple tache : this.getTachesSimple().values()) {
+            TacheSimple tacheSimple = (TacheSimple) tache.clone();
+            calendrier.addTacheSimple(tacheSimple);
+        }
+
         return calendrier;
     }
     public Projet getProjet(int ID){
@@ -446,6 +462,15 @@ public void supprimerTache(TacheDecompose tache){
         }
         return null;
     }
+    //setter for TachesSimple
+    public void setTachesSimple(HashMap<Integer, TacheSimple> tachesSimple) {
+        this.tachesSimple = tachesSimple;
+    }
+    // add tache simple methode
+    public void addTacheSimple(TacheSimple tache){
+        this.getTachesSimple().put(tache.getID(),tache);
+    }
+
 }
 
 

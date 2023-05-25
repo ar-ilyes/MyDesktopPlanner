@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -32,6 +33,8 @@ public class TaskInfoSimpleController implements Initializable {
     Button ApplyModifButton;
     @FXML
     Button DoneButton;
+    @FXML
+    Circle returnToCalendar;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
         ApplyModifButton.setVisible(false);
@@ -45,9 +48,9 @@ public class TaskInfoSimpleController implements Initializable {
         DeadlineField.setEditable(false);
         CategorieField.setText(tache.getCategorie().getNom());
         CategorieField.setEditable(false);
-        CreneauField.setText(tache.getCreneau().toString());
+        CreneauField.setText(tache.getCreneau().getDebut()+" - "+tache.getCreneau().getFin());
         CreneauField.setEditable(false);
-        PeriodiqueField.setText(Integer.toString(tache.getPeriodicite()));
+        PeriodiqueField.setText(Integer.toString(tache.getDuree()));//it displays now duree instead of periodicite
         PeriodiqueField.setEditable(false);
         SupprimeTacheButton.setOnAction(e -> {
             try {
@@ -110,7 +113,13 @@ public class TaskInfoSimpleController implements Initializable {
                 throw new RuntimeException(ex);
             }
         });
-
+        returnToCalendar.setOnMouseClicked(e -> {
+            try {
+                Modal.getInstance().getAppView().ShowJournee();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
     }
     public void OnDone() throws IOException {
@@ -132,10 +141,10 @@ public class TaskInfoSimpleController implements Initializable {
     public void OnModifTache() throws IOException {
         NameField.setEditable(true);
         PrioriteField.setEditable(true);
-        DeadlineField.setEditable(true);
+        DeadlineField.setEditable(false);
         CategorieField.setEditable(true);
-        CreneauField.setEditable(true);
-        PeriodiqueField.setEditable(true);
+        CreneauField.setEditable(false);
+        PeriodiqueField.setEditable(false);
         ModifTacheButton.setVisible(false);
         ModifTacheButton.setDisable(true);
         SupprimeTacheButton.setVisible(false);

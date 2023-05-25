@@ -12,9 +12,9 @@
                 <Font name="Segoe UI Black" size="27.0" />
             </font>
         </Label>
-        <Circle fx:id="GoToCalendar" fill="#f45050" layoutX="937.0" layoutY="95.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
-        <Circle fill="#3c486b" layoutX="1092.0" layoutY="96.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle fill="#f9d949" layoutX="1016.0" layoutY="95.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="returnToCalendar" fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fx:id="GoToAllTasks" fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="GoToProfile" fill="#3c486b" layoutX="1110.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
         <Label fx:id="UserName" layoutX="525.0" layoutY="148.0" text="USER" textFill="#f9d949">
             <font>
                 <Font name="Segoe UI Black" size="55.0" />
@@ -39,17 +39,17 @@
                         <Font name="Segoe UI Black" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="JourPlusRentable" layoutX="195.0" layoutY="5.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                  <Label fx:id="JourPlusRentable" layoutX="195.0" layoutY="5.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="DureeCategorie" layoutX="210.0" layoutY="59.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                  <Label fx:id="DureeCategorie" layoutX="210.0" layoutY="59.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="MoyenneRendement" layoutX="210.0" layoutY="129.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                  <Label fx:id="MoyenneRendement" layoutX="210.0" layoutY="129.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>

@@ -393,7 +393,7 @@ public class Journee implements Cloneable , java.io.Serializable {
 
    public int getNbTachesRealisees(){
         int nb=0;
-        for(TacheSimple tache : this.calendrierSuper.getTachesSimple().values()){
+        for(TacheSimple tache : this.getTaches().values()){
             if(tache.getEtat()==Etat.Completed){
                 nb++;
             }
@@ -429,10 +429,19 @@ public class Journee implements Cloneable , java.io.Serializable {
             if(nbGood>=3){
                 this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("VeryGood"));
                 this.calendrierSuper.getBadges().add(new Badge("VeryGood"));
-                for(int i=0;i<3;i++){
-                    this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("Good"));
-                    this.calendrierSuper.getBadges().remove(new Badge("Good"));
-                }
+                    for(Badge b : this.calendrierSuper.getUtilisateur().getBadge()){
+                        if(b.getNom().equals("Good")){
+                            this.calendrierSuper.getUtilisateur().getBadge().remove(b);
+
+                        }
+                    }
+                    for(Badge b : this.calendrierSuper.getBadges()){
+                        if(b.getNom().equals("Good")){
+                            this.calendrierSuper.getBadges().remove(b);
+                        }
+                    }
+
+
             }
         }
 
@@ -447,9 +456,16 @@ public class Journee implements Cloneable , java.io.Serializable {
             if(nbVeryGood>=3){
                 this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Excellent"));
                 this.calendrierSuper.getBadges().add(new Badge("Excellent"));
-                for(int i=0;i<3;i++){
-                    this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("VeryGood"));
-                    this.calendrierSuper.getBadges().remove(new Badge("VeryGood"));
+                for(Badge b : this.calendrierSuper.getUtilisateur().getBadge()){
+                    if(b.getNom().equals("VeryGood")){
+                        this.calendrierSuper.getUtilisateur().getBadge().remove(b);
+
+                    }
+                }
+                for(Badge b : this.calendrierSuper.getBadges()){
+                    if(b.getNom().equals("VeryGood")){
+                        this.calendrierSuper.getBadges().remove(b);
+                    }
                 }
             }
         }

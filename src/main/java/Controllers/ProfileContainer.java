@@ -37,6 +37,8 @@ public class ProfileContainer implements Initializable {
     TextField NbMinTaches;
     @FXML
     TextField CreneauMin;
+    @FXML
+    Circle returnToCalendar;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
         AtomicBoolean Clicked = new AtomicBoolean(false);
@@ -82,7 +84,7 @@ public class ProfileContainer implements Initializable {
             alert.showAndWait();
         }
 
-        GoToCalendar.setOnMouseClicked(e -> {
+        returnToCalendar.setOnMouseClicked(e -> {
             try {
                 OnGoToCalendar();
             } catch (Exception ex) {

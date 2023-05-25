@@ -95,6 +95,9 @@ public class AddTaskJourneeController implements Initializable {
         if (nomTache.isEmpty()){
             throw new NotFilledForm();
         }
+        if(duree.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
         try {
             if (Integer.parseInt(duree.getText()) == 0) {
                 throw new NotFilledForm();
@@ -123,7 +126,7 @@ public class AddTaskJourneeController implements Initializable {
         }
 
         String categorieTacheStr = categorie.getValue();
-        if (categorieTacheStr.isEmpty()){
+        if (categorie.getValue()==null){
             throw new NotFilledForm();
         }
         Categorie categorieTache = new Categorie(categorieTacheStr);
@@ -149,6 +152,9 @@ public class AddTaskJourneeController implements Initializable {
         if (nomTache.isEmpty()){
             throw new NotFilledForm();
         }
+        if(duree.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
         //if duree is contains characters that are not numbers throw an error throw exception
         try {
             if (Integer.parseInt(duree.getText()) == 0) {
@@ -164,7 +170,7 @@ public class AddTaskJourneeController implements Initializable {
         }
         int dureeTache = Integer.parseInt(duree.getText());
         String categorieTacheStr = categorie.getValue();
-        if (categorieTacheStr.isEmpty()){
+        if (categorie.getValue()==null){
             throw new NotFilledForm();
         }
         Categorie categorieTache = new Categorie(categorieTacheStr);
@@ -201,12 +207,15 @@ public class AddTaskJourneeController implements Initializable {
         if (nomTache.isEmpty()){
             throw new NotFilledForm();
         }
+        if(duree.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
         int dureeTache = Integer.parseInt(duree.getText());
         if (dureeTache == 0){
             throw new NotFilledForm();
         }
         String categorieTacheStr = categorie.getValue();
-        if (categorieTacheStr.isEmpty()){
+        if (categorie.getValue()==null){
             throw new NotFilledForm();
         }
         Categorie categorieTache = new Categorie(categorieTacheStr);

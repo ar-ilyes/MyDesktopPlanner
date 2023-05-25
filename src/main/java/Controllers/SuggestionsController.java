@@ -1,9 +1,6 @@
 package Controllers;
 
-import Modules.Modal;
-import Modules.TacheSimple;
-import Modules.WrongCreneauFormat;
-import Modules.WrongDateFormat;
+import Modules.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -15,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
+import static javafx.scene.control.PopupControl.USE_COMPUTED_SIZE;
 
 public class SuggestionsController implements Initializable {
     @FXML
@@ -43,6 +42,12 @@ public class SuggestionsController implements Initializable {
             suggDate.setLayoutX(260.0);
             suggDate.setLayoutY(6.0);
             suggDate.setPrefSize(200,30);
+            //suggdate is not editable
+            suggDate.setEditable(false);
+            suggDate.setPrefWidth(USE_COMPUTED_SIZE);
+
+
+
             SuggContainer.setStyle("-fx-background-color: RED; -fx-background-radius: 20PX;-fx-font-family: 'Segoe UI Black'; -fx-font-size: 22px; -fx-text-fill: #FFFFFF;");
             SuggContainer.getChildren().add(suggName);
             SuggContainer.getChildren().add(suggDate);
@@ -93,10 +98,23 @@ public class SuggestionsController implements Initializable {
                 alert.setHeaderText("Error");
                 alert.setContentText("une erreur est survenue");
                 alert.showAndWait();
+            } catch (DeadLinePassed exp){
+                Alert alert= new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("deadline depassé");
+                alert.showAndWait();
+                Stage stage = (Stage) applySugg.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowAllTasks();
+                } catch (IOException exc) {
+                    throw new RuntimeException(exc);
+                }
             }
         });
     }
-    public void Onapply() throws IOException, WrongCreneauFormat, WrongDateFormat {
+    public void Onapply() throws IOException, WrongCreneauFormat, WrongDateFormat , DeadLinePassed {
         //if suggestions.size()==tasksToAdd.size() then we can apply the suggestions
         //else we will show a message that says that the number of suggestions is not equal to the number of tasks to add and if he wants to etale the periode and the user can click to call etaleeperiode(tasksToAdd)
         //if he clicks yes then we will call etaleeperiode(tasksToAdd)
