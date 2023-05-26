@@ -1,5 +1,6 @@
 package Modules;
 
+import java.io.Serializable;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-public class Calendrier implements Cloneable {
+public class Calendrier implements Cloneable, Serializable {
     private LocalDate periodeDebut;
     private LocalDate periodeFin;
     private HashMap<Integer, TacheSimple> tachesSimple;
@@ -18,6 +19,7 @@ public class Calendrier implements Cloneable {
     private Historique historique;//!!! useless
     private Utilisateur utilisateur;
     private ArrayList<Projet> projets;
+    private ArrayList<Badge> badges;
 
 
 
@@ -38,6 +40,7 @@ public class Calendrier implements Cloneable {
         this.dateActuelle = LocalDate.now();
         this.heureActuelle = "";
         this.projets = new ArrayList<Projet>();
+        this.badges = new ArrayList<Badge>();
     }
     public void ajouterProjet(Projet projet) {
     	projets.add(projet);
@@ -63,6 +66,12 @@ public class Calendrier implements Cloneable {
     }
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+    public void setBadges(ArrayList<Badge> badges) {
+        this.badges = badges;
+    }
+    public ArrayList<Badge> getBadges() {
+        return badges;
     }
 
 
@@ -151,7 +160,7 @@ public class Calendrier implements Cloneable {
         }*/
     }
 
-    public ArrayList<TacheSimple> planifierAuto(ArrayList<Tache> taches){
+    public ArrayList<TacheSimple> planifierAuto(ArrayList<Tache> taches) throws DeadLinePassed, WrongCreneauFormat{
         Comparator<Tache> comparator = Comparator
                 .comparing(Tache::getPriorite)
                 .thenComparing(Tache::getDeadline);
@@ -209,7 +218,7 @@ public class Calendrier implements Cloneable {
         return array_sugg;
     }
 
-    public boolean planifierAuto(TacheSimple tache){
+    public boolean planifierAuto(TacheSimple tache) throws DeadLinePassed , WrongCreneauFormat{
         boolean stop=false;
         for (Journee jour : this.getLesJournees().values()){
             if(!stop){
@@ -226,17 +235,28 @@ public class Calendrier implements Cloneable {
         }
         return true;
     }
-    public boolean planifierAuto(TacheDecompose tache){
+    public boolean planifierAuto(TacheDecompose tache) throws DeadLinePassed,WrongCreneauFormat{
         Journee jour = this.getJournee(this.periodeDebut);
         return jour.introduireTacheAuto(tache);
     }
-    public void setPeriodeFin(LocalDate periodeFin) {
+    public void setPeriodeFin(LocalDate periodeFin) throws UnacceptableDateFinPeriode {
+        if (periodeFin.isBefore(periodeDebut)) {
+            throw new UnacceptableDateFinPeriode();
+        }
         this.periodeFin = periodeFin;
     }
-    public void setPeriodeDebut(LocalDate periodeDebut) {
+    public void setPeriodeDebut(LocalDate periodeDebut) throws UnacceptableDateDebutPeriode {
+
+        //if this date is after the date of this day then we throw UnacceptableDateDebutPeriode exception
+        System.out.println("now :"+LocalDate.now());
+        System.out.println("added:"+ periodeDebut);
+        if(periodeDebut.isBefore(LocalDate.now())){
+            System.out.println("WE HAVE UnacceptableDateDebutPeriode");
+            throw new UnacceptableDateDebutPeriode();
+        }
         this.periodeDebut = periodeDebut;
     }
-    public boolean etaleLaPeriode(ArrayList<Tache> Taches){
+    public boolean etaleLaPeriode(ArrayList<Tache> Taches) throws DeadLinePassed,WrongCreneauFormat{
         Comparator<Tache> comparator = Comparator
                 .comparing(Tache::getPriorite)
                 .thenComparing(Tache::getDeadline);
@@ -299,7 +319,7 @@ public class Calendrier implements Cloneable {
 
         return true;
     }
-    public boolean applySuggestions(ArrayList<TacheSimple> taches){
+    public boolean applySuggestions(ArrayList<TacheSimple> taches) throws DeadLinePassed{
         Comparator<TacheSimple> comparator = Comparator
                 .comparing(TacheSimple::getPriorite)
                 .thenComparing(TacheSimple::getDeadline);
@@ -307,7 +327,8 @@ public class Calendrier implements Cloneable {
         for(TacheSimple tache : taches){
             if(tache.getDate()!=null){
                 Journee jour=this.getJournee(tache.getDate());
-               boolean bool= jour.introduireTacheAuto(tache);
+               //boolean bool= jour.introduireTacheAuto(tache);
+                boolean bool= jour.introduireTacheManuelle(tache,tache.getCreneau());
                 if(!bool){
                      return false;
                 }
@@ -317,7 +338,7 @@ public class Calendrier implements Cloneable {
         }
         return true;
     }
-    public boolean supprimerTache(TacheSimple tache){
+    public boolean supprimerTache(TacheSimple tache)throws WrongCreneauFormat{
         return this.getJournee(tache.getDate()).supprimerTache(tache);
     }
 public void supprimerTache(TacheDecompose tache){
@@ -327,19 +348,30 @@ public void supprimerTache(TacheDecompose tache){
         this.getTachesDecompose().remove(tache.getID());
     }
 
-    public boolean replanification(TacheSimple tache) {
+    public boolean replanification(TacheSimple tache) throws DeadLinePassed,WrongCreneauFormat {
         ArrayList<Tache> ReplannedTaches = new ArrayList<Tache>();
+        ArrayList<Tache> BeforeReplanificationTaches = new ArrayList<Tache>();
         ReplannedTaches.add(tache);
         for (TacheSimple t : this.getTachesSimple().values()) {
             if (!t.isBloqué()) {
-                ReplannedTaches.add(t);
+                BeforeReplanificationTaches.add(t);
+                try {
+                    ReplannedTaches.add(t.clone());
+                } catch (CloneNotSupportedException e) {
+                    throw new RuntimeException(e);
+                }
                 this.supprimerTache(t);
             }
         }
         ArrayList<TacheSimple> Suggestions = this.planifierAuto(ReplannedTaches);
-        if (Suggestions.size() == ReplannedTaches.size()) {
+        if (Suggestions.size() >= ReplannedTaches.size()) {
             return this.applySuggestions(Suggestions);
         } else {
+            //replan all the tasks before replanification manually with methode introduireTachemanuelle
+            for (Tache t : BeforeReplanificationTaches) {
+                Journee jour = this.getJournee(t.getDate());
+                jour.introduireTacheManuelle((TacheSimple) t, ((TacheSimple) t).getCreneau());
+            }
             return false;//replanification impossible
         }
     }
@@ -381,10 +413,16 @@ public void supprimerTache(TacheDecompose tache){
 
     public double getMoyenneDesRendements(){
         double moyenne=0;
+        int tmp=0;
         for(Journee jour : this.getLesJournees().values()){
             moyenne+=jour.getRendement();
+            tmp++;
         }
-        return moyenne/this.getLesJournees().size();
+        if(tmp==0){
+            return 0;
+        }else{
+        return moyenne/tmp;
+        }
     }
     public void setLesJournees(HashMap<LocalDate, Journee> lesJournees) {
         this.lesJournees = lesJournees;
@@ -397,6 +435,13 @@ public void supprimerTache(TacheDecompose tache){
             journee.setCalendrierSuper(calendrier);
             calendrier.addDay(jour.getDate(), journee);
         }
+        //clone all tasks in tachesSimple
+        calendrier.setTachesSimple(new HashMap<Integer, TacheSimple>());
+        for (TacheSimple tache : this.getTachesSimple().values()) {
+            TacheSimple tacheSimple = (TacheSimple) tache.clone();
+            calendrier.addTacheSimple(tacheSimple);
+        }
+
         return calendrier;
     }
     public Projet getProjet(int ID){
@@ -417,6 +462,15 @@ public void supprimerTache(TacheDecompose tache){
         }
         return null;
     }
+    //setter for TachesSimple
+    public void setTachesSimple(HashMap<Integer, TacheSimple> tachesSimple) {
+        this.tachesSimple = tachesSimple;
+    }
+    // add tache simple methode
+    public void addTacheSimple(TacheSimple tache){
+        this.getTachesSimple().put(tache.getID(),tache);
+    }
+
 }
 
 

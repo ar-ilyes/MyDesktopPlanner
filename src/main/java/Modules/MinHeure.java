@@ -1,6 +1,6 @@
 package Modules;
 
-public class MinHeure {
+public class MinHeure implements java.io.Serializable{
     private String heure; // représente l'heure réelle de la journée sous forme de chaîne de caractères (comme 11:30)
     private boolean libre;
     private boolean dansCreneau;

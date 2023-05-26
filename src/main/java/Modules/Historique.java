@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Historique
+public class Historique implements java.io.Serializable
 {
     ArrayList<Calendrier> calendriers;
     public Historique() {

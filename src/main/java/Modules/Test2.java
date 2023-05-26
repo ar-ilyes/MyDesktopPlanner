@@ -97,7 +97,8 @@ public class Test2 {
         for (TacheSimple t : suggestion){
             System.out.println(t.getNom()+" date "+t.getDate()+" debut: "+t.getCreneau().getDebut()+" fin: "+t.getCreneau().getFin());
         }
-        calendrier.applySuggestions(suggestion);
+        boolean bool=calendrier.applySuggestions(suggestion);
+        System.out.println("bool :"+bool);
        // calendrier.planifierAuto(tacheDecompose);
 
 

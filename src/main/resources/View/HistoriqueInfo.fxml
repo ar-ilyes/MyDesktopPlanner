@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1085.0" style="-fx-background-color: #F0F0F0;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HistoriqueInfoController">
+    <children>
+        <Label alignment="CENTER" layoutX="75.0" layoutY="67.0" prefHeight="55.0" prefWidth="421.0" text="MY Desktop Planner  " textAlignment="RIGHT" textFill="#3c486b">
+            <font>
+                <Font name="Segoe UI Black" size="27.0" />
+            </font>
+        </Label>
+        <Circle fx:id="GoToCalendar" fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fx:id="GoToAllTasks" fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="GoToProfile" fill="#3c486b" layoutX="1110.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Label fx:id="histDate" layoutX="525.0" layoutY="148.0" text="Hist" textFill="#f9d949">
+            <font>
+                <Font name="Segoe UI Black" size="55.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="50.0" layoutY="260.0" prefHeight="187.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+            <content>
+                <AnchorPane fx:id="RendementContainer" prefHeight="179.0" prefWidth="419.0">
+                    <children>
+                        <Label layoutX="3.0" layoutY="10.0" prefHeight="25.0" prefWidth="189.0" text="  Jour plus rentable :" textFill="#3c486b">
+                            <font>
+                                <Font name="Segoe UI Black" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label layoutY="64.0" prefHeight="25.0" prefWidth="210.0" text="  Duree par Categorie :" textFill="#3c486b">
+                            <font>
+                                <Font name="Segoe UI Black" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label layoutY="134.0" prefHeight="25.0" prefWidth="195.0" text="  Rendement moyen :" textFill="#3c486b">
+                            <font>
+                                <Font name="Segoe UI Black" size="18.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="JourPlusRentable" layoutX="195.0" layoutY="5.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                            <font>
+                                <Font name="Segoe UI Black" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="DureeCategorie" layoutX="210.0" layoutY="59.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                            <font>
+                                <Font name="Segoe UI Black" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="MoyenneRendement" layoutX="210.0" layoutY="129.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                            <font>
+                                <Font name="Segoe UI Black" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <Label layoutX="220.0" layoutY="450.0" text="Taches" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="830.0" layoutY="450.0" prefHeight="35.0" prefWidth="97.0" text="Projets" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="680.0" layoutY="547.0" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="36.0" />
+            </font>
+        </Label>
+        <Label layoutX="200.0" layoutY="220.0" text="RENDEMENT" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="800.0" layoutY="220.0" text="BADGES" textFill="#f45050">
+            <font>
+                <Font name="Segoe UI Black" size="24.0" />
+            </font>
+        </Label>
+        <ScrollPane layoutX="650.0" layoutY="260.0" prefHeight="179.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+            <content>
+                <AnchorPane fx:id="BadgeContainer">
+                    <children>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <ScrollPane layoutX="50.0" layoutY="490.0" prefHeight="179.0" prefWidth="470.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+            <content>
+                <AnchorPane fx:id="TaskContainer">
+                    <children>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+        <ScrollPane layoutX="613.0" layoutY="490.0" prefHeight="179.0" prefWidth="470.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+            <content>
+                <AnchorPane fx:id="ProjetsContainer">
+                    <children>
+
+                    </children>
+                </AnchorPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

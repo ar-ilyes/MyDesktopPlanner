@@ -2,8 +2,11 @@ package Controllers;
 
 import Modules.Creneau;
 import Modules.Modal;
+import Modules.NotFilledForm;
+import Modules.WrongCreneauFormat;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -22,11 +25,40 @@ public class AddCreneaux implements Initializable {
                 OnAddNewCreneau();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (WrongCreneauFormat wrongCreneauFormat) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Le format du créneau est incorrect");
+                alert.showAndWait();
+                Stage stage = (Stage) AddNewCreneau.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }catch (NotFilledForm notFilledForm) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("vous devez remplir le champ");
+                alert.showAndWait();
+                Stage stage = (Stage) AddNewCreneau.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
-    public void OnAddNewCreneau() throws IOException {
+    public void OnAddNewCreneau() throws IOException,WrongCreneauFormat {
         String creneauxTmp = NewCreneaux.getText();
+        if (creneauxTmp.isEmpty()){
+            throw new NotFilledForm();
+        }
         //remove spaces from creneauxTmp
         creneauxTmp=creneauxTmp.replaceAll("\\s+","");
         //split creneauxTmp by "|" and put it in creneauxArray
@@ -40,7 +72,7 @@ public class AddCreneaux implements Initializable {
                 creneauToAdd.setFin(creneauArray[1]);//this one is to verify the format of the hour because it's not verified in the constructor
                 Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireCreneau(creneauToAdd);
             } else {
-                throw new RuntimeException("Wrong format for creneaux");//!!!!!!!!!!!!!this must be a customized error
+                throw new WrongCreneauFormat();
             }
         }
         Stage stage = (Stage) AddNewCreneau.getScene().getWindow();

@@ -12,15 +12,15 @@
                 <Font name="Segoe UI Black" size="27.0" />
             </font>
         </Label>
-        <Circle fx:id="GoToCalendar" fill="#f45050" layoutX="937.0" layoutY="95.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
-        <Circle fill="#3c486b" layoutX="1092.0" layoutY="96.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle fill="#f9d949" layoutX="1016.0" layoutY="95.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="returnToCalendar" fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fx:id="GoToAllTasks" fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="GoToProfile" fill="#3c486b" layoutX="1110.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
         <Label fx:id="UserName" layoutX="525.0" layoutY="148.0" text="USER" textFill="#f9d949">
             <font>
                 <Font name="Segoe UI Black" size="55.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="50.0" layoutY="260.0" prefHeight="195.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="50.0" layoutY="260.0" prefHeight="187.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="RendementContainer" prefHeight="179.0" prefWidth="419.0">
                <children>
@@ -39,17 +39,17 @@
                         <Font name="Segoe UI Black" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="JourPlusRentable" layoutX="195.0" layoutY="5.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                  <Label fx:id="JourPlusRentable" layoutX="195.0" layoutY="5.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="DureeCategorie" layoutX="210.0" layoutY="59.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                  <Label fx:id="DureeCategorie" layoutX="210.0" layoutY="59.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="MoyenneRendement" layoutX="210.0" layoutY="129.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
+                  <Label fx:id="MoyenneRendement" layoutX="210.0" layoutY="129.0" prefHeight="35.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px;">
                      <font>
                         <Font name="Segoe UI Black" size="14.0" />
                      </font>
@@ -58,7 +58,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <Label layoutX="550.0" layoutY="450.0" text="HISTORIQUE" textFill="#f45050">
+        <Label layoutX="220.0" layoutY="450.0" text="HISTORIQUE" textFill="#f45050">
             <font>
                 <Font name="Segoe UI Black" size="24.0" />
             </font>
@@ -78,7 +78,7 @@
                 <Font name="Segoe UI Black" size="24.0" />
             </font>
         </Label>
-        <ScrollPane layoutX="650.0" layoutY="260.0" prefHeight="195.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="650.0" layoutY="260.0" prefHeight="179.0" prefWidth="421.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="BadgeContainer">
                <children>
@@ -87,7 +87,7 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
-        <ScrollPane layoutX="350.0" layoutY="490.0" prefHeight="195.0" prefWidth="533.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="50.0" layoutY="490.0" prefHeight="179.0" prefWidth="533.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="HistoriqueContainer">
                <children>
@@ -96,5 +96,39 @@
                 </AnchorPane>
             </content>
         </ScrollPane>
+        <AnchorPane layoutX="689.0" layoutY="491.0" prefHeight="179.0" prefWidth="361.0" style="-fx-border-color: red; -fx-border-radius: 20px;">
+            <children>
+                <Label layoutX="10.0" layoutY="24.0" prefHeight="25.0" prefWidth="210.0" text="Nombre Min De Tache:" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="10.0" layoutY="80.0" prefHeight="25.0" prefWidth="195.0" text="Duree Min Creneau:" textFill="#3c486b">
+                    <font>
+                        <Font name="Segoe UI Black" size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="NbMinTaches" layoutX="220.0" layoutY="20.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px; -fx-background-radius: 20px;">
+                    <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="CreneauMin" layoutX="200.0" layoutY="75.0" prefHeight="35.0" prefWidth="85.0" style="-fx-border-color: #3c486b; -fx-border-radius: 20px; -fx-label-padding: 0 20px; -fx-background-radius: 20px;">
+                    <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                    </font>
+                </TextField>
+            <Button fx:id="changeParam" layoutX="132.0" layoutY="129.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: f9d949; -fx-background-radius: 20px;" text="CHANGER" textFill="#3c486b">
+               <font>
+                  <Font name="Segoe UI Black" size="14.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+      <Label layoutX="781.0" layoutY="460.0" prefHeight="35.0" prefWidth="170.0" text="PARAMETRES" textFill="#f45050">
+         <font>
+            <Font name="Segoe UI Black" size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

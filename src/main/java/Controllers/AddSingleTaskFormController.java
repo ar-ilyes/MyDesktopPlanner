@@ -4,6 +4,7 @@ import Modules.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -33,32 +34,80 @@ public class AddSingleTaskFormController implements Initializable {
         planifierSingle.setOnAction(e -> {
             try {
                 OnPlanifierSingle();
-            } catch (Exception ex) {
+            } catch (NotFilledForm notFilledForm) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Le format du créneau est incorrect");
+                alert.showAndWait();
+                Stage stage = (Stage) planifierSingle.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            } catch (DeadLinePassed deadLinePassed) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("La deadline est dépassée");
+                alert.showAndWait();
+                Stage stage = (Stage) planifierSingle.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } catch (WrongCreneauFormat wrongCreneauFormat) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Le format du créneau est incorrect");
+                alert.showAndWait();
+                Stage stage = (Stage) planifierSingle.getScene().getWindow();
+                stage.close();
+                try {
+                    Modal.getInstance().getAppView().ShowJournee();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
-    public void OnPlanifierSingle() throws Exception {
+    public void OnPlanifierSingle() throws NotFilledForm, IOException, DeadLinePassed,WrongCreneauFormat {
         String nom = nomSingle.getText();
+        if(nom.isEmpty()){
+            throw new NotFilledForm();
+        }
         String duree = dureeSingle.getText();
+        if (duree.isEmpty()){
+            throw new NotFilledForm();
+        }
         String periodique = periodiqueSingle.getText();
+        if (periodique.isEmpty()){
+            throw new NotFilledForm();
+        }
         String prioriteStr = prioriteSingle.getValue();
+        if (prioriteStr.isEmpty()){
+            throw new NotFilledForm();
+        }
 
         LocalDate deadline = deadlineSingle.getValue();
+        if (deadline == null){
+            throw new NotFilledForm();
+        }
         boolean compose = composeSingle.isSelected();
         String categorieTacheStr = categorieSingle.getValue();
+        if (categorieTacheStr.isEmpty()){
+            throw new NotFilledForm();
+        }
 
         Etat etatTache = Etat.Not_realised;
         Etat_realisation etatRealisationTache = Etat_realisation.EN_COURS;
-        if(nom.isEmpty() || duree.isEmpty() || periodique.isEmpty() || prioriteStr.isEmpty() || categorieTacheStr.isEmpty() || deadline == null ){
-            //show error alert
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Error");
-            alert.setHeaderText("Wrong input");
-            alert.setContentText("you can't leave empty fields");
-            // Show the alert and wait for user response
-            alert.showAndWait();
-        }else{
             Priorite priorite = Priorite.valueOf(prioriteStr);
             Categorie categorieTache = new Categorie(categorieTacheStr);
             Boolean bool=true;
@@ -101,7 +150,20 @@ public class AddSingleTaskFormController implements Initializable {
 
                     confirmationAlert.showAndWait().ifPresent(response -> {
                         if (response == buttonTypeYes) {
-                            Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().replanification(tacheSimple);
+                            Boolean bool2=Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().replanification(tacheSimple);
+                            if(!bool2){
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Error");
+                                alert.setHeaderText("Replanification impossible");
+                                alert.setContentText("la replanification est impossible votre tache est en etat unscheduled");
+                                // Show the alert and wait for user response
+                                alert.showAndWait();
+                                try {
+                                    Modal.getInstance().getAppView().ShowAllTasks();
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
                             try {
                                 Modal.getInstance().getAppView().ShowAllTasks();
                             } catch (IOException e) {
@@ -124,7 +186,7 @@ public class AddSingleTaskFormController implements Initializable {
                 }
             }
 
-        }
+
     }
 }
 

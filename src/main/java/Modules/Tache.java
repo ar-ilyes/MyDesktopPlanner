@@ -4,7 +4,7 @@ import java.util.Date;
 
 import java.time.LocalDate;
 
-public abstract class Tache {
+public abstract class Tache implements java.io.Serializable {
 
     protected String nom;
 
@@ -17,7 +17,7 @@ public abstract class Tache {
     protected Etat_realisation etatRealisation;
     protected boolean Bloqué = false;
     protected int ID;
-    protected static int IDtemp = 0;
+    public static int IDtemp = 0;
 
     protected int Duree;
 

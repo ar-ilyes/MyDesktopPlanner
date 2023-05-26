@@ -12,15 +12,15 @@
                 <Font name="Segoe UI Black" size="27.0" />
             </font>
         </Label>
-        <Circle fx:id="GoToCalendar" fill="#f45050" layoutX="937.0" layoutY="95.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
-        <Circle fill="#3c486b" layoutX="1092.0" layoutY="96.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-        <Circle fill="#f9d949" layoutX="1016.0" layoutY="95.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="GoToCalendar" fill="#f45050" layoutX="958.0" layoutY="66.0" radius="28.0" stroke="WHITE" strokeType="INSIDE" />
+        <Circle fx:id="GoToAllTasks" fill="#f9d949" layoutX="1036.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+        <Circle fx:id="GoToProfile" fill="#3c486b" layoutX="1110.0" layoutY="66.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
         <Label fx:id="projetName" layoutX="525.0" layoutY="148.0" text="PROJET" textFill="#f45050">
             <font>
                 <Font name="Segoe UI Black" size="55.0" />
             </font>
         </Label>
-        <ScrollPane  layoutX="320.0" layoutY="265.0" prefHeight="226.0" prefWidth="682.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
+        <ScrollPane layoutX="320.0" layoutY="265.0" prefHeight="226.0" prefWidth="682.0" style="-fx-background-color: #F5F5F5; -fx-border-color: red;">
             <content>
                 <AnchorPane fx:id="TasksProjectContainer" prefWidth="665.0">
                     <children>
@@ -44,5 +44,6 @@
             <Font name="Segoe UI Black" size="36.0" />
          </font>
       </Label>
+      <Button fx:id="supprimePrj" layoutX="539.0" layoutY="643.0" mnemonicParsing="false" text="SUPPRIMER" />
     </children>
 </AnchorPane>

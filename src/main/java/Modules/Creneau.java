@@ -1,9 +1,10 @@
 package Modules;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Creneau implements Cloneable {
+public class Creneau implements Cloneable , Serializable {
     private String debut; // représente l'heure de début réelle du créneau sous forme de chaîne de caractères (comme 11:30)
     private String fin; // représente l'heure de fin réelle du créneau sous forme de chaîne de caractères (comme 11:30)
     private static int min = 30; // période de temps en minutes qui est égale à 30
@@ -18,7 +19,7 @@ public class Creneau implements Cloneable {
         return debut;
     }
 
-    public void setDebut(String debut) {
+    public void setDebut(String debut) throws WrongCreneauFormat {
         if(isValidHour(debut)) {
             if(isMultipleOfMin(debut)) {
                 this.debut = debut;
@@ -27,6 +28,7 @@ public class Creneau implements Cloneable {
             }
         } else {
             System.out.println("L'heure de début n'est pas dans le format attendu (hh:mm)");
+            throw new WrongCreneauFormat();
         }
     }
 
@@ -34,7 +36,7 @@ public class Creneau implements Cloneable {
         return fin;
     }
 
-    public void setFin(String fin) {
+    public void setFin(String fin) throws WrongCreneauFormat {
         if(isValidHour(fin)) {
             if(isMultipleOfMin(fin)) {
                 this.fin = fin;
@@ -43,6 +45,7 @@ public class Creneau implements Cloneable {
             }
         } else {
             System.out.println("L'heure de fin n'est pas dans le format attendu (hh:mm)");
+            throw new WrongCreneauFormat();
         }
     }
 

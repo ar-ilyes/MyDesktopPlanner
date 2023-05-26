@@ -2,7 +2,7 @@ package Modules;
 
 import java.util.HashMap;
 
-public class MyPlannerApp {
+public class MyPlannerApp implements java.io.Serializable {
     private HashMap<String, Utilisateur> users;
     private Utilisateur currentUser;
 

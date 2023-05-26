@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Journee implements Cloneable {
+public class Journee implements Cloneable , java.io.Serializable {
     private HashMap<Integer,TacheSimple> taches; // HashMap d'objets de la classe TacheSimple
     private ArrayList<Creneau> creneauxLibres; // tableau d'objets de la classe Creneau
     private LocalDate date; // représente la date de la journée sous forme de chaîne de caractères (comme 2023-04-30)
@@ -85,9 +85,21 @@ public class Journee implements Cloneable {
     public void introduireTache(TacheSimple tache) {
         this.taches.put(tache.getID(), tache);
     }
+    //une methode qui boucle surtout les creneaux et si elle trouve deux qui se chevauchent elle les fusionne exemple : 10h-11h et 11h-12h devient un seul creneau 10h-12h
+    public void fusionnerCreneaux(){
+        for (Creneau c : this.creneauxLibres){
+            for (Creneau c2 : this.creneauxLibres){
+                if (c.getFin().equals(c2.getDebut())){
+                    c.setFin(c2.getFin());
+                    this.creneauxLibres.remove(c2);
+                    return;
+                }
+            }
+        }
+    }
 
     // méthode pour ajouter un créneau libre au tableau de créneaux libres
-    public void introduireCreneau(Creneau creneau) {
+    public void introduireCreneau(Creneau creneau) throws WrongCreneauFormat {
         for(MinHeure demiHeure : this.lesMinHeures) {
             if(creneau.Include(demiHeure.getHeure())) {
                 demiHeure.setDansCreneau(true);
@@ -101,15 +113,19 @@ public class Journee implements Cloneable {
             LocalTime Creneaufin = LocalTime.parse(creneau.getFin());
             if(c.getFin().equals(creneau.getDebut())){
                 c.setFin(creneau.getFin());
+                fusionnerCreneaux();
                 return;
             }else if (c.getDebut().equals(creneau.getFin())){
                 c.setDebut(creneau.getDebut());
+                fusionnerCreneaux();
                 return;
             }else if (Cdebut.isBefore(Creneaudebut) && Cfin.isAfter(Creneaufin)){
+                fusionnerCreneaux();
                 return;
             }else if (Cdebut.isAfter(Creneaudebut) && Cfin.isBefore(Creneaufin)){
                 c.setDebut(creneau.getDebut());
                 c.setFin(creneau.getFin());
+                fusionnerCreneaux();
                 return;
         }}
         this.creneauxLibres.add(creneau);
@@ -142,11 +158,12 @@ public class Journee implements Cloneable {
         }
     }
 
-    public boolean introduireTacheAuto(TacheSimple tache){
+    public boolean introduireTacheAuto(TacheSimple tache) throws DeadLinePassed , WrongCreneauFormat{
         //loop over creneaux libres and find the creneau that has Duree > tache.getDuree()
         if(this.date.isAfter(tache.getDeadline())){
             tache.setEtat(Etat.Unscheduled);
-            return false;///the deadline is before the date of the day
+            throw new DeadLinePassed();
+            //return false;///the deadline is before the date of the day
 
         }
         for (Creneau creneau : this.creneauxLibres){
@@ -190,8 +207,13 @@ public class Journee implements Cloneable {
         return false;
     }
 
-   public boolean introduireTacheManuelle(TacheSimple tache,Creneau creneau){
+   public boolean introduireTacheManuelle(TacheSimple tache,Creneau creneau) throws DeadLinePassed{
         //verify if this creneaux is inside a creneau in creneauxLibres
+       if(this.date.isAfter(tache.getDeadline())) {
+           tache.setEtat(Etat.Unscheduled);
+           throw new DeadLinePassed();
+           //return false;///the deadline is before the date of the day
+       }
         for(Creneau c : this.creneauxLibres){
             if(c.getDebut().compareTo(creneau.getDebut())<=0 && c.getFin().compareTo(creneau.getFin())>=0){
                 this.creneauxLibres.remove(c);
@@ -240,12 +262,17 @@ public class Journee implements Cloneable {
         return false;
    }
 
-   public boolean introduireTacheAuto(TacheDecompose tache){
+   public boolean introduireTacheAuto(TacheDecompose tache) throws DeadLinePassed{
         //LocalDate jourDate = this.getDate();
         //while(jourDate.compareTo(this.getCalendrierSuper().getPeriodeFin())<=0){
         //    Journee jour = this.calendrierSuper.getJournee(jourDate);
         //    if(!jour.getCreneauxLibres().isEmpty());
         //    }
+       if (this.getDate().isAfter(tache.getDeadline())) {
+           tache.setEtat(Etat.Unscheduled);
+           throw new DeadLinePassed();
+           //return false;///the deadline is before the date of the day
+       }
        if(this.getDate().compareTo(this.getCalendrierSuper().getPeriodeFin())<=0){
            if(!this.getCreneauxLibres().isEmpty()){
                Creneau creneau=this.biggestDureeCreneau();
@@ -353,7 +380,7 @@ public class Journee implements Cloneable {
         return temp;
    }
 
-   public boolean supprimerTache(TacheSimple tache){
+   public boolean supprimerTache(TacheSimple tache) throws WrongCreneauFormat {
         if(this.taches.containsKey(tache.getID())){
             this.introduireCreneau(tache.getCreneau());
             this.taches.remove(tache.getID());
@@ -366,7 +393,7 @@ public class Journee implements Cloneable {
 
    public int getNbTachesRealisees(){
         int nb=0;
-        for(TacheSimple tache : this.calendrierSuper.getTachesSimple().values()){
+        for(TacheSimple tache : this.getTaches().values()){
             if(tache.getEtat()==Etat.Completed){
                 nb++;
             }
@@ -387,8 +414,9 @@ public class Journee implements Cloneable {
         }
         if(this.calendrierSuper.getUtilisateur().getNbrFelicitation()==5){
             this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Good"));
+            this.calendrierSuper.getBadges().add(new Badge("Good"));
             this.calendrierSuper.getUtilisateur().setNbrFelicitation(0);
-            //// !!!!!!!!!!!!!!!!!! un message de felicitation doit s'afficher !!!!!!!!!!!!!!!!
+
         }
         //if the user have 3 badges Good he will get a badge Verygood, and we remove the good badges
         if (this.calendrierSuper.getUtilisateur().getBadge().size()>=3){
@@ -400,9 +428,20 @@ public class Journee implements Cloneable {
             }
             if(nbGood>=3){
                 this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("VeryGood"));
-                for(int i=0;i<3;i++){
-                    this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("Good"));
-                }
+                this.calendrierSuper.getBadges().add(new Badge("VeryGood"));
+                    for(Badge b : this.calendrierSuper.getUtilisateur().getBadge()){
+                        if(b.getNom().equals("Good")){
+                            this.calendrierSuper.getUtilisateur().getBadge().remove(b);
+
+                        }
+                    }
+                    for(Badge b : this.calendrierSuper.getBadges()){
+                        if(b.getNom().equals("Good")){
+                            this.calendrierSuper.getBadges().remove(b);
+                        }
+                    }
+
+
             }
         }
 
@@ -416,8 +455,17 @@ public class Journee implements Cloneable {
             }
             if(nbVeryGood>=3){
                 this.calendrierSuper.getUtilisateur().getBadge().add(new Badge("Excellent"));
-                for(int i=0;i<3;i++){
-                    this.calendrierSuper.getUtilisateur().getBadge().remove(new Badge("VeryGood"));
+                this.calendrierSuper.getBadges().add(new Badge("Excellent"));
+                for(Badge b : this.calendrierSuper.getUtilisateur().getBadge()){
+                    if(b.getNom().equals("VeryGood")){
+                        this.calendrierSuper.getUtilisateur().getBadge().remove(b);
+
+                    }
+                }
+                for(Badge b : this.calendrierSuper.getBadges()){
+                    if(b.getNom().equals("VeryGood")){
+                        this.calendrierSuper.getBadges().remove(b);
+                    }
                 }
             }
         }

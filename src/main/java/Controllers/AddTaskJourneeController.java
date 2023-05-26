@@ -44,14 +44,40 @@ public class AddTaskJourneeController implements Initializable {
         });
 
         planifierJournee.setOnAction(e -> {
-            if(automatique.isSelected()) {
-                if(compose.isSelected()) {
+            try {
+            if (automatique.isSelected()) {
+                if (compose.isSelected()) {
                     OnPlanifierJourneeComposeAuto();
-                }else{
+                } else {
                     OnPlanifierJourneeAuto();
                 }
-            }else{
+            } else {
                 OnPlanifierJourneeMan();//case of simple task not decomposed
+            }
+            }catch (NotFilledForm exp){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("vous devez remplir les champs");
+                alert.showAndWait();
+            }catch (DeadLinePassed exp) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("La deadline est dépassée");
+                alert.showAndWait();
+            }catch (WrongCreneauFormat exp) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Le format du créneau est incorrect");
+                alert.showAndWait();
+            }catch (WrongDureeFormat exp) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Erreur de format");
+                alert.setContentText("Le format de la durée est incorrect");
+                alert.showAndWait();
             }
             try {
                 Stage stage = (Stage) planifierJournee.getScene().getWindow();
@@ -64,10 +90,34 @@ public class AddTaskJourneeController implements Initializable {
         });
 
     }
-    public void OnPlanifierJourneeComposeAuto(){
+    public void OnPlanifierJourneeComposeAuto() throws NotFilledForm,DeadLinePassed,WrongCreneauFormat,WrongDureeFormat{
         String nomTache = nom.getText();
+        if (nomTache.isEmpty()){
+            throw new NotFilledForm();
+        }
+        if(duree.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
+        try {
+            if (Integer.parseInt(duree.getText()) == 0) {
+                throw new NotFilledForm();
+            }
+
+            int dureeTache = Integer.parseInt(duree.getText());
+            if (dureeTache == 0) {
+                throw new NotFilledForm();
+            }
+        }catch (NumberFormatException e){
+            throw new WrongDureeFormat();
+        }
         int dureeTache = Integer.parseInt(duree.getText());
+        if (dureeTache == 0){
+            throw new NotFilledForm();
+        }
         String prioriteTacheStr = priorite.getValue();
+        if (prioriteTacheStr.isEmpty()){
+            throw new NotFilledForm();
+        }
         Priorite prioriteTache = Priorite.LOW;
         if(prioriteTacheStr.equals("MEDIUM")) {
             prioriteTache = Priorite.LOW;
@@ -76,6 +126,9 @@ public class AddTaskJourneeController implements Initializable {
         }
 
         String categorieTacheStr = categorie.getValue();
+        if (categorie.getValue()==null){
+            throw new NotFilledForm();
+        }
         Categorie categorieTache = new Categorie(categorieTacheStr);
         Etat etatTache = Etat.Not_realised;
         Etat_realisation etatRealisationTache = Etat_realisation.EN_COURS;
@@ -94,12 +147,37 @@ public class AddTaskJourneeController implements Initializable {
         Modal.getInstance().getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
 
     }
-    public void OnPlanifierJourneeAuto(){
+    public void OnPlanifierJourneeAuto() throws NotFilledForm,DeadLinePassed,WrongCreneauFormat,WrongDureeFormat{
         String nomTache = nom.getText();
+        if (nomTache.isEmpty()){
+            throw new NotFilledForm();
+        }
+        if(duree.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
+        //if duree is contains characters that are not numbers throw an error throw exception
+        try {
+            if (Integer.parseInt(duree.getText()) == 0) {
+                throw new NotFilledForm();
+            }
+
+            int dureeTache = Integer.parseInt(duree.getText());
+            if (dureeTache == 0) {
+                throw new NotFilledForm();
+            }
+        }catch (NumberFormatException e){
+            throw new WrongDureeFormat();
+        }
         int dureeTache = Integer.parseInt(duree.getText());
         String categorieTacheStr = categorie.getValue();
+        if (categorie.getValue()==null){
+            throw new NotFilledForm();
+        }
         Categorie categorieTache = new Categorie(categorieTacheStr);
         String prioriteTacheStr = priorite.getValue();
+        if (prioriteTacheStr.isEmpty()){
+            throw new NotFilledForm();
+        }
         Priorite prioriteTache = Priorite.LOW;
         if(prioriteTacheStr.equals("MEDIUM")) {
             prioriteTache = Priorite.LOW;
@@ -124,14 +202,32 @@ public class AddTaskJourneeController implements Initializable {
         projet.ajouterTache(tache);
         Modal.getMyPlannerApp().getCurrentUser().getCalendrier_perso().getJournee(Modal.getSelectedDay()).introduireTacheAuto(tache);
     }
-    public void OnPlanifierJourneeMan(){
+    public void OnPlanifierJourneeMan() throws NotFilledForm,DeadLinePassed,WrongCreneauFormat{
         String nomTache = nom.getText();
+        if (nomTache.isEmpty()){
+            throw new NotFilledForm();
+        }
+        if(duree.getText().isEmpty()){
+            throw new NotFilledForm();
+        }
         int dureeTache = Integer.parseInt(duree.getText());
+        if (dureeTache == 0){
+            throw new NotFilledForm();
+        }
         String categorieTacheStr = categorie.getValue();
+        if (categorie.getValue()==null){
+            throw new NotFilledForm();
+        }
         Categorie categorieTache = new Categorie(categorieTacheStr);
         String prioriteTacheStr = priorite.getValue();
+        if (prioriteTacheStr.isEmpty()){
+            throw new NotFilledForm();
+        }
         Priorite prioriteTache = Priorite.LOW;
         String creneauTacheStr = creneau.getText();
+        if (creneauTacheStr.isEmpty()){
+            throw new NotFilledForm();
+        }
         Creneau creneauTache = new Creneau("00:00","00:00");
         creneauTache.setDebut(creneauTacheStr.split("-")[0]);
         creneauTache.setFin(creneauTacheStr.split("-")[1]);

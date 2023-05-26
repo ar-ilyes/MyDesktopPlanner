@@ -1,6 +1,8 @@
 package Modules;
 
-public class Categorie {
+import java.io.Serializable;
+
+public class Categorie implements Serializable {
     private String nom;
     private Couleur couleur;
 

@@ -3,7 +3,7 @@ package Modules;
 
 import java.util.ArrayList;
 
-public class Utilisateur {
+public class Utilisateur implements java.io.Serializable {
     private String pseudo;
     private Calendrier calendrier_perso;
     private Historique historique;

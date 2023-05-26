@@ -1,8 +1,9 @@
 package Modules;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
-public class TacheSimple extends Tache implements Cloneable{
+public class TacheSimple extends Tache implements Cloneable , Serializable {
     private int periodicite;
     private boolean partieTacheDecompose=false;
 
